@@ -23,6 +23,10 @@
                 <outlet property="SignupBtnobj" destination="muM-VP-kx5" id="pvm-vg-2Og"/>
                 <outlet property="UserTF" destination="wKM-2c-CPy" id="LqI-Yh-GD6"/>
                 <outlet property="accountTF" destination="9q5-7C-zhs" id="qCH-br-gM3"/>
+                <outlet property="codeTF" destination="0gY-XO-8l5" id="zTO-fJ-QLk"/>
+                <outlet property="codedoneobj" destination="W0e-ED-WeC" id="Blq-0Q-Qru"/>
+                <outlet property="codelblobj" destination="Nju-F3-1hm" id="Bzs-oa-Nm3"/>
+                <outlet property="codepickerobj" destination="VfJ-PP-eFO" id="Ela-Nr-FQc"/>
                 <outlet property="contactimg" destination="WtR-zX-SMH" id="pI2-gb-pQw"/>
                 <outlet property="logoimg" destination="pgU-D0-u6l" id="fpv-cP-Tac"/>
                 <outlet property="mobileTF" destination="FT8-Z9-VWh" id="ggW-Wi-H0d"/>
@@ -139,7 +143,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FT8-Z9-VWh">
-                    <rect key="frame" x="98" y="359" width="250" height="30"/>
+                    <rect key="frame" x="113" y="359" width="218" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="12"/>
@@ -148,14 +152,6 @@
                         <outlet property="delegate" destination="-1" id="CjE-cr-eVW"/>
                     </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKX-cw-is9">
-                    <rect key="frame" x="59" y="360" width="25" height="28"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="akJ-2f-uVk">
                     <rect key="frame" x="29" y="359" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -229,9 +225,48 @@
                         <outlet property="delegate" destination="-1" id="ZQR-dc-e6W"/>
                     </connections>
                 </pickerView>
+                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VfJ-PP-eFO">
+                    <rect key="frame" x="0.0" y="498" width="375" height="170"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" red="0.88923637010000001" green="0.89557674620000005" blue="0.91459787439999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ZuX-dR-j2x"/>
+                        <outlet property="delegate" destination="-1" id="sFR-UA-asl"/>
+                    </connections>
+                </pickerView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nju-F3-1hm">
+                    <rect key="frame" x="-1" y="466" width="376" height="37"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" red="0.57081635399999997" green="0.58083841459999996" blue="0.62753807110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0e-ED-WeC">
+                    <rect key="frame" x="285" y="470" width="90" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" red="0.57451381830000003" green="0.5846007969" blue="0.63160295050000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="Done">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="codebtnAction:" destination="-1" eventType="touchUpInside" id="Eta-dB-mtt"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gY-XO-8l5">
+                    <rect key="frame" x="60" y="359" width="50" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="0.35991010270000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="V64-vR-RPE"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="32.5" y="106.5"/>
+            <point key="canvasLocation" x="31.199999999999999" y="105.69715142428787"/>
         </view>
     </objects>
     <resources>

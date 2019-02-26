@@ -3,10 +3,12 @@
 #import "FriendsTableViewCell.h"
 #import "SettingViewController.h"
 #import <Contacts/Contacts.h>
-//#import <Contacts/CNContact.h>
-//#import <ContactsUI/CNContactViewController.h>
-//#import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
+#import <AddressBookUI/ABPeoplePickerNavigationController.h>
+#import <AddressBookUI/ABPersonViewController.h>
+#import <AddressBookUI/ABNewPersonViewController.h>
+#import <AddressBookUI/ABUnknownPersonViewController.h>
+#import <AddressBookUI/ABAddressFormatting.h>
 #import "UIImageView+WebCache.h"
 #import "ChatfriendViewController.h"
 #import "SWRevealViewController.h"
@@ -50,12 +52,14 @@
     NSString *conatactphone1;
 
     NSMutableArray *contactarray;
-    //NSMutableArray *contactarray1;
-    UIRefreshControl *refreshControl;
+     UIRefreshControl *refreshControl;
     BOOL check;
     NSString *innercount;
     NSString *outercount;
     NSString *invitestr;
+    NSString *invitestrname;
+
+    NSString *contactidstr;
 
 }
 @end
@@ -71,9 +75,9 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    
-    //[_DoneBtnobj setUserInteractionEnabled:NO];
-    _Addcontactview.hidden=YES;
+    self.navigationController.navigationBar.hidden=YES;
+
+     _Addcontactview.hidden=YES;
     _footerviewobj.hidden=YES;
     if ([_invitestr isEqualToString:@"invite"])
     {
@@ -90,7 +94,9 @@
  - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+     _Editcontactview.hidden=YES;
+     indexCount = 3000;
+
     if ([_invitestr isEqualToString:@"invite"])
     {
         _footerviewobj.hidden=NO;
@@ -107,14 +113,11 @@
 
     chatnotification.layer.cornerRadius=10;
     chatnotification.clipsToBounds=YES;
-  //  [_DoneBtnobj setUserInteractionEnabled:NO];
-    _Addcontactview.hidden=YES;
+     _Addcontactview.hidden=YES;
     
      
     
-     //[self contactList];
-    //    @try {
-    // [self fetchContactsandAuthorization];
+    
     check=NO;
     [self contactList];
     _profileiconimg.layer.cornerRadius=20;
@@ -138,6 +141,12 @@
     _Addnewcontactobj.layer.cornerRadius=4;
     _Addnewcontactobj.clipsToBounds=YES;
   
+     
+     _Editcontactview.layer.cornerRadius=8;
+     _Editcontactview.clipsToBounds=YES;
+     
+     _Editcontactview.layer.borderWidth =1;
+     _Editcontactview.layer.borderColor = [UIColor colorWithRed:(61.0/255.0) green:(181.0/255) blue:(230.0/255) alpha:1].CGColor;
     
     [self callfetchprofile];
     
@@ -179,8 +188,7 @@
 -(void) tapped:(UIGestureRecognizer *) sender
 {
     [_searchBar resignFirstResponder];
-    // _searchBar.hidden=YES;
-}
+ }
 
 -(void) tapped12:(UIGestureRecognizer *) sender
 {
@@ -188,14 +196,12 @@
     [_LastnameTF resignFirstResponder];
     [_PhoneTF resignFirstResponder];
 
-     // _searchBar.hidden=YES;
-}
+ }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+ }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if(textField==self.FirstnameTF || textField==self.LastnameTF || textField==self.PhoneTF)
@@ -229,14 +235,10 @@
     
     static NSString *iden=@"ListtableView";
     FriendsTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:iden];
-//    if (cell==nil)
-//    {
-        NSArray * array =[[NSBundle mainBundle]loadNibNamed:@"FriendsTableViewCell" owner:self options:nil];
+         NSArray * array =[[NSBundle mainBundle]loadNibNamed:@"FriendsTableViewCell" owner:self options:nil];
         cell=[array objectAtIndex:0];
         
-   // }
-    //[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
+ 
     if (isfiltered)
     {
         
@@ -247,7 +249,7 @@
              
               cell.Usernamelbl.text=[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"contact_name"];
 
-            // cell.circlenamelbl.text=[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"contact_phone"];
+           
 
              if ([[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"status"] integerValue] == 1)
             {
@@ -311,8 +313,7 @@
                             
                         }
                         
-                        // [cell.RequestBtnobj setImage:[UIImage imageNamed:@"circle_full_inner.png"] forState:UIControlStateNormal];
-                        // cell.RequestBtnobj.backgroundColor = [UIColor colorWithRed:44/255.0 green:118/255.0 blue:8/255.0 alpha:0.5];
+                     
                         
                         else  if ([[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"group"] isEqual: @"2"])
                         {
@@ -344,14 +345,13 @@
                 
             }
         }
-        //        NSString *contactname=[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"contact_name"];
+        
         
         
     }
     else
     {
-        //        NSString *contactname=[[userarr objectAtIndex:indexPath.row] valueForKey:@"contact_name"];
-        NSString *contactname1=[[userarr objectAtIndex:indexPath.row] valueForKey:@"contact_phone"];
+         NSString *contactname1=[[userarr objectAtIndex:indexPath.row] valueForKey:@"contact_phone"];
         
         if (![contactname1 isEqual:(id)[NSNull null]])
         {
@@ -414,14 +414,11 @@
                         cell.Circleimg.image = [UIImage imageNamed:@"inner_circle_green80.png"];
                         
                     }
-                    // [cell.RequestBtnobj setImage:[UIImage imageNamed:@"circle_full_inner.png"] forState:UIControlStateNormal];
-                    // cell.RequestBtnobj.backgroundColor = [UIColor colorWithRed:44/255.0 green:118/255.0 blue:8/255.0 alpha:0.5];
+                   
                     
                     else  if ([[[userarr objectAtIndex:indexPath.row] valueForKey:@"group"] isEqual: @"2"])
                     {
-                        //[cell.RequestBtnobj setImage:[UIImage imageNamed:@" "] forState:UIControlStateNormal];
-                        // cell.RequestBtnobj.backgroundColor = [UIColor whiteColor];
-                        //  [cell.RequestBtnobj setImage:[UIImage imageNamed:@"both_circle.png"] forState:UIControlStateNormal];
+                       
                         cell.Circleimg.image = [UIImage imageNamed:@"outer_circle_green80.png"];
                         
                         
@@ -689,11 +686,17 @@
          if (isfiltered)
         {
             invitestr=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"contact_phone"];
-
+            contactidstr=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"contact_id"];
+            invitestrname=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"contact_name"];
+            
         }
         else
         {
+            contactidstr=[[userarr objectAtIndex:btn.tag] valueForKey:@"contact_id"];
+
             invitestr=[[userarr objectAtIndex:btn.tag] valueForKey:@"contact_phone"];
+            invitestrname=[[userarr objectAtIndex:btn.tag] valueForKey:@"contact_name"];
+
            // resendinvite1=[[userarr objectAtIndex:btn.tag] valueForKey:@"invite_status"];
          }
         
@@ -716,8 +719,7 @@
             
          }
         
-        
-    }
+     }
 }
 
 
@@ -742,7 +744,7 @@
     [webServiceManager setDelegateMethode:self];
     [webServiceManager callMyWebServiceManager:@"contactList" :dict :paramDict];
     
-}
+ }
 - (void)refresh1:(UIRefreshControl *)refreshControl
 {
      [self fetchContactsandAuthorization];
@@ -800,10 +802,7 @@
             [self contactList];
             [self callsearchmethod];
             
-            // [FriendsTableviewobj reloadData];
-            //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            //            [alert show];
-            
+           
             
             SCLAlertView *alert = [[SCLAlertView alloc] init];
             
@@ -819,8 +818,7 @@
             [self.view hideActivityView];
             _RequestSentViewobj.hidden=YES;
  
-             // imgArr =[[NSMutableArray alloc]initWithArray:[responseDictionary valueForKey:@"data"]];
-            if ([[responseDictionary valueForKey:@"status_message"] isEqualToString:@"Block"]) {
+             if ([[responseDictionary valueForKey:@"status_message"] isEqualToString:@"Block"]) {
                 
                 [_blockBtnobj setTitle:@"Unblocked" forState:UIControlStateNormal];
                 
@@ -891,7 +889,8 @@
     {
         if ([[responseDictionary valueForKey:@"status"] integerValue] ==200)
         {
-            _Addcontactview.hidden=YES;
+              _Addcontactview.hidden=YES;
+             [_EPhoneTF resignFirstResponder];
             [self.view hideActivityView];
 
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -903,14 +902,40 @@
         else
         {
             [self.view hideActivityView];
+            [_EPhoneTF resignFirstResponder];
+
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:[responseDictionary valueForKey:@"status_message"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+ 
+          
+        }
+            
+ 
+    }
+    if([[methodeDictionary valueForKey:@"name"] isEqualToString:@"EditContacts"])
+    {
+        if ([[responseDictionary valueForKey:@"status"] integerValue] ==200)
+        {
+            [_EPhoneTF resignFirstResponder];
+            _Editcontactview.hidden=YES;
+            [self.view hideActivityView];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+             [self contactList];
+        }
+        else
+        {
+            [self.view hideActivityView];
+           // _Editcontactview.hidden=YES;
+
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
         }
-            
-      
-            
+        
+        
+        
     }
-    
     
     
     if([[methodeDictionary valueForKey:@"name"] isEqualToString:@"getProfileInfo"])
@@ -993,9 +1018,12 @@
         {
             [self.view hideActivityView];
 
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-            [alert show];
+ 
             
+            UIAlertView *alertcrp=[[UIAlertView alloc]initWithTitle:@"SISUROOT" message:[responseDictionary valueForKey:@"status_message"] delegate:self cancelButtonTitle:@"No" otherButtonTitles:nil];
+            [alertcrp addButtonWithTitle:@"Yes"];
+            alertcrp.tag=31111;
+            [alertcrp show];
         }
         
     }
@@ -1161,213 +1189,190 @@
     for(int i=0; i<nPeople; i++)
     {
         {
-            
-            NSString *contact1;
             NSMutableDictionary *contacName = [[NSMutableDictionary alloc] init];
-            
+            NSString* phone = @"0";
             ABRecordRef person=CFArrayGetValueAtIndex(people, i);
             
+            
+            NSString *nameString3;
+            if (ABRecordCopyValue(person, kABPersonSortByFirstName))
+            {
+                nameString3  = [NSString stringWithFormat:@"%@",ABRecordCopyValue(person, kABPersonSortByFirstName)];
+            }
+            
+            NSString *nameString2;
+            if (ABRecordCopyValue(person, kABPersonSortByLastName))
+            {
+                nameString2  = [NSString stringWithFormat:@"%@ ",ABRecordCopyValue(person, kABPersonSortByLastName)];
+            }
+            
+            
+            
+            NSString *nameString1 = @"0";
+            
+            
+            if (nameString3  != NULL   && nameString2  != NULL)
+            {
+                nameString1=[NSString stringWithFormat:@"%@ %@",nameString3,nameString2];
+                
+            }
+            else if (nameString3  != NULL)
+            {
+                nameString1= nameString3;
+            }
+            else if (nameString2  != NULL)
+            {
+                nameString1= nameString2;
+            }
+            
+            nameString1 = [nameString1 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            
+            [contacName setObject:nameString1 forKey:@"name"];
+            //[contacName setValue:[NSString stringWithFormat:@"%@",ABRecordCopyValue(person, kABPersonSortByFirstName)] forKey:@"name"];
+            
+            UIImage *img ;
+            if (person != nil && ABPersonHasImageData(person))
+            {
+                if ( &ABPersonCopyImageDataWithFormat != nil ) {
+                    
+                    img= [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
+                }
+            }
+            else
+            {
+               // img =  [UIImage imageNamed:@"profile1_icon120.png"];
+            }
+            
+//            [contacName setObject:img  forKey:@"image"];
+//            [contacName setValue:@"0" forKey:@"fav"];
+//            [contacName setValue:@"mobile" forKey:@"type"];
+//            [contacName setValue:@"0" forKey:@"activeuser"];
+            
             ABMultiValueRef multi = ABRecordCopyValue(person, kABPersonPhoneProperty);
-            for (CFIndex j=0; j < ABMultiValueGetCount(multi); j++)
-            {
-                  NSString* phone = [NSString stringWithFormat:@"%@",ABMultiValueCopyValueAtIndex(multi, j)];
-                contact1=phone;
-               // [contacName setObject:phone forKey:@"mobile"];
-                
-                NSString *foo=phone;
-                NSString *trimmed = [foo stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                phone=trimmed;
-
-                
-                NSString *cleanedString = [[phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789+"] invertedSet]] componentsJoinedByString:@""];
-                phone=cleanedString;
-                
-//                 if ([phone length] ==10)
-//                {
-//                    NSString *i=phone;
-//
-//
-//                    NSString *j =[NSString stringWithFormat:@"%d%@",+1,i];
-//                    i=j;
-//                    NSString *url1 = @"http://apilayer.net/api/validate?access_key=62b08fa0b60837b56c0e239cac487ab0&number=";
-//                    NSString *mainUrl=[url1 stringByAppendingString:i];
-//
-//                    //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//                    //    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-//                     NSURL *url = [NSURL URLWithString:mainUrl];
-//                    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-//                    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//
-//                    [NSURLConnection sendAsynchronousRequest:urlRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-//                     {
-//                         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//                         NSLog(@"%@",dictionary);
-//                         if ([[dictionary valueForKey:@"valid"] integerValue]==1 && ![[dictionary valueForKey:@"location"] isEqualToString:@""])
-//                         {
-//                             NSString *phone1=@"+1";
-//                             NSString *phone2=phone;
-//                             phone2=[phone1 stringByAppendingString:phone2];
-//                              [contacName setObject:phone2 forKey:@"mobile"];
-//                         }
-//
-//                     }];
-//                }
-//                if ([phone length] ==10)
-//                {
-//                    NSString *i=phone;
-//
-//                    NSString *j =[NSString stringWithFormat:@"%d%@",+91,i];
-//                    i=j;
-//                    NSString *url1 = @"http://apilayer.net/api/validate?access_key=62b08fa0b60837b56c0e239cac487ab0&number=";
-//                    NSString *mainUrl=[url1 stringByAppendingString:i];
-//
-//                    //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//                    //    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-//
-//                    NSURL *url = [NSURL URLWithString:mainUrl];
-//                    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-//                    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//
-//                    [NSURLConnection sendAsynchronousRequest:urlRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-//                     {
-//                         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//                         NSLog(@"%@",dictionary);
-//                         if ([[dictionary valueForKey:@"valid"] integerValue]==1 && ![[dictionary valueForKey:@"location"] isEqualToString:@""])
-//                         {
-//                             NSString *phone1=@"+91";
-//                             NSString *phone2=phone;
-//                             phone2=[phone1 stringByAppendingString:phone2];
-//
-//                             [contacName setObject:phone2 forKey:@"mobile"];
-//                         }
-//
-//                     }];
-//                }
-//                else
-//                {
-//
-//                    [contacName setObject:phone forKey:@"mobile"];
-//
-//                }
-//                if ([phone length] ==9)
-//                {
-//
-//                    NSString *i=phone;
-//
-//
-//                    NSString *j =[NSString stringWithFormat:@"%d%@",+61,i];
-//                    i=j;
-//                    NSString *url1 = @"http://apilayer.net/api/validate?access_key=62b08fa0b60837b56c0e239cac487ab0&number=";
-//                    NSString *mainUrl=[url1 stringByAppendingString:i];
-//
-//                    //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//                    //    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-//                    NSURL *url = [NSURL URLWithString:mainUrl];
-//                    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-//                    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//
-//                    [NSURLConnection sendAsynchronousRequest:urlRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-//                     {
-//                         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//                         NSLog(@"%@",dictionary);
-//                         if ([[dictionary valueForKey:@"valid"] integerValue]==1 && ![[dictionary valueForKey:@"location"] isEqualToString:@""])
-//                         {
-//                             NSString *phone1=@"+61";
-//                             NSString *phone2=phone;
-//                             phone2=[phone1 stringByAppendingString:phone2];
-//                             [contacName setObject:phone2 forKey:@"mobile"];
-//                         }
-//                         else
-//                         {
-//                              [contacName setObject:phone forKey:@"mobile"];
-//
-//                         }
-//                     }];
-//
-//
-//                }
-//                else if ([phone length] ==8)
-//                {
-//
-//                    NSString *i=phone;
-//                    NSString *k=@"+64";
-//
-//                    NSString *j =[NSString stringWithFormat:@"%d%@",+64,i];
-//                    i=j;
-//                    NSString *url1 = @"http://apilayer.net/api/validate?access_key=62b08fa0b60837b56c0e239cac487ab0&number=";
-//                    NSString *mainUrl=[url1 stringByAppendingString:i];
-//
-//                    //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//                    //    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-//                    NSURL *url = [NSURL URLWithString:mainUrl];
-//                    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-//                    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//
-//                    [NSURLConnection sendAsynchronousRequest:urlRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-//                     {
-//                         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//                         NSLog(@"%@",dictionary);
-//                         if ([[dictionary valueForKey:@"valid"] integerValue]==1 && ![[dictionary valueForKey:@"location"] isEqualToString:@""])
-//                         {
-//                             NSString *phone1=@"+64";
-//                             NSString *phone2=phone;
-//                             phone2=[phone1 stringByAppendingString:phone2];
-//
-//                             [contacName setObject:phone2 forKey:@"mobile"];
-//                         }
-//                         else
-//                         {
-//
-//                             [contacName setObject:phone forKey:@"mobile"];
-//
-//                         }
-//                     }];
-//
-//                 }
-//                else
-//                {
-                     [contacName setObject:phone forKey:@"mobile"];
- //               }
-                
-              }
-             
-             NSString *nameString1 = [NSString stringWithFormat:@"%@ ",ABRecordCopyValue(person, kABPersonSortByFirstName)];
-            NSString *nameString2 = [NSString stringWithFormat:@" %@",ABRecordCopyValue(person, kABPersonSortByLastName)];
-             NSString *nameString3=[nameString1 stringByAppendingString: nameString2];
- 
-            // nameString3=[nameString3 stringByAppendingString:nameString2];
             
-            [contacName setObject:nameString3 forKey:@"name"];
-            if (![nameString isEqualToString:@"(null)"])
+            NSArray *arrayL =  (__bridge NSArray *)(ABMultiValueCopyArrayOfAllValues(multi)) ;
+            
+            for (int l = 0; l < arrayL.count; l++)
             {
-                [arrayTableData addObject:contacName];
-                 NSSortDescriptor *sortDescriptor;
-                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
-                                                             ascending:YES];
-                contactarray = [arrayTableData sortedArrayUsingDescriptors:@[sortDescriptor]];
+                NSString *str   = [NSString stringWithFormat:@"%@",ABMultiValueCopyValueAtIndex(multi, l)];
+                NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"] invertedSet];
+                phone = [[str componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
+//                phone = [phone stringByReplacingOccurrencesOfString:@"+91"
+//                                                         withString:@""];
+//                phone = [phone stringByReplacingOccurrencesOfString:@"+1"
+//                                                         withString:@""];
+//                int length = phone.length;
+//
+//                if (phone.length >10)
+//                {
+//                    phone = [phone substringFromIndex: length-10];
+//
+//                }
+                [contacName setObject:phone forKey:@"mobile"];
                 
-                name=[contactarray valueForKey:@"name"];
-          // name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-          //[[name stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
+                [contacName setValue:[NSString stringWithFormat:@"%d",indexCount] forKey:@"id"];
                 
-                 contacts=[contactarray valueForKey:@"mobile"];
-               // contacts = [contacts stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                //[[contacts stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
-                
+                NSMutableDictionary *contacName1 = [[NSMutableDictionary alloc] init];
+                contacName1 = contacName;
+                if ( ![nameString1 isEqualToString:@"0"] && ![phone isEqualToString:@"0"])
+                {
+                    if (nameString1.length > 0)
+                    {
+//                        [arrayTableData addObject:contacName];
+//                        NSSortDescriptor *sortDescriptor;
+//                        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+//                                                                     ascending:YES];
+//                        contactarray = [arrayTableData sortedArrayUsingDescriptors:@[sortDescriptor]];
+                        [contactarray addObject:[contacName1 mutableCopy]];
+                        indexCount = indexCount +1;
+                    }
+                }
             }
-            else if([nameString isEqualToString:@"(null)"] || [nameString isEqualToString:@""])
-            {
-                name=@"";
-                contacts=@"";
             }
             
-             //            name=[contactarray valueForKey:@"name"];
+        
+            
+        
+            //                [arrayTableData addObject:contacName];
+            //                 NSSortDescriptor *sortDescriptor;
+            //                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+            //                                                             ascending:YES];
+            //                contactarray = [arrayTableData sortedArrayUsingDescriptors:@[sortDescriptor]];
             //
-            //            contacts=[contactarray valueForKey:@"mobile"];
-            
-            //  [_contactList addObject:contacName];
-            
-        }
+            //                name=[contactarray valueForKey:@"name"];
+            //
+            //
+            //                 contacts=[contactarray valueForKey:@"mobile"];
+            //
+            //
+            //            }
+            //            else if([nameString isEqualToString:@"(null)"] || [nameString isEqualToString:@""])
+            //            {
+            //                name=@"";
+            //                contacts=@"";
+            //            }
+//            NSString *contact1;
+//            NSMutableDictionary *contacName = [[NSMutableDictionary alloc] init];
+//
+//            ABRecordRef person=CFArrayGetValueAtIndex(people, i);
+//
+//            ABMultiValueRef multi = ABRecordCopyValue(person, kABPersonPhoneProperty);
+//            for (CFIndex j=0; j < ABMultiValueGetCount(multi); j++)
+//            {
+//                  NSString* phone = [NSString stringWithFormat:@"%@",ABMultiValueCopyValueAtIndex(multi, j)];
+//                contact1=phone;
+//               // [contacName setObject:phone forKey:@"mobile"];
+//
+//                NSString *foo=phone;
+//                NSString *trimmed = [foo stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//                phone=trimmed;
+//
+//
+//                NSString *cleanedString = [[phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789+"] invertedSet]] componentsJoinedByString:@""];
+//                phone=cleanedString;
+//
+//
+//
+//                     [contacName setObject:phone forKey:@"mobile"];
+//
+//
+//              }
+//
+//             NSString *nameString1 = [NSString stringWithFormat:@"%@ ",ABRecordCopyValue(person, kABPersonSortByFirstName)];
+//            NSString *nameString2 = [NSString stringWithFormat:@" %@",ABRecordCopyValue(person, kABPersonSortByLastName)];
+//             NSString *nameString3=[nameString1 stringByAppendingString: nameString2];
+//
+//            // nameString3=[nameString3 stringByAppendingString:nameString2];
+//
+//            [contacName setObject:nameString3 forKey:@"name"];
+//            if (![nameString isEqualToString:@"(null)"])
+//            {
+//                [arrayTableData addObject:contacName];
+//                 NSSortDescriptor *sortDescriptor;
+//                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+//                                                             ascending:YES];
+//                contactarray = [arrayTableData sortedArrayUsingDescriptors:@[sortDescriptor]];
+//
+//                name=[contactarray valueForKey:@"name"];
+//
+//
+//                 contacts=[contactarray valueForKey:@"mobile"];
+//
+//
+//            }
+//            else if([nameString isEqualToString:@"(null)"] || [nameString isEqualToString:@""])
+//            {
+//                name=@"";
+//                contacts=@"";
+//            }
+//
+//             //            name=[contactarray valueForKey:@"name"];
+//            //
+//            //            contacts=[contactarray valueForKey:@"mobile"];
+//
+//            //  [_contactList addObject:contacName];
+//
+        
     }
     
      [self callstorecontact];
@@ -1443,8 +1448,82 @@
             [webServiceManager setDelegateMethode:self];
             [webServiceManager callMyWebServiceManager:@"invitesisuroot" :dict :dict1];
         }
-     }
+        else if (alertView.tag == 31111)
+        {
+ 
+            ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+            // ABAddressBookRef addressBook = ABAddressBookCreate();
+            
+            __block BOOL accessGranted = NO;
+            
+            if (&ABAddressBookRequestAccessWithCompletion != NULL)
+            {
+                dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+                
+                ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+                    accessGranted = granted;
+                    dispatch_semaphore_signal(semaphore);
+                });
+                
+                dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+                NSArray *people = (NSArray *)CFBridgingRelease(ABAddressBookCopyPeopleWithName(addressBook, CFBridgingRetain(invitestrname)));
+                // Display "Appleseed" information if found in the address book
+                if ((people != nil) && [people count])
+                {
+                    ABRecordRef person = (__bridge ABRecordRef)[people objectAtIndex:0];
+                    ABPersonViewController *picker = [[ABPersonViewController alloc] init];
+                    picker.personViewDelegate = self;
+                    picker.displayedPerson = person;
+                    // Allow users to edit the person’s information
+                    picker.allowsEditing = YES;
+                    [self.navigationController pushViewController:picker animated:YES];
+                    self.navigationController.navigationBar.hidden=NO;
+
+                }
+            }
+            
+ 
+           
+            
+//            NSArray *people = [userarr mutableCopy];
+//             if ((people != nil) && [people count])
+//            {
+//                 ABPersonViewController *picker = [[ABPersonViewController alloc] init];
+//                picker.personViewDelegate = self;
+//                picker.displayedPerson = person;
+//                // Allow users to edit the person’s information
+//                picker.allowsEditing = YES;
+//                [self.navigationController pushViewController:picker animated:YES];
+//            }
+      
+//            _Editcontactview.hidden=NO;
+//            _EPhoneTF.text=invitestr;
+        }
+    }
 }
+
+- (void)deleteContactWithIdentifier:(NSString *)identifier {
+    
+//    NSArray *keys = @[CNContactGivenNameKey,
+//                      CNContactPhoneNumbersKey,
+//                      CNContactEmailAddressesKey,
+//                      CNContactIdentifierKey];
+//    CNMutableContact *contact = [[store unifiedContactWithIdentifier:identifier keysToFetch:keys error:nil] mutableCopy];
+//    NSError *error;
+//    CNSaveRequest *saveRequest = [[CNSaveRequest alloc] init];
+//    [saveRequest deleteContact:contact];
+//    [store executeSaveRequest:saveRequest error:&error];
+    
+}
+
+
+
+ - (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person
+                    property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
+{
+    return NO;
+}
+
 -(void)actionSheet:(UIActionSheet *)profileactionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (check==YES)
@@ -1856,8 +1935,7 @@
 
 -(void)callfetchprofile
 {
-    //hud.hidden=NO;
-    
+ 
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
     [dict setValue:@"getProfileInfo" forKey:@"name"];
@@ -1918,12 +1996,10 @@
     NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
     NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    //NSString *phoneRegex = @"^((\\+)|(00))[0-9]{6,14}$";
-    //NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    
     NSString *regExPattern = @"^[01]?[- .]?(\([2-9]d{2})|[2-9]d{2})[- .]?d{3}[- .]?d{4}$";
     NSPredicate *phoneTest1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regExPattern];
-      //[23456789][0-9]{6}([0-9]{3})
-     NSString *phoneRegex = @"[23456789][0-9]{6}([0-9]{3})";
+      NSString *phoneRegex = @"[23456789][0-9]{6}([0-9]{3})";
     NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
  
      NSString *msg  = @"0";
@@ -1943,7 +2019,7 @@
      }
     else if (_PhoneTF.text.length == 0 || [_PhoneTF.text isEqualToString:@" "])
     {
-        msg = @"Please enter phone number";
+        msg = @"Please enter mobile number";
     }
     else if (_PhoneTF.text.length < 10 || _PhoneTF.text.length > 13)
     {
@@ -1954,16 +2030,12 @@
         if(![test evaluateWithObject:_PhoneTF.text])
         {
             msg =@"Please enter valid mobile number";
-        }
+         }
         
     }
     
     
-//    else if([phoneTest1 evaluateWithObject:_PhoneTF.text])
-//    {
-//        msg =@"US mobile number";
-//    }
-    
+ 
     if (![msg isEqualToString:@"0"])
     {
         
@@ -1996,5 +2068,60 @@
     [self.navigationController pushViewController:FVC animated:YES];
 }
 
+- (IBAction)updatecontact:(id)sender
+{
+    [_EPhoneTF resignFirstResponder];
+    
+    BOOL stricterFilter = NO;
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    NSString *regExPattern = @"^[01]?[- .]?(\([2-9]d{2})|[2-9]d{2})[- .]?d{3}[- .]?d{4}$";
+    NSPredicate *phoneTest1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regExPattern];
+    NSString *phoneRegex = @"[+23456789][0-9]{6}([0-9]{3})";
+    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    NSString *msg  = @"0";
+ 
+     if (_EPhoneTF.text.length == 0 || [_EPhoneTF.text isEqualToString:@" "])
+    {
+        msg = @"Please enter mobilr number";
+    }
+    else if (_EPhoneTF.text.length < 11 || _EPhoneTF.text.length > 13)
+    {
+        msg = @"Please enter valid mobile number";
+    }
+    
+ 
+     if (![msg isEqualToString:@"0"])
+    {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:msg delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    else
+    {
+        [self.view showActivityViewWithLabel:@"Loading"];
+        MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+        [dict setValue:@"EditContacts" forKey:@"name"];
+        
+        NSMutableDictionary *paramDict = [[NSMutableDictionary alloc]init];
+        [paramDict setValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"id"]] forKey:@"id"];
+        
+        [paramDict setObject:_EPhoneTF.text forKey:@"contact"];
+        [paramDict setObject:contactidstr forKey:@"contact_id"];
+
+        [webServiceManager setDelegateMethode:self];
+        [webServiceManager callMyWebServiceManager:@"EditContacts" :dict :paramDict];
+        
+    }
+}
+- (IBAction)CancelBtn1Action:(id)sender
+{
+     _Editcontactview.hidden=YES;
+    [_EPhoneTF resignFirstResponder];
+}
 @end
 

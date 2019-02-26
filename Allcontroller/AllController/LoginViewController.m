@@ -329,8 +329,7 @@ didSignInForUser:(GIDGoogleUser *)user
             }
             else
             {
-                
-                
+ 
                 [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"id"] forKey:@"id"];
                 
                 [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"username"] forKey:@"username"];
@@ -342,7 +341,7 @@ didSignInForUser:(GIDGoogleUser *)user
                 
                 if ([[[responseDictionary valueForKey:@"data"] valueForKey:@"email_verified_status"] isEqual:@"0"])
                 {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please check your email and verify your email id" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"RESEND", nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please check your email and verify your email id" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Resend", nil];
                      alert.tag=2000;
                     [alert show];
                     

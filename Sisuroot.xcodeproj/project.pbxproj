@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F224A782224219A00A66CB5 /* CountryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F224A702224219900A66CB5 /* CountryCell.m */; };
+		6F224A792224219A00A66CB5 /* CountryListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F224A722224219900A66CB5 /* CountryListDataSource.m */; };
+		6F224A7A2224219A00A66CB5 /* CountryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F224A732224219900A66CB5 /* CountryListViewController.xib */; };
+		6F224A7B2224219A00A66CB5 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F224A742224219900A66CB5 /* countries.json */; };
+		6F224A7C2224219A00A66CB5 /* CountryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F224A762224219900A66CB5 /* CountryListViewController.m */; };
 		6F2FE92C220DC7A9006E2B26 /* DietaryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FE92A220DC7A9006E2B26 /* DietaryCollectionViewCell.m */; };
 		6F2FE92D220DC7A9006E2B26 /* DietaryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FE92B220DC7A9006E2B26 /* DietaryCollectionViewCell.xib */; };
 		6F6B271221F10FAC0055B854 /* 211876-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B271021F10FAB0055B854 /* 211876-128.png */; };
@@ -25,6 +30,7 @@
 		6F80A88521EFACA50018A2C8 /* Default-iOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F80A87421EFACA40018A2C8 /* Default-iOS7@2x.png */; };
 		6F80A88621EFACA50018A2C8 /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80A87921EFACA40018A2C8 /* FBShimmeringLayer.m */; };
 		6F80A88721EFACA50018A2C8 /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80A87A21EFACA40018A2C8 /* FBShimmeringView.m */; };
+		6F914CEB2214672000F63615 /* 9-Home-Settings.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F914CEA2214672000F63615 /* 9-Home-Settings.jpg */; };
 		6FA9975621F8A3B300FA0C8B /* pause_button_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9975221F8A3B200FA0C8B /* pause_button_green.png */; };
 		6FA9975721F8A3B300FA0C8B /* play_button_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9975321F8A3B200FA0C8B /* play_button_white.png */; };
 		6FA9975821F8A3B300FA0C8B /* play_button_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9975421F8A3B200FA0C8B /* play_button_green.png */; };
@@ -550,7 +556,6 @@
 		FD9D5E4B220DA555003A3484 /* 8-Home-Setting.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9D5E43220DA553003A3484 /* 8-Home-Setting.jpg */; };
 		FD9D5E4C220DA555003A3484 /* chats.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9D5E44220DA553003A3484 /* chats.jpg */; };
 		FD9D5E4D220DA555003A3484 /* inner-circle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9D5E45220DA554003A3484 /* inner-circle.jpg */; };
-		FD9D5E4E220DA555003A3484 /* 9-Home-Settings.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9D5E46220DA554003A3484 /* 9-Home-Settings.jpg */; };
 		FD9D5E4F220DA555003A3484 /* Outer-Circle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9D5E47220DA554003A3484 /* Outer-Circle.jpg */; };
 		FD9D5E50220DA555003A3484 /* Sisuchat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9D5E48220DA555003A3484 /* Sisuchat.jpg */; };
 		FD9D5E51220DA555003A3484 /* sos.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9D5E49220DA555003A3484 /* sos.jpg */; };
@@ -577,6 +582,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F224A702224219900A66CB5 /* CountryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryCell.m; sourceTree = "<group>"; };
+		6F224A712224219900A66CB5 /* CountryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListViewController.h; sourceTree = "<group>"; };
+		6F224A722224219900A66CB5 /* CountryListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListDataSource.m; sourceTree = "<group>"; };
+		6F224A732224219900A66CB5 /* CountryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryListViewController.xib; sourceTree = "<group>"; };
+		6F224A742224219900A66CB5 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
+		6F224A752224219900A66CB5 /* CountryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryCell.h; sourceTree = "<group>"; };
+		6F224A762224219900A66CB5 /* CountryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListViewController.m; sourceTree = "<group>"; };
+		6F224A772224219900A66CB5 /* CountryListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListDataSource.h; sourceTree = "<group>"; };
 		6F2FE929220DC7A9006E2B26 /* DietaryCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DietaryCollectionViewCell.h; sourceTree = "<group>"; };
 		6F2FE92A220DC7A9006E2B26 /* DietaryCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DietaryCollectionViewCell.m; sourceTree = "<group>"; };
 		6F2FE92B220DC7A9006E2B26 /* DietaryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DietaryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -600,6 +613,7 @@
 		6F80A87821EFACA40018A2C8 /* FBShimmeringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringView.h; sourceTree = "<group>"; };
 		6F80A87921EFACA40018A2C8 /* FBShimmeringLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringLayer.m; sourceTree = "<group>"; };
 		6F80A87A21EFACA40018A2C8 /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
+		6F914CEA2214672000F63615 /* 9-Home-Settings.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "9-Home-Settings.jpg"; path = "Allcontroller/9-Home-Settings.jpg"; sourceTree = SOURCE_ROOT; };
 		6FA9975221F8A3B200FA0C8B /* pause_button_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_button_green.png; sourceTree = "<group>"; };
 		6FA9975321F8A3B200FA0C8B /* play_button_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_button_white.png; sourceTree = "<group>"; };
 		6FA9975421F8A3B200FA0C8B /* play_button_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_button_green.png; sourceTree = "<group>"; };
@@ -1258,7 +1272,6 @@
 		FD9D5E43220DA553003A3484 /* 8-Home-Setting.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "8-Home-Setting.jpg"; sourceTree = "<group>"; };
 		FD9D5E44220DA553003A3484 /* chats.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chats.jpg; sourceTree = "<group>"; };
 		FD9D5E45220DA554003A3484 /* inner-circle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "inner-circle.jpg"; sourceTree = "<group>"; };
-		FD9D5E46220DA554003A3484 /* 9-Home-Settings.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "9-Home-Settings.jpg"; sourceTree = "<group>"; };
 		FD9D5E47220DA554003A3484 /* Outer-Circle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Outer-Circle.jpg"; sourceTree = "<group>"; };
 		FD9D5E48220DA555003A3484 /* Sisuchat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sisuchat.jpg; sourceTree = "<group>"; };
 		FD9D5E49220DA555003A3484 /* sos.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sos.jpg; sourceTree = "<group>"; };
@@ -1324,6 +1337,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F224A6F2224219900A66CB5 /* CountryList */ = {
+			isa = PBXGroup;
+			children = (
+				6F224A702224219900A66CB5 /* CountryCell.m */,
+				6F224A712224219900A66CB5 /* CountryListViewController.h */,
+				6F224A722224219900A66CB5 /* CountryListDataSource.m */,
+				6F224A732224219900A66CB5 /* CountryListViewController.xib */,
+				6F224A742224219900A66CB5 /* countries.json */,
+				6F224A752224219900A66CB5 /* CountryCell.h */,
+				6F224A762224219900A66CB5 /* CountryListViewController.m */,
+				6F224A772224219900A66CB5 /* CountryListDataSource.h */,
+			);
+			path = CountryList;
+			sourceTree = "<group>";
+		};
 		6F80A86A21EFACA40018A2C8 /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1358,6 +1386,7 @@
 		6FF1EC1321E67CCB00420FF7 = {
 			isa = PBXGroup;
 			children = (
+				6F224A6F2224219900A66CB5 /* CountryList */,
 				6FF1EC5421E688B000420FF7 /* Allcontroller */,
 				6FF1EC1E21E67CCB00420FF7 /* Sisuroot */,
 				6FF1EC3A21E67CCE00420FF7 /* SisurootTests */,
@@ -2117,7 +2146,7 @@
 		6FF1EF2D21E688B200420FF7 /* tutescreens */ = {
 			isa = PBXGroup;
 			children = (
-				FD9D5E46220DA554003A3484 /* 9-Home-Settings.jpg */,
+				6F914CEA2214672000F63615 /* 9-Home-Settings.jpg */,
 				FD9D5E43220DA553003A3484 /* 8-Home-Setting.jpg */,
 				FD9D5E44220DA553003A3484 /* chats.jpg */,
 				FD9D5E45220DA554003A3484 /* inner-circle.jpg */,
@@ -2626,6 +2655,7 @@
 				6FF1F03E21E688B300420FF7 /* search_white_nav.png in Resources */,
 				6FF1F13521E688B300420FF7 /* icons8-right_4.png in Resources */,
 				6FF1F04821E688B300420FF7 /* back_white_nav.png in Resources */,
+				6F224A7A2224219A00A66CB5 /* CountryListViewController.xib in Resources */,
 				6FF1F26C21E688B400420FF7 /* BS4ViewController.xib in Resources */,
 				6FF1F08F21E688B300420FF7 /* welcome (2).jpg in Resources */,
 				6FF1F02C21E688B200420FF7 /* dummy_user_d.jpg in Resources */,
@@ -2702,6 +2732,7 @@
 				6FF1F02A21E688B200420FF7 /* icons8-full_moon.png in Resources */,
 				6FF1F0EC21E688B300420FF7 /* EmotionCollectionViewCell.xib in Resources */,
 				6FF1F04021E688B300420FF7 /* inner_circle_green40.png in Resources */,
+				6F914CEB2214672000F63615 /* 9-Home-Settings.jpg in Resources */,
 				6FF1F1A621E688B300420FF7 /* ResponseViewController.xib in Resources */,
 				6FF1F1CA21E688B300420FF7 /* ChatTableViewCell.xib in Resources */,
 				6FF1F0E321E688B300420FF7 /* Perceived1.png in Resources */,
@@ -2727,6 +2758,7 @@
 				6FF1F21921E688B300420FF7 /* add_profile.png in Resources */,
 				FD9D5E42220DA423003A3484 /* icons8-question_group_filled.png in Resources */,
 				6FF1F02421E688B200420FF7 /* icons8-user_group_man_man.png in Resources */,
+				6F224A7B2224219A00A66CB5 /* countries.json in Resources */,
 				6FF1F2C221E688B400420FF7 /* BriefstateViewController.xib in Resources */,
 				6FF1F0BD21E688B300420FF7 /* Default@2x.png in Resources */,
 				6FF1F1DF21E688B300420FF7 /* form_icon.png in Resources */,
@@ -2780,7 +2812,6 @@
 				6FF1F01221E688B200420FF7 /* favorite_default (1).png in Resources */,
 				6FF1F20321E688B300420FF7 /* circle_send80 (1).png in Resources */,
 				6FF1F1B621E688B300420FF7 /* ShareTableViewCell.xib in Resources */,
-				FD9D5E4E220DA555003A3484 /* 9-Home-Settings.jpg in Resources */,
 				6FF1F1EB21E688B300420FF7 /* newcamera.png in Resources */,
 				6F2FE92D220DC7A9006E2B26 /* DietaryCollectionViewCell.xib in Resources */,
 				6FF1F00721E688B200420FF7 /* go_arrow.png in Resources */,
@@ -2940,10 +2971,12 @@
 				6F80A88621EFACA50018A2C8 /* FBShimmeringLayer.m in Sources */,
 				6FF1F16E21E688B300420FF7 /* LeftViewController.m in Sources */,
 				6FF1F2B621E688B400420FF7 /* PPDTestDViewController.m in Sources */,
+				6F224A7C2224219A00A66CB5 /* CountryListViewController.m in Sources */,
 				6FF1F1C321E688B300420FF7 /* ChatTableViewCell.m in Sources */,
 				6FF1F14721E688B300420FF7 /* GalleryCollectionViewCell.m in Sources */,
 				6FF1F09821E688B300420FF7 /* UIFont+FontAwesome.m in Sources */,
 				6FF1F27121E688B400420FF7 /* VoiceTestViewController.m in Sources */,
+				6F224A792224219A00A66CB5 /* CountryListDataSource.m in Sources */,
 				6FF1F26321E688B400420FF7 /* SectionBvoicetestViewController.m in Sources */,
 				6FF1F26F21E688B400420FF7 /* BS5ViewController.m in Sources */,
 				6FF1F2B821E688B400420FF7 /* BriefstateViewController.m in Sources */,
@@ -2968,6 +3001,7 @@
 				6FF1F26D21E688B400420FF7 /* TestlistViewController.m in Sources */,
 				6FF1F1B821E688B300420FF7 /* ShareTableViewCell.m in Sources */,
 				6FF1F09521E688B300420FF7 /* FAImageView.m in Sources */,
+				6F224A782224219A00A66CB5 /* CountryCell.m in Sources */,
 				6F80A88721EFACA50018A2C8 /* FBShimmeringView.m in Sources */,
 				6FF1F2C621E688B400420FF7 /* PHQ9CollectionViewCell.m in Sources */,
 				6FF1F2C821E688B400420FF7 /* PPDTestEViewController.m in Sources */,

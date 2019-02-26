@@ -15,6 +15,7 @@
     NSString *contactString;
     NSMutableArray *namearray;
     NSMutableArray *contactnarray;
+    int indexCount;
     
 }
 @property (strong, nonatomic) IBOutlet UILabel *signupstmtlbl;
@@ -57,6 +58,10 @@
 
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerviewobj;
 @property (strong, nonatomic) IBOutlet UITextField *accountTF;
-
+@property (strong, nonatomic) IBOutlet UILabel *codelblobj;
+@property (strong, nonatomic) IBOutlet UIButton *codedoneobj;
+- (IBAction)codebtnAction:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *codeTF;
+@property (strong, nonatomic) IBOutlet UIPickerView *codepickerobj;
 
 @end

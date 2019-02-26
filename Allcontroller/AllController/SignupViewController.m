@@ -12,7 +12,9 @@
 #import "SCLAlertView.h"
 #import "DemoGraphicViewController.h"
 #import "LoginViewController.h"
-//#import "GAI.h"
+#import "CountryListViewController.h"
+
+ //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
 //#import "GAIFields.h"
 //#import "GAILogger.h"
@@ -30,6 +32,10 @@
     NSMutableArray *accountarr;
     NSMutableArray *contactarray;
     NSString *accounttype;
+    NSMutableArray *codearr;
+    NSString *codestr;
+    NSMutableArray *countries;
+    NSMutableArray *sortedCountries;
 }
 
 @end
@@ -46,6 +52,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden=YES;
+    codearr=[[NSMutableArray alloc]initWithObjects:@"+1",@"+64",@"+61",@"+91", nil];
+    _codelblobj.hidden=YES;
+    _codedoneobj.hidden=YES;
+    _codepickerobj.hidden=YES;
     activityIden.hidden=YES;
     _pickerviewobj.hidden=YES;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -78,6 +88,17 @@
     UITapGestureRecognizer *tapper=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped:)];
     [self.view addGestureRecognizer:tapper];
     
+    
+       countries = [NSMutableArray arrayWithCapacity: [[NSLocale ISOCountryCodes] count]];
+    
+    for (NSString *countryCode in [NSLocale ISOCountryCodes])
+    {
+        NSString *identifier = [NSLocale localeIdentifierFromComponents: [NSDictionary dictionaryWithObject: countryCode forKey: NSLocaleCountryCode]];
+        NSString *country = [[NSLocale currentLocale] displayNameForKey: NSLocaleIdentifier value: identifier];
+        [countries addObject: country];
+    }
+    sortedCountries = [countries sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+
 }
 
 
@@ -88,9 +109,8 @@
     [_PasswordTF resignFirstResponder];
     [_accountTF resignFirstResponder];
     [_mobileTF resignFirstResponder];
-    
-    
-    
+    [_codeTF resignFirstResponder];
+ 
     return YES;
 }
 
@@ -104,6 +124,10 @@
         [_EmailTF endEditing:YES];
         [_PasswordTF endEditing:YES];
         [_mobileTF endEditing:YES];
+        [_codeTF endEditing:YES];
+        _codepickerobj.hidden=YES;
+        _codelblobj.hidden=YES;
+        _codedoneobj.hidden=YES;
     }
     else if(textField==_EmailTF)
     {
@@ -112,6 +136,10 @@
         [_UserTF endEditing:YES];
         [_PasswordTF endEditing:YES];
         [_mobileTF endEditing:YES];
+        [_codeTF endEditing:YES];
+        _codepickerobj.hidden=YES;
+        _codelblobj.hidden=YES;
+        _codedoneobj.hidden=YES;
     }
     
     else if(textField==_PasswordTF)
@@ -121,6 +149,26 @@
         [_UserTF endEditing:YES];
         [_EmailTF endEditing:YES];
         [_mobileTF endEditing:YES];
+        [_codeTF endEditing:YES];
+        _codepickerobj.hidden=YES;
+        _codelblobj.hidden=YES;
+        _codedoneobj.hidden=YES;
+    }
+    else if(textField==self.codeTF)
+    {
+        [_accountTF endEditing:YES];
+        [_UserTF endEditing:YES];
+        [_EmailTF endEditing:YES];
+        [_PasswordTF endEditing:YES];
+         [_codeTF resignFirstResponder];
+//        _codelblobj.hidden=NO;
+//        _codedoneobj.hidden=NO;
+//        _codepickerobj.hidden=NO;
+        [_mobileTF endEditing:YES];
+        
+        CountryListViewController *cv = [[CountryListViewController alloc] initWithNibName:@"CountryListViewController" delegate:self];
+        [self presentViewController:cv animated:YES completion:NULL];
+         //  [ _MobileTF endEditing:YES];
     }
     else if(textField==self.mobileTF)
     {
@@ -129,9 +177,17 @@
         [_UserTF endEditing:YES];
         [_EmailTF endEditing:YES];
         [_PasswordTF endEditing:YES];
+        [_codeTF endEditing:YES];
+        _codelblobj.hidden=YES;
+        _codedoneobj.hidden=YES;
+        _codepickerobj.hidden=YES;
+        _codelblobj.hidden=YES;
+        _codedoneobj.hidden=YES;
     }
     else if(textField==self.accountTF)
     {
+        _codelblobj.hidden=NO;
+        _codedoneobj.hidden=NO;
         _pickerviewobj.hidden=NO;
         _accountTF.text=@"Free version";
         [_mobileTF endEditing:YES];
@@ -139,10 +195,18 @@
         [_EmailTF endEditing:YES];
         [_PasswordTF endEditing:YES];
         [_accountTF endEditing:YES];
+        [_codeTF endEditing:YES];
+        _codepickerobj.hidden=YES;
+
 
     }
 }
 
+- (void)didSelectCountry:(NSDictionary *)country
+{
+    NSLog(@"Selected Country : %@", country);
+    _codeTF.text=[country valueForKey:@"dial_code"];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -151,13 +215,16 @@
 
 -(void) tapped:(UIGestureRecognizer *) sender
 {
-    
+    _codelblobj.hidden=YES;
+    _codedoneobj.hidden=YES;
     [_UserTF resignFirstResponder];
     [_EmailTF resignFirstResponder];
     
     [_PasswordTF resignFirstResponder];
     [_mobileTF resignFirstResponder];
     _pickerviewobj.hidden=YES;
+    _codepickerobj.hidden=YES;
+
 }
 
 - (IBAction)backBtn:(id)sender {
@@ -221,6 +288,10 @@
     else if (_PasswordTF.text.length < 5)
     {
         msg = @"Please enter valid password";
+    }
+    else if (_codeTF.text.length < 1)
+    {
+        msg = @"Please select country code";
     }
     else if (_mobileTF.text.length < 1)
     {
@@ -289,11 +360,15 @@
 -(void)callSignupService
 {
    // [self.view showActivityViewWithLabel:@"Loading"];
-
+    NSString *mobilestr1=_codeTF.text;
+    NSString *mobilestr2=_mobileTF.text;
+    
+    NSString *mobilestr3=[mobilestr1 stringByAppendingString:mobilestr2];
+    _mobileTF.text=mobilestr3;
+    
     if ([_accountTF.text isEqualToString:@"Free version"])
     {
-        
-        accounttype=@"0";
+         accounttype=@"0";
     }
     else if([_accountTF.text isEqualToString:@"Standard account"])
     {
@@ -306,7 +381,7 @@
 
     }
     
-   // [self.view showActivityViewWithLabel:@"Loading"];
+    [self.view showActivityViewWithLabel:@"Loading"];
     
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
@@ -361,8 +436,7 @@
             if ( [[responseDictionary valueForKey:@"status_message"]  isEqualToString: @"Registration done!"]  )
             {
                 
-                
-                
+ 
                 [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"id"] forKey:@"id"];
                 
                 
@@ -402,8 +476,7 @@
                     [self.navigationController pushViewController:EVC animated:YES];
                 }
                 
-                
-            }
+             }
             
             else
             {
@@ -429,8 +502,7 @@
         //
         
         // }
-        
-        
+ 
     }
     if ([[methodeDictionary valueForKey:@"name"] isEqualToString:@"userRegistrationViaGmail"])
     {
@@ -489,6 +561,7 @@
             //LeftMenuViewController *uvc=[[LeftMenuViewController alloc]init];
             //            uvc.logout.hidden=NO;
             //            uvc.Login.hidden=YES;
+            
             
         }
     }
@@ -624,77 +697,112 @@
     // NSLog(@"%@",people);
     CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
     
+ 
     
     for(int i=0; i<nPeople; i++)
     {
-        
         {
-            NSString *name1;
-            NSString *contact1;
             NSMutableDictionary *contacName = [[NSMutableDictionary alloc] init];
-            
+            NSString* phone = @"0";
             ABRecordRef person=CFArrayGetValueAtIndex(people, i);
             
-            ABMultiValueRef multi = ABRecordCopyValue(person, kABPersonPhoneProperty);
-            for (CFIndex j=0; j < ABMultiValueGetCount(multi); j++)
+            
+            NSString *nameString3;
+            if (ABRecordCopyValue(person, kABPersonSortByFirstName))
             {
+                nameString3  = [NSString stringWithFormat:@"%@",ABRecordCopyValue(person, kABPersonSortByFirstName)];
+            }
+            
+            NSString *nameString2;
+            if (ABRecordCopyValue(person, kABPersonSortByLastName))
+            {
+                nameString2  = [NSString stringWithFormat:@"%@ ",ABRecordCopyValue(person, kABPersonSortByLastName)];
+            }
+            
+            
+            
+            NSString *nameString1 = @"0";
+            
+            
+            if (nameString3  != NULL   && nameString2  != NULL)
+            {
+                nameString1=[NSString stringWithFormat:@"%@ %@",nameString3,nameString2];
                 
-                NSString* phone = [NSString stringWithFormat:@"%@",ABMultiValueCopyValueAtIndex(multi, j)];
-                contact1=phone;
-                // NSLog(@"nitesh test"); [nitesh monga],8588079787;[nitesh new],701182717
-                
-                // NSLog(@"%@",phone);
-                
-                
+            }
+            else if (nameString3  != NULL)
+            {
+                nameString1= nameString3;
+            }
+            else if (nameString2  != NULL)
+            {
+                nameString1= nameString2;
+            }
+            
+            nameString1 = [nameString1 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            
+            [contacName setObject:nameString1 forKey:@"name"];
+            //[contacName setValue:[NSString stringWithFormat:@"%@",ABRecordCopyValue(person, kABPersonSortByFirstName)] forKey:@"name"];
+            
+            UIImage *img ;
+            if (person != nil && ABPersonHasImageData(person))
+            {
+                if ( &ABPersonCopyImageDataWithFormat != nil ) {
+                    
+                    img= [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
+                }
+            }
+            else
+            {
+                // img =  [UIImage imageNamed:@"profile1_icon120.png"];
+            }
+            
+            //            [contacName setObject:img  forKey:@"image"];
+            //            [contacName setValue:@"0" forKey:@"fav"];
+            //            [contacName setValue:@"mobile" forKey:@"type"];
+            //            [contacName setValue:@"0" forKey:@"activeuser"];
+            
+            ABMultiValueRef multi = ABRecordCopyValue(person, kABPersonPhoneProperty);
+            
+            NSArray *arrayL =  (__bridge NSArray *)(ABMultiValueCopyArrayOfAllValues(multi)) ;
+            
+            for (int l = 0; l < arrayL.count; l++)
+            {
+                NSString *str   = [NSString stringWithFormat:@"%@",ABMultiValueCopyValueAtIndex(multi, l)];
+                NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"] invertedSet];
+                phone = [[str componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
+                //                phone = [phone stringByReplacingOccurrencesOfString:@"+91"
+                //                                                         withString:@""];
+                //                phone = [phone stringByReplacingOccurrencesOfString:@"+1"
+                //                                                         withString:@""];
+                //                int length = phone.length;
+                //
+                //                if (phone.length >10)
+                //                {
+                //                    phone = [phone substringFromIndex: length-10];
+                //
+                //                }
                 [contacName setObject:phone forKey:@"mobile"];
                 
+                [contacName setValue:[NSString stringWithFormat:@"%d",indexCount] forKey:@"id"];
                 
-                
+                NSMutableDictionary *contacName1 = [[NSMutableDictionary alloc] init];
+                contacName1 = contacName;
+                if ( ![nameString1 isEqualToString:@"0"] && ![phone isEqualToString:@"0"])
+                {
+                    if (nameString1.length > 0)
+                    {
+                        //                        [arrayTableData addObject:contacName];
+                        //                        NSSortDescriptor *sortDescriptor;
+                        //                        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+                        //                                                                     ascending:YES];
+                        //                        contactarray = [arrayTableData sortedArrayUsingDescriptors:@[sortDescriptor]];
+                        [contactarray addObject:[contacName1 mutableCopy]];
+                        indexCount = indexCount +1;
+                    }
+                }
             }
-            
-            NSString *nameString1 = [NSString stringWithFormat:@"%@ ",ABRecordCopyValue(person, kABPersonSortByFirstName)];
-            NSString *nameString2 = [NSString stringWithFormat:@" %@",ABRecordCopyValue(person, kABPersonSortByLastName)];
-            
-            NSString *nameString3=[nameString1 stringByAppendingString: nameString2];
-            
-            // nameString3=[nameString3 stringByAppendingString:nameString2];
-            
-            [contacName setObject:nameString3 forKey:@"name"];
-            if (![nameString isEqualToString:@"(null)"])
-            {
-                [arrayTableData addObject:contacName];
-                
-                NSSortDescriptor *sortDescriptor;
-                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
-                                                             ascending:YES];
-                contactarray = [arrayTableData sortedArrayUsingDescriptors:@[sortDescriptor]];
-                
-                name=[contactarray valueForKey:@"name"];
-                // name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                //[[name stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
-                
-                contacts=[contactarray valueForKey:@"mobile"];
-                //contacts = [contacts stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                //[[contacts stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
-                
-                
-                
-                
-                
-            }
-            else if([nameString isEqualToString:@"(null)"] || [nameString isEqualToString:@""])
-            {
-                name=@"";
-                contacts=@"";
-            }
-            
-            //            name=[contactarray valueForKey:@"name"];
-            //
-            //            contacts=[contactarray valueForKey:@"mobile"];
-            
-            //  [_contactList addObject:contacName];
-            
         }
+        
     }
     
     [self callstorecontact];
@@ -798,47 +906,68 @@
      }];
     
 }
+- (IBAction)codebtnAction:(id)sender
+{
+    _codelblobj.hidden=YES;
+    _codedoneobj.hidden=YES;
+    _pickerviewobj.hidden=YES;
+    _codepickerobj.hidden=YES;
+
+    
+}
 
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    
     return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [accountarr count];
+    if (pickerView==_codepickerobj)
+    {
+        return [countries count];
+
+    }
+    else if (pickerView==_pickerviewobj)
+    {
+        return [accountarr count];
+
+    }
+    
+    return 0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     
-    return [accountarr objectAtIndex:row];
+    if (pickerView==_codepickerobj)
+    {
+         return [countries objectAtIndex:row];
+
+    }
+    else if (pickerView==_pickerviewobj)
+    {
+        return [accountarr objectAtIndex:row];
+
+    }
+    return 0;
+
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    _accountTF.text=[accountarr objectAtIndex:row];
     
-    //    if(pickerView == firstPickerView)
-    //    {
-    //        NSString *strFirstPickerView = [yourarray objectAtIndex:row];
-    //    }
-    //    else if(pickerView == secondPickerView)
-    //    {
-    //        NSString *strSecondPickerView = [yourarray objectAtIndex:row];
-    //    }
-    //    else
-    //    {
-    //        NSString *strThirdPickerView = [yourarray objectAtIndex:row];
-    //    }
+    if (pickerView==_codepickerobj)
+    {
+        _codeTF.text=[countries objectAtIndex:row];
+        
+    }
+    else if (pickerView==_pickerviewobj)
+    {
+        _accountTF.text=[accountarr objectAtIndex:row];
+
+    }
 }
-
-
-
-
-
-
-
-
 
 
 @end

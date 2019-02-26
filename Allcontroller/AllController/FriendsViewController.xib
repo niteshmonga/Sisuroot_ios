@@ -16,6 +16,8 @@
                 <outlet property="Cancelbtnobj" destination="TF6-po-gAj" id="aiY-mW-fm9"/>
                 <outlet property="Chatbtnobj" destination="YtF-UK-kum" id="awk-Is-gjt"/>
                 <outlet property="DoneBtnobj" destination="R5y-oy-SZy" id="2Xg-ld-4I4"/>
+                <outlet property="EPhoneTF" destination="VMk-jP-GoA" id="kf9-zu-CmG"/>
+                <outlet property="Editcontactview" destination="Qyf-uM-mBc" id="KBc-LD-HVB"/>
                 <outlet property="FirstnameTF" destination="9Ag-RZ-dFM" id="vAx-5v-Pn6"/>
                 <outlet property="FriendsTableviewobj" destination="78j-U6-IPT" id="zGw-ru-jJY"/>
                 <outlet property="Friendsstmtlbl" destination="BQ7-4w-WRT" id="Apb-4m-e8d"/>
@@ -172,17 +174,13 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.50311957470000002" blue="0.05932617188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="     Add Contact">
+                    <state key="normal" title="Add Contact">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="Addcontact:" destination="-1" eventType="touchUpInside" id="U2g-1l-d9o"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="206460-128.png" translatesAutoresizingMaskIntoConstraints="NO" id="c8v-w0-RM6">
-                    <rect key="frame" x="238" y="140" width="25" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qxc-24-vHs">
                     <rect key="frame" x="16" y="194" width="336" height="219"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -276,13 +274,67 @@
                     </subviews>
                     <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qyf-uM-mBc">
+                    <rect key="frame" x="16" y="265" width="336" height="166"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Edit Contact" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0N-Dc-Jlr">
+                            <rect key="frame" x="16" y="10" width="108" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxP-bv-Wse">
+                            <rect key="frame" x="244" y="126" width="59" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="Close"/>
+                            <connections>
+                                <action selector="CancelBtn1Action:" destination="-1" eventType="touchUpInside" id="X8L-R9-TJ2"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6Z-Co-Fi9">
+                            <rect key="frame" x="38" y="127" width="69" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="Save"/>
+                            <connections>
+                                <action selector="updatecontact:" destination="-1" eventType="touchUpInside" id="xO6-RF-OFl"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newlogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="bPd-rE-M1l">
+                            <rect key="frame" x="267" y="12" width="36" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-Zk-Ix7">
+                            <rect key="frame" x="62" y="99" width="222" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.23921568630000001" green="0.70980392160000005" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VMk-jP-GoA">
+                            <rect key="frame" x="62" y="69" width="221" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="Xw8-7o-A5C"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="64.799999999999997" y="-210.94452773613196"/>
         </view>
     </objects>
     <resources>
-        <image name="206460-128.png" width="128" height="128"/>
         <image name="back_white_nav.png" width="80" height="80"/>
         <image name="chaticon (1).png" width="120" height="120"/>
         <image name="dashboard_icon_gallery_white.png" width="120" height="120"/>

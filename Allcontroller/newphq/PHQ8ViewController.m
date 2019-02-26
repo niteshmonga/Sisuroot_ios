@@ -49,17 +49,17 @@
     [ _MenuBtnobj addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationController.navigationBar.hidden=YES;
      testarray1=[[NSMutableArray alloc]initWithObjects:
-                @{@"value":@"Demographic Form", @"is_Select":@"0"},
+                @{@"value":@"Demographic Form.", @"is_Select":@"0"},
                 @{@"value":@"Demographic Form Therapy", @"is_Select":@"0"},
-                @{@"value":@"Demographic Form Teens", @"is_Select":@"0"},
-                @{@"value":@"Demographic Form PPD", @"is_Select":@"0"},nil];
+                @{@"value":@"Demographic Form", @"is_Select":@"0"},
+                @{@"value":@"Demographic Form PPD", @"is_Select":@"0"},
+                @{@"value":@"Dietary info form", @"is_Select":@"0"},nil];
     testarray11=[[NSMutableArray alloc]initWithObjects:
                  @{@"value":@"Demographic Form", @"is_Select1":@"0"},
                  @{@"value":@"Demographic Form Therapy", @"is_Select1":@"0"},
                  @{@"value":@"Demographic Form Teens", @"is_Select1":@"0"},
                  @{@"value":@"Demographic Form PPD", @"is_Select1":@"0"},nil];
-    
-    is_Select=0;
+       is_Select=0;
       NSArray *listarr14=_listarray12;
     
     listarr=[[NSMutableArray alloc]init];
@@ -87,10 +87,7 @@
     [newDict setObject:[listarr valueForKey:@"Demograpic_form2_group_status"] forKey:@"is_Select"];
     [testarray1 replaceObjectAtIndex:1 withObject:newDict];
     
-//    newDict1 = [[NSMutableDictionary alloc] init];
-//    [newDict1 addEntriesFromDictionary:oldDict];
-//    [newDict1 setObject:[listarr valueForKey:@"PhqStatus"] forKey:@"is_Select1"];
-//    [testarray11 replaceObjectAtIndex:1 withObject:newDict1];
+ 
     
     newDict = [[NSMutableDictionary alloc] init];
     oldDict = (NSDictionary *)[testarray1 objectAtIndex:2];
@@ -98,10 +95,7 @@
     [newDict setObject:[listarr valueForKey:@"Demograpic_form3_group_status"] forKey:@"is_Select"];
     [testarray1 replaceObjectAtIndex:2 withObject:newDict];
     
-//    newDict1 = [[NSMutableDictionary alloc] init];
-//    [newDict1 addEntriesFromDictionary:oldDict];
-//    [newDict1 setObject:[listarr valueForKey:@"Phq2Status"] forKey:@"is_Select1"];
-//    [testarray11 replaceObjectAtIndex:2 withObject:newDict1];
+ 
     
     newDict = [[NSMutableDictionary alloc] init];
     oldDict = (NSDictionary *)[testarray1 objectAtIndex:3];
@@ -109,20 +103,18 @@
     [newDict setObject:[listarr valueForKey:@"Demograpic_form4_group_status"] forKey:@"is_Select"];
     [testarray1 replaceObjectAtIndex:3 withObject:newDict];
     
-//    newDict1 = [[NSMutableDictionary alloc] init];
-//    [newDict1 addEntriesFromDictionary:oldDict];
-//    [newDict1 setObject:[listarr valueForKey:@"PerceivedStatus"] forKey:@"is_Select1"];
-//    [testarray11 replaceObjectAtIndex:3 withObject:newDict1];
-//
-    
+     newDict = [[NSMutableDictionary alloc] init];
+    oldDict = (NSDictionary *)[testarray1 objectAtIndex:4];
+    [newDict addEntriesFromDictionary:oldDict];
+    [newDict setObject:[listarr valueForKey:@"Dietary_Info_Group_Status"] forKey:@"is_Select"];
+    [testarray1 replaceObjectAtIndex:4 withObject:newDict];
     
     
  }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+ }
 - (IBAction)NotatallBtnAction:(id)sender {
     
     Bs2ViewController *BSV=[[Bs2ViewController alloc]init];
@@ -162,13 +154,14 @@
 //       UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
 //        [calert show];
  //   [self.navigationController popViewControllerAnimated:YES];
+    
     }
-//}
+
 
 
 -(void)callfetchprofile
 {
-    // hud.hidden=NO;
+    
     
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
@@ -287,19 +280,21 @@
     }
     cell.backlblobj.font=[UIFont systemFontOfSize:16.0];
     cell.backlblobj.textColor=[UIColor whiteColor];
-     cell.switchobj.hidden=YES;
+    cell.switchobj.hidden=YES;
     
     if ([[[testarray1 objectAtIndex:indexPath.row] valueForKey:@"is_Select"] isEqual:@"0"]) {
         
-        
-       // cell.listlblobj.text=[[testarray1 objectAtIndex:indexPath.row] valueForKey:@"value"];
-        cell.backlblobj.text=@"Demographic Form";
+         cell.backlblobj.text=[[testarray1 objectAtIndex:indexPath.row] valueForKey:@"value"];
+ 
+       // cell.backlblobj.text=@"Demographic Form";
+
         cell.backlblobj.backgroundColor=[[UIColor alloc] initWithRed:61.0/255.0 green:181.0/255.0 blue:230.0/255.0 alpha:1.0];
         cell.iconimg.hidden=NO;
+        
 //        if ([[[testarray11 objectAtIndex:indexPath.row] valueForKey:@"is_Select1"] isEqual:@"1"]) {
 //
 //            cell.backlblobj.backgroundColor=[[UIColor alloc] initWithRed:12.0/255.0 green:223.0/255.0 blue:135.0/255.0 alpha:1.0];
-//
+
 //        }
 //        else
 //        {
@@ -360,7 +355,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[[testarray1 objectAtIndex:indexPath.row] valueForKey:@"value"] isEqualToString:@"Demographic Form"])
+    if ([[[testarray1 objectAtIndex:indexPath.row] valueForKey:@"value"] isEqualToString:@"Demographic Form."])
     {
         Bs2ViewController *BSV=[[Bs2ViewController alloc]init];
         [self.navigationController pushViewController:BSV animated:YES];
@@ -373,7 +368,7 @@
         [self.navigationController pushViewController:BSV animated:YES];
         
     }
-    else if ([[[testarray1 objectAtIndex:indexPath.row] valueForKey:@"value"] isEqualToString:@"Demographic Form Teens"])
+    else if ([[[testarray1 objectAtIndex:indexPath.row] valueForKey:@"value"] isEqualToString:@"Demographic Form"])
     {
         DemoOtherViewController *BSV=[[DemoOtherViewController alloc]init];
         [BSV setTypeString:@"demo2"];
@@ -387,7 +382,13 @@
         [self.navigationController pushViewController:BSV animated:YES];
         
     }
-    
+    else if ([[[testarray1 objectAtIndex:indexPath.row] valueForKey:@"value"] isEqualToString:@"Dietary info form"])
+    {
+        DemoOtherViewController *BSV=[[DemoOtherViewController alloc]init];
+        [BSV setTypeString:@"demo4"];
+        [self.navigationController pushViewController:BSV animated:YES];
+        
+    }
     
     
 }

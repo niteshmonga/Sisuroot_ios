@@ -31,6 +31,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *UserTF;
 @property (strong, nonatomic) IBOutlet UITextField *DobTF;
 @property (strong, nonatomic) IBOutlet UITextField *MobileTF;
+
 @property (strong, nonatomic) IBOutlet UITextField *EmailTF;
 @property (strong, nonatomic) IBOutlet UITextField *PasswordTF;
 @property (strong, nonatomic) IBOutlet UITextField *locationTF;
@@ -50,5 +51,11 @@
 @property (strong, nonatomic) IBOutlet NSDictionary *detail;
 @property (strong, nonatomic) IBOutlet UIButton *saveandverifybtnobj;
 @property (strong, nonatomic) IBOutlet UIImageView *extlogoimg;
+@property (strong, nonatomic) IBOutlet UIPickerView *codepickerobj;
+@property (strong, nonatomic) IBOutlet UILabel *codelblobj;
+@property (strong, nonatomic) IBOutlet UIButton *codedoneobj;
+- (IBAction)codebtnAction:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *codeTF;
+
 
 @end

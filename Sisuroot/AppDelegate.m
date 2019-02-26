@@ -81,7 +81,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 {
     NSLog( @"Handle push from background or closed" );
     // if you set a member variable in didReceiveRemoteNotification, you  will know if this is from closed or background
-    //NSLog(@"%@", response.noThread 7tification.request.content.userInfo);
+    NSLog(@"%@", response);
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -344,6 +344,7 @@ forRemoteNotification:(NSDictionary *)notification completionHandler:(void(^)())
     //         object:self];
     //    }
     // }
+    
     if ([[[[userInfo valueForKey:@"aps"] valueForKey:@"alert"] valueForKey:@"title"]  isEqualToString:@"notification"])
     {
         //        [[NSNotificationCenter defaultCenter]

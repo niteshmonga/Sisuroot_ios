@@ -28,5 +28,16 @@
 @property (strong, nonatomic) IBOutlet UILabel *skipbacklbl;
 @property (strong, nonatomic) IBOutlet UIButton *backbtnobj;
 @property (strong, nonatomic) IBOutlet UIButton *Homebtnobj;
+@property (strong, nonatomic) IBOutlet UIView *newzealantviewobj;
+@property (strong, nonatomic) IBOutlet UIButton *emergencybtnobj;
+@property (strong, nonatomic) IBOutlet UIButton *helplinebtnobj;
+@property (strong, nonatomic) IBOutlet UIButton *suicidebtnobj;
+@property (strong, nonatomic) IBOutlet UIButton *youthlinebtnobj;
+@property (strong, nonatomic) IBOutlet UIButton *depresionbtnobj1;
+@property (strong, nonatomic) IBOutlet UIButton *depresionbtnobj2;
+
+@property (strong, nonatomic) IBOutlet UIButton *healthlinebtnobj;
+@property (strong, nonatomic) IBOutlet UIButton *samaritansbtnobj;
+@property (strong, nonatomic) IBOutlet UIButton *crisisbtnobj;
 
 @end

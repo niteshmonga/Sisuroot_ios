@@ -19,14 +19,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="645"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="home_screen.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="q7d-nb-ahV">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="9-Home-Settings.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="q7d-nb-ahV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="645"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbj-0c-VHe">
                         <rect key="frame" x="283" y="563" width="80" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <state key="normal" title="Skip" backgroundImage="nextbtn.png">
+                        <state key="normal" title="Next" backgroundImage="nextbtn.png">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                     </button>
@@ -41,7 +41,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="home_screen.jpg" width="750" height="1334"/>
+        <image name="9-Home-Settings.jpg" width="750" height="1334"/>
         <image name="nextbtn.png" width="168" height="49"/>
     </resources>
 </document>

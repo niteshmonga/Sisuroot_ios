@@ -18,6 +18,7 @@
 #import "FeedViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "BS1ViewController.h"
+#import "CountryListViewController.h"
 
 @interface EditViewController ()
 {
@@ -27,7 +28,8 @@
     BOOL check1;
     CLLocationManager *locationManager;
     CLGeocoder *ceo;
-    
+    NSMutableArray *codearr;
+
 }
 @end
 
@@ -65,8 +67,12 @@
     //    _DobTF.text=[defaults objectForKey:@"dob"];
     //    _uidstr=[defaults objectForKey:@"id"];
     
-    //    NSLog(@"%@",_uidstr);
+ 
+    _codelblobj.hidden=YES;
+    _codedoneobj.hidden=YES;
+    _codepickerobj.hidden=YES;
     
+    codearr=[[NSMutableArray alloc]initWithObjects:@"+1",@"+64",@"+61",@"+91", nil];
     self.MobileTF.keyboardType = UIKeyboardTypePhonePad;
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 375, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
@@ -99,6 +105,7 @@
     
     //_ChangePasswordBtnobj.layer.borderWidth =1;
     //_ChangePasswordBtnobj.layer.borderColor = [UIColor colorWithRed:(61.0/255.0) green:(181.0/255) blue:(230.0/255) alpha:1].CGColor;
+    
     UITapGestureRecognizer *tapper=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped:)];
     [self.view addGestureRecognizer:tapper];
     
@@ -193,13 +200,10 @@
                   NSLog(@"location %@",placemark.location);
                   //Print the location to console
                   NSLog(@"I am currently at %@",locatedAt);
-                  
-                  
-                  //  _locationTF.text=[placemark.addressDictionary objectForKey:@"City"];
+                    //  _locationTF.text=[placemark.addressDictionary objectForKey:@"City"];
                   [locationManager stopUpdatingLocation];
               }
-     
-     ];
+      ];
 }
 -(void)hideKeyboard
 {
@@ -211,8 +215,13 @@
     _DoneBtnobj.hidden=YES;
     _Callenderlblobj.hidden=YES;
     _Datepickerobj.hidden=YES;
-    
+    [_codeTF resignFirstResponder];
+    _codelblobj.hidden=YES;
+    _codedoneobj.hidden=YES;
+    _codepickerobj.hidden=YES;
+
     [self.scrollViewObj setContentOffset:CGPointMake(0, 0)animated:YES];
+    
     
 }
 
@@ -262,8 +271,26 @@
         [_locationTF endEditing:YES];
         [_DobTF endEditing:YES];
         [ _MobileTF endEditing:YES];
+        [ _codeTF endEditing:YES];
+
         //[_UserTF resignFirstResponder];
         
+    }
+    else if(textField==self.codeTF)
+    {
+        [self.scrollViewObj setContentOffset:CGPointMake(0, 75)animated:YES];
+        [_UserTF endEditing:YES];
+        [_EmailTF endEditing:YES];
+        [_locationTF endEditing:YES];
+        [_DobTF endEditing:YES];
+ 
+         [_codeTF resignFirstResponder];
+       // _codelblobj.hidden=NO;
+       // _codedoneobj.hidden=NO;
+       // _codepickerobj.hidden=NO;
+        CountryListViewController *cv = [[CountryListViewController alloc] initWithNibName:@"CountryListViewController" delegate:self];
+        [self presentViewController:cv animated:YES completion:NULL];
+        //  [ _MobileTF endEditing:YES];
     }
     
     else if(textField==self.MobileTF)
@@ -273,6 +300,8 @@
         [_EmailTF endEditing:YES];
         [_locationTF endEditing:YES];
         [_DobTF endEditing:YES];
+        [ _codeTF endEditing:YES];
+
         // [_MobileTF resignFirstResponder];
         
         //  [ _MobileTF endEditing:YES];
@@ -286,6 +315,8 @@
         [_locationTF endEditing:YES];
         [_DobTF endEditing:YES];
         [ _MobileTF endEditing:YES];
+        [ _codeTF endEditing:YES];
+
         // [_EmailTF resignFirstResponder];
         
     }
@@ -303,6 +334,8 @@
         _Datepickerobj.hidden=YES;
         _DoneBtnobj.hidden=YES;
         _Callenderlblobj.hidden=YES;
+        [ _codeTF endEditing:YES];
+
         
     }
     
@@ -337,6 +370,12 @@
     }
     
     
+}
+
+- (void)didSelectCountry:(NSDictionary *)country
+{
+    NSLog(@"Selected Country : %@", country);
+    _codeTF.text=[country valueForKey:@"dial_code"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -559,12 +598,17 @@
     {
         msg = @"Please enter username";
      }
+    else if(_codeTF.text.length < 1)
+    {
+        msg =@"Please select country code";
+        
+    }
     else if(_MobileTF.text.length < 1)
     {
         msg =@"Please enter mobile number";
         
     }
-    else if(_MobileTF.text.length >13 || _MobileTF.text.length < 10)
+    else if(_MobileTF.text.length >13 || _MobileTF.text.length < 8)
     {
          msg =@"Please enter your valid mobile number";
         
@@ -574,8 +618,7 @@
         msg =@"Please enter your valid mobile number";
 
     }
-    
-    else if (_EmailTF.text.length < 1)
+     else if (_EmailTF.text.length < 1)
     {
         msg = @"Please enter email address";
         
@@ -614,6 +657,11 @@
 }
 -(void)CallEditProfile
 {
+    NSString *mobilestr1=_codeTF.text;
+    NSString *mobilestr2=_MobileTF.text;
+
+    NSString *mobilestr3=[mobilestr1 stringByAppendingString:mobilestr2];
+    _MobileTF.text=mobilestr3;
     [self.view showActivityViewWithLabel:@"Loading"];
     
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
@@ -625,7 +673,8 @@
     [paramDict setValue:_UserTF.text forKey:@"username"];
     [paramDict setValue:_DobTF.text forKey:@"dob"];
     [paramDict setValue:_MobileTF.text forKey:@"mobile_no"];
- 
+    [paramDict setValue:_codeTF.text forKey:@"phonenum_country_code"];
+
     [paramDict setValue:_EmailTF.text forKey:@"email_id"];
     
     //        if (![_locationTF.text isEqualToString:[NSNull null]] || ![_locationTF.text isEqualToString:@" "])
@@ -756,22 +805,21 @@
             }
             _UserTF.text = [[responseDictionary valueForKey:@"data"]valueForKey:@"username"];
             _EmailTF.text=[[responseDictionary valueForKey:@"data"] valueForKey:@"email"];
-            
-            
-            
-            NSString *phonestr = [[responseDictionary valueForKey:@"data"]valueForKey:@"mobile_no"];
-            
-            
+               NSString *phonestr = [[responseDictionary valueForKey:@"data"]valueForKey:@"mobile_no"];
+            NSString *phonestr1 = [[responseDictionary valueForKey:@"data"]valueForKey:@"phonenum_country_code"];
+
             if ([phonestr isEqual:(id)[NSNull null]] || phonestr.length < 1 )
             {
                 _MobileTF.text=@"";
                 
             }
-            
-            else
+             else
             {
-                _MobileTF.text=[[responseDictionary valueForKey:@"data"] valueForKey:@"mobile_no"];
-                
+                phonestr = [phonestr stringByReplacingOccurrencesOfString:phonestr1
+                                                         withString:@""];
+                _MobileTF.text=phonestr;
+                _codeTF.text=[[responseDictionary valueForKey:@"data"] valueForKey:@"phonenum_country_code"];
+
             }
             
             NSString *locationstr = [[responseDictionary valueForKey:@"data"]valueForKey:@"location"];
@@ -882,6 +930,34 @@
     //    _doblinObj.hidden=YES;
     [self.scrollViewObj setContentOffset:CGPointMake(0, 0)animated:YES];
     
+}
+- (IBAction)codebtnAction:(id)sender
+{
+    _codelblobj.hidden=YES;
+    _codedoneobj.hidden=YES;
+    _codepickerobj.hidden=YES;
+
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    
+         return [codearr count];
+  }
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    
+        return [codearr objectAtIndex:row];
+        
+ }
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+          _codeTF.text = [codearr objectAtIndex:row];
+        
 }
 @end
 

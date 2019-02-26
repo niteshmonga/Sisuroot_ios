@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBook/AddressBook.h>
 
-@interface FriendsViewController : UIViewController
+#import <AddressBookUI/ABPeoplePickerNavigationController.h>
+#import <AddressBookUI/ABPersonViewController.h>
+#import <AddressBookUI/ABNewPersonViewController.h>
+#import <AddressBookUI/ABUnknownPersonViewController.h>
+#import <AddressBookUI/ABAddressFormatting.h>
+
+@interface FriendsViewController : UIViewController <ABPeoplePickerNavigationControllerDelegate,ABNewPersonViewControllerDelegate,ABPersonViewControllerDelegate>
 {
     IBOutlet UIActivityIndicatorView *activityIden;
     UITapGestureRecognizer *tapper;
@@ -21,7 +28,8 @@
     IBOutlet UITableView *FriendsTableviewobj;
     IBOutlet UILabel *chatnotification;
     UITextView *privateTextView;
-    
+    int indexCount;
+
 }
 @property (strong, nonatomic) IBOutlet UIImageView *Backgroundimg;
 - (IBAction)BackBtnAction:(id)sender;
@@ -72,6 +80,11 @@
 @property (weak, nonatomic) IBOutlet UIView *footerviewobj;
 - (IBAction)SkipBtnAction:(id)sender;
 @property (weak, nonatomic) IBOutlet NSString *invitestr;
+
+@property (weak, nonatomic) IBOutlet UIView *Editcontactview;
+@property (weak, nonatomic) IBOutlet UITextField *EPhoneTF;
+- (IBAction)updatecontact:(id)sender;
+- (IBAction)CancelBtn1Action:(id)sender;
 
 @end
 

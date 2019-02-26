@@ -25,8 +25,7 @@
     NSMutableArray *Arr5;
     NSMutableArray *Arr6;
     
-    // NSMutableArray *Arr3;
-    NSString *check;
+     NSString *check;
     NSString *check1;
     
     NSString *check2;
@@ -60,7 +59,7 @@
 - (void)viewDidLoad {
     
     selectedIndexArray = [[NSMutableArray alloc] init];
-    for(int i =0 ; i < 10; i++)
+    for(int i =0 ; i < 11; i++)
     {
         localDict = [[NSMutableDictionary alloc] init];
         [localDict setValue:[NSString stringWithFormat:@"%d",i] forKey:@"selectedindex"];
@@ -89,9 +88,9 @@
     self.navigationController.navigationBar.hidden=YES;
     
     
-    Arr1=[[NSMutableArray alloc]initWithObjects:@"Question 1/9",@"Question 2/9",@"Question 3/9",@"Question 4/9",@"Question 5/9",@"Question 6/9",@"Question 7/9",@"Question 8/9",@"Question 9/9",@"Thankyou",nil];
+    Arr1=[[NSMutableArray alloc]initWithObjects:@"Question 1/9",@"Question 2/9",@"Question 3/9",@"Question 4/9",@"Question 5/9",@"Question 6/9",@"Question 7/9",@"Question 8/9",@"Question 9/9",@"newzealand",@"Thankyou",nil];
     
-    Arr2=[[NSMutableArray alloc]initWithObjects:@"Little interest or pleasure in doing things",@"Feeling down, depressed,or hopeless",@"Trouble falling asleep or staying asleep",@"Feeling tired or having little energy",@"Poor appetite or overeating",@"Feeling bad about yourself — or that you are a failure or have let yourself or your family down",@"Trouble concentrating on things,such as reading the newspaper or watching television",@"Moving or speaking so slowly that other day people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",@"Thoughts that you would be better off dead or of hurting yourself in some way",@" ",nil];
+    Arr2=[[NSMutableArray alloc]initWithObjects:@"Little interest or pleasure in doing things",@"Feeling down, depressed,or hopeless",@"Trouble falling asleep or staying asleep",@"Feeling tired or having little energy",@"Poor appetite or overeating",@"Feeling bad about yourself — or that you are a failure or have let yourself or your family down",@"Trouble concentrating on things,such as reading the newspaper or watching television",@"Moving or speaking so slowly that other day people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",@"Thoughts that you would be better off dead or of hurting yourself in some way",@" ",@" ",nil];
     
     
     // Do any additional setup after loading the view from its nib.
@@ -121,7 +120,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
         
         NSInteger firstIndex = 0;
-        NSInteger lastIndex = 9;
+        NSInteger lastIndex = 10;
         
         NSArray *currentIndex = [_introcollection indexPathsForVisibleItems];
         
@@ -215,6 +214,7 @@
     PHQ9CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.SubmitBtnobj.hidden=YES;
     cell.thankulbl.hidden=YES;
+    cell.newzealantviewobj.hidden=YES;
     // cell.backgroundimg.image = [UIImage imageNamed:[Arrayimage objectAtIndex:indexPath.row]];
     cell.Questionlbl.text = [Arr1 objectAtIndex:indexPath.row];
     cell.BSAlbl.text = [Arr2 objectAtIndex:indexPath.row];
@@ -242,7 +242,28 @@
     [cell.Btn4obj addTarget:self action:@selector(btn4Action:) forControlEvents:UIControlEventTouchUpInside];
     
     
+    cell.helplinebtnobj.tag = indexPath.row;
+    [cell.helplinebtnobj addTarget:self action:@selector(helplineAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    cell.emergencybtnobj.tag = indexPath.row;
+    [cell.emergencybtnobj addTarget:self action:@selector(EmergencyAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.suicidebtnobj.tag = indexPath.row;
+    [cell.suicidebtnobj addTarget:self action:@selector(suicideAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.youthlinebtnobj.tag = indexPath.row;
+    [cell.youthlinebtnobj addTarget:self action:@selector(youthlineAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.depresionbtnobj1.tag = indexPath.row;
+    [cell.depresionbtnobj1 addTarget:self action:@selector(depression1Action:) forControlEvents:UIControlEventTouchUpInside];
+    cell.depresionbtnobj2.tag = indexPath.row;
+    [cell.depresionbtnobj2 addTarget:self action:@selector(depression2Action:) forControlEvents:UIControlEventTouchUpInside];
+    cell.healthlinebtnobj.tag = indexPath.row;
+    [cell.healthlinebtnobj addTarget:self action:@selector(healthAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.samaritansbtnobj.tag = indexPath.row;
+    [cell.samaritansbtnobj addTarget:self action:@selector(samaritonsAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.crisisbtnobj.tag = indexPath.row;
+    [cell.crisisbtnobj addTarget:self action:@selector(crisisAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+
     int lastindex=[Arr2 count]-1;
     
     if (indexPath.row == lastindex)
@@ -264,6 +285,8 @@
         _pagecontrol.hidden=YES;
         cell.skipBtnobj.hidden=YES;
         cell.backbtnobj.hidden=NO;
+        cell.newzealantviewobj.hidden=YES;
+
         
     }
     else
@@ -272,7 +295,8 @@
         if (indexPath.row == 0)
         {
             cell.backbtnobj.hidden=YES;
-            
+            cell.newzealantviewobj.hidden=YES;
+
             cell.Questionlbl.hidden=NO;
             cell.BSAlbl.hidden=NO;
             cell.Btn1obj.hidden=NO;
@@ -292,9 +316,10 @@
         }
         else if (indexPath.row == 8)
         {
-            cell.skipBtnobj.hidden=YES;
+            cell.newzealantviewobj.hidden=YES;
+
+            cell.skipBtnobj.hidden=NO;
             cell.skipbacklbl.hidden=YES;
-            
             cell.backbtnobj.hidden=NO;
             cell.Questionlbl.hidden=NO;
             cell.BSAlbl.hidden=NO;
@@ -305,7 +330,7 @@
             cell.btn1lbl.hidden=NO;
             cell.btn2lbl.hidden=NO;
             cell.headerlbl.hidden=NO;
-            // cell.skipbacklbl.hidden=NO;
+            //cell.skipbacklbl.hidden=NO;
             cell.btn3lbl.hidden=NO;
             cell.btn4lbl.hidden=NO;
             cell.SubmitBtnobj.hidden=YES;
@@ -314,9 +339,17 @@
             //cell.skipBtnobj.hidden=NO;
             
         }
+        else if (indexPath.row == 9)
+        {
+            cell.skipBtnobj.hidden=NO;
+            //cell.skipbacklbl.hidden=YES;
+            cell.backbtnobj.hidden=NO;
+            cell.newzealantviewobj.hidden=NO;
+        }
         else
         {
-            
+            cell.newzealantviewobj.hidden=YES;
+
             cell.backbtnobj.hidden=NO;
             cell.Questionlbl.hidden=NO;
             cell.BSAlbl.hidden=NO;
@@ -408,6 +441,118 @@
     return CGSizeMake(_introcollection.bounds.size.width, _introcollection.bounds.size.height-45);
 }
 
+-(void)helplineAction : (UIButton *) btn
+{
+        NSString *phNo = @"111";
+        NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
+    
+        if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+            [[UIApplication sharedApplication] openURL:phoneUrl];
+        } else
+        {
+           UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+            [calert show];
+        }
+ }
+    
+-(void)EmergencyAction : (UIButton *) btn
+{
+    NSString *phNo = @"0800543354";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
+}
+-(void)suicideAction : (UIButton *) btn
+{
+    NSString *phNo = @"0800376633";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
+}
+-(void)depression1Action : (UIButton *) btn
+{
+    NSString *phNo = @"0800111757";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
+}
+-(void)depression2Action : (UIButton *) btn
+{
+    NSString *phNo = @"0800543354";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
+}
+-(void)healthAction : (UIButton *) btn
+{
+    
+    NSString *phNo = @"0800611116";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
+}
+-(void)samaritonsAction : (UIButton *) btn
+{
+    NSString *phNo = @"0800726666";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
+}
+-(void)crisisAction : (UIButton *) btn
+{
+    NSString *phNo = @"0800920092";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
+}
+
+
+
+
+
+
 
 
 
@@ -427,7 +572,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
         
         NSInteger firstIndex = 0;
-        NSInteger lastIndex = 9;
+        NSInteger lastIndex = 10;
         
         NSArray *currentIndex = [_introcollection indexPathsForVisibleItems];
         NSInteger nextIndex = [[currentIndex objectAtIndex:0] row] + 1;
@@ -459,7 +604,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
         
         NSInteger firstIndex = 0;
-        NSInteger lastIndex = 9;
+        NSInteger lastIndex = 10;
         
         NSArray *currentIndex = [_introcollection indexPathsForVisibleItems];
         NSInteger nextIndex = [[currentIndex objectAtIndex:0] row] + 1;
@@ -722,7 +867,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
         
         NSInteger firstIndex = 0;
-        NSInteger lastIndex = 9;
+        NSInteger lastIndex = 10;
         
         NSArray *currentIndex = [_introcollection indexPathsForVisibleItems];
         NSInteger nextIndex = [[currentIndex objectAtIndex:0] row] + 1;
@@ -792,7 +937,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
         
         NSInteger firstIndex = 0;
-        NSInteger lastIndex = 9;
+        NSInteger lastIndex = 10;
         
         NSArray *currentIndex = [_introcollection indexPathsForVisibleItems];
         NSInteger nextIndex = [[currentIndex objectAtIndex:0] row] + 1;
@@ -865,7 +1010,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
         
         NSInteger firstIndex = 0;
-        NSInteger lastIndex = 9;
+        NSInteger lastIndex = 10;
         
         NSArray *currentIndex = [_introcollection indexPathsForVisibleItems];
         NSInteger nextIndex = [[currentIndex objectAtIndex:0] row] + 1;
@@ -937,7 +1082,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
         
         NSInteger firstIndex = 0;
-        NSInteger lastIndex = 9;
+        NSInteger lastIndex = 10;
         
         NSArray *currentIndex = [_introcollection indexPathsForVisibleItems];
         NSInteger nextIndex = [[currentIndex objectAtIndex:0] row] + 1;

@@ -21,6 +21,7 @@
 #import "Bs3ViewController.h"
 #import "BS1ViewController.h"
 #import "FrontViewController.h"
+#import "EditViewController.h"
 
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
@@ -92,7 +93,7 @@
     else
     {
         [self callTaglist];
-        [self callfetchprofile];
+       // [self callfetchprofile];
         
     }
     [self.view showActivityViewWithLabel:@"Loading"];
@@ -379,9 +380,9 @@
             //[cell.EmotionBtnobj setTitle:@"Tag Me" forState:UIControlStateNormal];
             //  [cell.EmotionBtnobj setBackgroundImage:[UIImage imageNamed:@"tagmeback.png"] forState:UIControlStateNormal];
             //  cell.Taggedlbl.text=@"Tagged";
-            cell.taggedimg.hidden=NO;
             
-            NSString *imgStr3 = [[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"tagging_status"];
+              cell.taggedimg.hidden=NO;
+             NSString *imgStr3 = [[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"tagging_status"];
             
             if ([imgStr3 isEqual:(id)[NSNull null]] || [imgStr3 isEqual:@"0"] )
             {
@@ -1295,6 +1296,21 @@
         if ([[responseDictionary valueForKey:@"status"] integerValue] ==200)
         {
             
+            NSString *phonestr = [[responseDictionary valueForKey:@"data"]valueForKey:@"mobile_no"];
+            
+            if ([phonestr isEqual:(id)[NSNull null]] || phonestr.length < 1 )
+            {
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Please fill your mobile number first" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                
+                alert.tag=2000;
+                [alert show];
+            }
+            
+            
+            
+           
+            
              if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"Chat_Status"] isEqual:@"0"])
             {
                 
@@ -1557,8 +1573,7 @@
 }
 - (IBAction)ChatBtnAction:(id)sender {
     ChatfriendViewController *VC1=[[ChatfriendViewController alloc]init];
-    
-    // [VC1 setDetail1:[[imgArr objectAtIndex:btn.tag]valueForKey:@"tag_id"]];
+     // [VC1 setDetail1:[[imgArr objectAtIndex:btn.tag]valueForKey:@"tag_id"]];
     // [VC1 setDetail1:[imgArr objectAtIndex:btn.tag]];
     [self.navigationController pushViewController:VC1 animated:YES];
 }
@@ -1603,6 +1618,25 @@
 
 - (IBAction)NointernetBtnAction:(id)sender {
 }
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"Button Index =%ld",(long)buttonIndex);
+    if (buttonIndex == 0)
+    {
+        NSLog(@"You have clicked Cancel");
+        
+        if(alertView.tag == 2000)
+        {
+            EditViewController *Hgn= [[EditViewController alloc]init];
+             [self.navigationController pushViewController:Hgn animated:YES];
+            
+        }
+        else
+        {
+            
+        }
+    }
+ }
 @end
     
    

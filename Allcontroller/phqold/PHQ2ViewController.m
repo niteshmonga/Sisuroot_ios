@@ -60,6 +60,7 @@
 
 - (void)viewDidLoad {
     
+    
     selectedIndexArray = [[NSMutableArray alloc] init];
     for(int i =0 ; i < 10; i++)
     {
@@ -67,8 +68,7 @@
         [localDict setValue:[NSString stringWithFormat:@"%d",i] forKey:@"selectedindex"];
         [localDict setValue:@"0" forKey:@"value"];
         [localDict setValue:@"0" forKey:@"selectedvalue"];
-        
-        [selectedIndexArray addObject:localDict];
+         [selectedIndexArray addObject:localDict];
     }
     
     selectedIndex = 0;
@@ -81,10 +81,8 @@
     flag=NO;
     check=@"no";
     check1=@"no";
-    
-    check2=@"no";
-    
-    check3=@"no";
+     check2=@"no";
+     check3=@"no";
     
     self.navigationController.navigationBar.hidden=YES;
     
@@ -209,10 +207,10 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     static NSString *reuseIdentifier = @"FirstCollectionViewCell";
     
     PHQ9CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.newzealantviewobj.hidden=YES;
     cell.SubmitBtnobj.hidden=YES;
     cell.thankulbl.hidden=YES;
     // cell.backgroundimg.image = [UIImage imageNamed:[Arrayimage objectAtIndex:indexPath.row]];

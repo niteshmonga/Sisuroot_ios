@@ -186,12 +186,38 @@
 
 -(void)SkipAction : (UIButton *) btn
 {
-    [self callfetchprofile];
+    int lastindex=[strarr1 count]-1;
+    
+    if (btn.tag == lastindex)
+    {
+        [self callfetchprofile];
 
-//        DemoGraphicViewController *fvc=[[DemoGraphicViewController alloc]init];
-//        [self.navigationController pushViewController:fvc animated:YES];
- 
-}
+    }
+    else
+    {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
+            
+            NSInteger firstIndex = 0;
+            NSInteger lastIndex = 7;
+            
+            NSArray *currentIndex = [_introcollection indexPathsForVisibleItems];
+            NSInteger nextIndex = [[currentIndex objectAtIndex:0] row] + 1;
+            
+            NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:nextIndex inSection:0];
+            NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:firstIndex inSection:0];
+            
+            if (nextIndex > lastIndex) {
+                
+                // [_introcollection scrollToItemAtIndexPath:firstIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+                
+            } else {
+                [_introcollection scrollToItemAtIndexPath:nextIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+            }
+        });
+    }
+
+ }
 
 
 -(void)callfetchprofile
