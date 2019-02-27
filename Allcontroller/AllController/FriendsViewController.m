@@ -58,8 +58,8 @@
     NSString *outercount;
     NSString *invitestr;
     NSString *invitestrname;
-
-    NSString *contactidstr;
+    NSString *importcodestr;
+     NSString *contactidstr;
 
 }
 @end
@@ -75,6 +75,12 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
+
+    if ([importcodestr isEqualToString:@"changedcode"])
+    {
+        [self fetchContactsandAuthorization];
+
+    }
     self.navigationController.navigationBar.hidden=YES;
 
      _Addcontactview.hidden=YES;
@@ -89,6 +95,8 @@
         _profileBtnobj1.hidden=YES;
         _profileiconimg.hidden=YES;
  [self contactList];
+        importcodestr=@"changedcode1";
+
     }
 }
  - (void)viewDidLoad {
@@ -96,6 +104,7 @@
     
      _Editcontactview.hidden=YES;
      indexCount = 3000;
+     importcodestr=@"changedcode1";
 
     if ([_invitestr isEqualToString:@"invite"])
     {
@@ -1480,6 +1489,7 @@
                     self.navigationController.navigationBar.hidden=NO;
 
                 }
+                importcodestr=@"changedcode";
             }
             
  
