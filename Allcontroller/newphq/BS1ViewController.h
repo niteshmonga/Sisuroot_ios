@@ -32,5 +32,6 @@
 @property(strong,nonatomic) IBOutlet UILabel *hidderlbl;
 - (IBAction)BackBtnAction:(id)sender;
 - (IBAction)HomeBtnAction:(id)sender;
+@property(strong,nonatomic) IBOutlet UIButton *backbtnobj;
 
 @end

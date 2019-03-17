@@ -17,6 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BS1ViewController">
             <connections>
+                <outlet property="backbtnobj" destination="X2b-2v-iJf" id="W1g-JB-Q5A"/>
                 <outlet property="headerLbl" destination="K7S-xp-Ym5" id="QTG-Km-D4t"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webview" destination="IOn-Xb-1yn" id="bSO-jc-e9b"/>

@@ -13,6 +13,7 @@
 #import "DemoGraphicViewController.h"
 #import "LoginViewController.h"
 #import "CountryListViewController.h"
+//#import "CountrySelector.h"
 
  //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
@@ -114,6 +115,11 @@
     return YES;
 }
 
+-(void) selectedCountryWithName:(NSString *)countryName andWithDailer:(NSString *)dailerCode andWithCountryCode:(NSString *)countryCode {
+    
+    // Do your stuff here
+    
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -165,7 +171,7 @@
 //        _codedoneobj.hidden=NO;
 //        _codepickerobj.hidden=NO;
         [_mobileTF endEditing:YES];
-        
+       
         CountryListViewController *cv = [[CountryListViewController alloc] initWithNibName:@"CountryListViewController" delegate:self];
         [self presentViewController:cv animated:YES completion:NULL];
          //  [ _MobileTF endEditing:YES];
@@ -183,6 +189,7 @@
         _codepickerobj.hidden=YES;
         _codelblobj.hidden=YES;
         _codedoneobj.hidden=YES;
+        
     }
     else if(textField==self.accountTF)
     {
@@ -197,9 +204,8 @@
         [_accountTF endEditing:YES];
         [_codeTF endEditing:YES];
         _codepickerobj.hidden=YES;
-
-
-    }
+        
+     }
 }
 
 - (void)didSelectCountry:(NSDictionary *)country
@@ -254,19 +260,19 @@
     if([_UserTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length < 1)
     {
         msg = @"Please enter username";
-     
-    }
+        
+     }
     
     else if([Arr valueForKey:@"username"]==_UserTF.text)
     {
         msg =@"This username already in used";
         
     }
-    
-    //    else if([Arr valueForKey:@"username"]==_UserTF.text)
+     //    else if([Arr valueForKey:@"username"]==_UserTF.text)
     //    {
     //        msg =@"This username already taken";
     //    }
+    
     else if (_EmailTF.text.length < 1)
     {
         msg = @"Please enter your email address";
@@ -297,14 +303,14 @@
     {
         msg = @"Please enter mobile number";
     }
-    else if (_mobileTF.text.length < 10 || _mobileTF.text.length > 10)
+    else if (_mobileTF.text.length < 8 || _mobileTF.text.length > 11)
     {
          msg = @"Please enter valid mobile number";
         
     }
     else if([phoneTest evaluateWithObject:_mobileTF.text])
     {
-        msg =@"Please enter your valid mobile number";
+         msg =@"Please enter your valid mobile number";
         
     }
     
@@ -318,9 +324,8 @@
         if([_AllowcontactBtnobj isSelected]==YES)
         {
             [self callSignupService];
- 
         }
-    else{
+    else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please allow for Access contacts" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
             
@@ -354,17 +359,13 @@
 //
 //    [webServiceManager setDelegateMethode:self];
 //    [webServiceManager callMyWebServiceManager:@"userRegistrationViaGmail" :dict :paramDict];
-//
+
 //}
 
 -(void)callSignupService
 {
    // [self.view showActivityViewWithLabel:@"Loading"];
-    NSString *mobilestr1=_codeTF.text;
-    NSString *mobilestr2=_mobileTF.text;
     
-    NSString *mobilestr3=[mobilestr1 stringByAppendingString:mobilestr2];
-    _mobileTF.text=mobilestr3;
     
     if ([_accountTF.text isEqualToString:@"Free version"])
     {
@@ -380,20 +381,20 @@
         accounttype=@"2";
 
     }
-    
+   
     [self.view showActivityViewWithLabel:@"Loading"];
     
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
     [dict setValue:@"userRegistration" forKey:@"name"];
-    
-    
+ 
     NSMutableDictionary *paramDict = [[NSMutableDictionary alloc]init];
     [paramDict setValue:_UserTF.text forKey:@"customerUsername"];
     [paramDict setValue:_EmailTF.text forKey:@"customerEmail"];
     [paramDict setValue:_PasswordTF.text forKey:@"customerPassword"];
-    [paramDict setValue:_mobileTF.text forKey:@"customermobile"];
-   
+     [paramDict setValue:_mobileTF.text forKey:@"customermobile"];
+    [paramDict setValue:_codeTF.text forKey:@"phonenum_country_code"];
+
     [paramDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"udid"] forKey:@"udid"];
     [paramDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"lat"] forKey:@"lat"];
     [paramDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"lng"] forKey:@"lng"];
@@ -448,7 +449,7 @@
                 [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"profile_img"] forKey:@"profile_img"];
                 [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"email"] forKey:@"email"];
                 idstr=[[responseDictionary valueForKey:@"data"]valueForKey:@"id"];
-                [self fetchContactsandAuthorization];
+              //  [self fetchContactsandAuthorization];
                 
                 
                 //                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -606,8 +607,7 @@
     
     
     NSString *nameStr;
-    NSString *mobileStr;
-    
+ 
     for (int i = 0; i<contactarray.count; i++)
     {
         if (i == 0 )
@@ -692,12 +692,10 @@
     
     arrayTableData = [[NSMutableArray alloc] init];
     
-    
     CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
     // NSLog(@"%@",people);
     CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
     
- 
     
     for(int i=0; i<nPeople; i++)
     {
@@ -770,17 +768,7 @@
                 NSString *str   = [NSString stringWithFormat:@"%@",ABMultiValueCopyValueAtIndex(multi, l)];
                 NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"] invertedSet];
                 phone = [[str componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
-                //                phone = [phone stringByReplacingOccurrencesOfString:@"+91"
-                //                                                         withString:@""];
-                //                phone = [phone stringByReplacingOccurrencesOfString:@"+1"
-                //                                                         withString:@""];
-                //                int length = phone.length;
-                //
-                //                if (phone.length >10)
-                //                {
-                //                    phone = [phone substringFromIndex: length-10];
-                //
-                //                }
+               
                 [contacName setObject:phone forKey:@"mobile"];
                 
                 [contacName setValue:[NSString stringWithFormat:@"%d",indexCount] forKey:@"id"];

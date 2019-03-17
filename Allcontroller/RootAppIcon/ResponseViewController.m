@@ -16,6 +16,7 @@
 #import "Tag_ProfileViewController.h"
 #import "Bs3ViewController.h"
 #import "BS1ViewController.h"
+#import "Reachability.h"
 
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
@@ -43,6 +44,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self callnetconnection];
+
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     [self.view showActivityViewWithLabel:@"Loading"];
 
@@ -58,12 +61,7 @@
     _MenuBtnObj.hidden=YES;
     search = NO;
     [self Requestlist];
-    SWRevealViewController *revealController = [self revealViewController];
     
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
-    
-    [ _MenuBtnObj addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     
     if ([_str2 isEqualToString:@"done"])
     {
@@ -72,6 +70,12 @@
 
     }
     
+    SWRevealViewController *revealController = [self revealViewController];
+    
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    [ _MenuBtnObj addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     _profileiconimg.layer.cornerRadius=20;
     _profileiconimg.clipsToBounds=YES;
     
@@ -326,9 +330,7 @@
 
 -(void)DeleteRequest  : (UIButton *) btn
 {
-   
-
-    MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
+     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
     [dict setValue:@"TagShareNotifyUpdate" forKey:@"name"];
     
@@ -463,10 +465,8 @@
 //                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
 //                        [alert show];
             
-            
-        }
-        
-        
+         }
+ 
     }
     
     if ([[methodeDictionary valueForKey:@"name"] isEqualToString:@"TagShareNotifyUpdate"])
@@ -492,9 +492,7 @@
             
             //                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             //                    [alert show];
-            
-            
-        }
+         }
         else
         {
             //                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -528,10 +526,8 @@
             //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             //            [alert show];
             
-            
-        }
-        
-        
+         }
+ 
     }
     
     
@@ -568,8 +564,38 @@
                 [_Sosbtnobj setUserInteractionEnabled:NO];
             }
             
-            chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
-            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+            
+            
+            
+            
+             if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"Sisuchat_Status"] integerValue]==1)
+            {
+                if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+                {
+                    chatnotification.hidden=YES;
+                    
+                }
+                else
+                {
+                    chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+                    
+                }
+            }
+            else
+            {
+                chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+                NSInteger b = [chatnotification.text integerValue];
+                
+                NSString *str = [[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"];
+                NSInteger j=[str integerValue];;
+                j=b+j;
+                NSString* myNewString = [NSString stringWithFormat:@"%li", (long)j];
+                
+                chatnotification.text=myNewString;
+                
+            }
+            
+            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"] && [[[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"] integerValue]==0)
             {
                 chatnotification.hidden=YES;
                 
@@ -654,8 +680,6 @@
     [webServiceManager callMyWebServiceManager:@"acceptFriendRequest":dict :dict1];
     
 }
-
-
 
 
 - (IBAction)OuterCircleBtn:(id)sender
@@ -874,6 +898,32 @@
 - (IBAction)SosBtnAction:(id)sender {
     BS1ViewController *Tvc=[[BS1ViewController alloc]init];
  [self.navigationController pushViewController:Tvc animated:YES];
+}
+
+
+
+-(void)callnetconnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        alert.tag=2000;
+        [alert show];
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
 }
 @end
 

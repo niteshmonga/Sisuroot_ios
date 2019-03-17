@@ -14,7 +14,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-}
+    _notificationlbl.layer.cornerRadius=15;
+    _notificationlbl.clipsToBounds=YES;
+ }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

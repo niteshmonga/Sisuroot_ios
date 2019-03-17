@@ -2,7 +2,7 @@
 #import "BS1ViewController.h"
 #import "FeedViewController.h"
 #import "MyWebserviceManager.h"
-
+#import "Reachability.h"
 @interface BS1ViewController ()
 {
     NSString *phNo;
@@ -13,13 +13,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-  // [self callviewdemo];
+    [self callnetconnection];
+   // [self callviewdemo];
     
     self.navigationController.navigationBar.hidden=YES;
     
     if ([_msgcheckstr isEqualToString:@"Testmsg"])
     {
+        _backbtnobj.hidden=YES;
+        
        [_SkipBtnobj setTitle:@"Done" forState:UIControlStateNormal];
         headerLbl.text=@"Message";
         _SkipBtnobj.hidden=NO;
@@ -62,6 +64,7 @@
  // Pass the selected object to the new view controller.
  }
  */
+
 
 - (IBAction)NotatallBtnAction:(id)sender {
     
@@ -178,5 +181,33 @@
     FeedViewController *EVC=[[FeedViewController alloc]init];
     //            [EVC setStr2:@"feed"];
     [self.navigationController pushViewController:EVC animated:YES];
+}
+
+
+
+
+
+-(void)callnetconnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        alert.tag=2000;
+        [alert show];
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
 }
 @end

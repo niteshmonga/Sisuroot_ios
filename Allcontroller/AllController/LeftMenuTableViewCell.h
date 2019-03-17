@@ -11,5 +11,6 @@
 @interface LeftMenuTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *listiconimg;
 @property (strong, nonatomic) IBOutlet UILabel *liststmtlbl;
+@property (strong, nonatomic) IBOutlet UILabel *notificationlbl;
 
 @end

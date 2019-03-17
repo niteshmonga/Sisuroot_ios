@@ -14,6 +14,7 @@
 //#import "GAIDictionaryBuilder.h"
 //#import "GAIFields.h"
 //#import "GAILogger.h"
+#import "Reachability.h"
 #import "FriendsViewController.h"
 #import "BS1ViewController.h"
 #import "EmotionlistTableViewCell.h"
@@ -94,10 +95,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self callfetchprofile];
-//    WARVChatPanelView *view = [[WARVChatPanelView alloc] init];
-//    view.delegate = self;
-//     [view showInView:self.voicerecordviewobj];
-//    self.chatPanelView = view;
+    [self callnetconnection];
+
+ 
     self.voicerecordviewobj.hidden=YES;
     inddd = 0;
     _progressLabel.hidden=YES;
@@ -2685,6 +2685,34 @@
         }
     }
     
+}
+
+
+
+
+
+-(void)callnetconnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        alert.tag=2000;
+        [alert show];
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
 }
 @end
 

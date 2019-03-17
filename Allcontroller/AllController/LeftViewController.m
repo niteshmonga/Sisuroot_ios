@@ -28,6 +28,7 @@
 #import "TestlistViewController.h"
 #import "VoiceTestViewController.h"
 #import "DemoOtherViewController.h"
+#import "NotificationListViewController.h"
 
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
@@ -71,14 +72,18 @@
     
     _LogoutBtnobj.layer.cornerRadius=16;
     _LogoutBtnobj.clipsToBounds=YES;
-    
-    _LogoutBtnobj.layer.borderWidth =1;
+     _LogoutBtnobj.layer.borderWidth =1;
     _LogoutBtnobj.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    
     // Do any additional setup after loading the view from its nib.
-    //
-    titles=[[NSArray alloc]initWithObjects:@"HOME",@"FRIEND CIRCLE",@"NOTIFICATIONS",@"SETTINGS",@"TEST",@"DEMOGRAPHIC FORM",@"BUG REPORT",@"LOGOUT",nil];
-    imgarr=[[NSArray alloc]initWithObjects:@"icons8-home.png",@"dashboard_icon_friends_white.png",@"notification.png",@"settings1.png",@"test.png",@"forms.png",@"Feedback.png",@"logout-2.png",nil];
+    
+    titles=[[NSArray alloc]initWithObjects:@"HOME",@"FRIEND CIRCLE",@"NOTIFICATIONS",@"SETTINGS",@"TEST",@"DEMOGRAPHIC FORM",@"FEEDBACK",@"ALERTS",@"LOGOUT",nil];
+    
+    
+    imgarr=[[NSArray alloc]initWithObjects:@"icons8-home.png",@"dashboard_icon_friends_white.png",@"notification.png",@"settings1.png",@"test.png",@"forms.png",@"Feedback.png",@"warning.png",@"logout-2.png",nil];
     //@"icons8-voice_presentation.png",,@"VOICE TEST"
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,6 +109,31 @@
         cell = [nib objectAtIndex:0];
         
      }
+    
+    cell.notificationlbl.text=[listarray valueForKey:@"AlertCount"];
+    
+    cell.notificationlbl.hidden=YES;
+
+    if (indexPath.row==7)
+    {
+        if ([cell.notificationlbl.text isEqual:@"0"])
+        {
+            cell.notificationlbl.hidden=YES;
+            
+        }
+        else
+        {
+            
+            cell.notificationlbl.hidden=NO;
+
+        }
+
+    }
+    else
+    {
+        cell.notificationlbl.hidden=YES;
+
+    }
     
     cell.liststmtlbl.text=[titles objectAtIndex:indexPath.row];
     cell.listiconimg.image = [UIImage imageNamed:[imgarr objectAtIndex:indexPath.row]];
@@ -196,20 +226,20 @@
         [revealController pushFrontViewController:nav animated:YES];
         
     }
-//       else if(indexPath.row==7)
-//        {
-//
-//            SWRevealViewController *revealController = [self revealViewController];
-//            DemoOtherViewController *LVC=[[DemoOtherViewController alloc]init];
-//            [LVC setTypeString:@"quiz"];
-//
-//            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LVC];
-//            [revealController pushFrontViewController:nav animated:YES];
-//
-//
-//        }
+       else if(indexPath.row==7)
+        {
+
+            SWRevealViewController *revealController = [self revealViewController];
+            NotificationListViewController *LVC=[[NotificationListViewController alloc]init];
+           // [LVC setTypeString:@"quiz"];
+
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LVC];
+            [revealController pushFrontViewController:nav animated:YES];
+
+
+        }
     
-    else if(indexPath.row==7)
+    else if(indexPath.row==8)
     {
         [self calllogout];
         
@@ -286,6 +316,7 @@
         {
             //hud.hidden=YES;
             listarray =[responseDictionary valueForKey:@"data"];
+            
              //  [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"UserImage"] forKey:@"UserImage"];
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Phq_Test_Status"] forKey:@"Phq_Test_Status"];
             
@@ -296,6 +327,16 @@
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Sisuchat_Status"] forKey:@"Sisuchat_Status"];
             
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Chat_Status"] forKey:@"Chat_Status"];
+            
+            
+            
+            [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Voice_Test_StatusA"] forKey:@"Voice_Test_StatusA"];
+            [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Voice_Test_StatusB"] forKey:@"Voice_Test_StatusB"];
+            [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Voice_Test_StatusC"] forKey:@"Voice_Test_StatusC"];
+            
+            
+            
+            
             
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Demographic_Form_Group_Status"] forKey:@"Demographic_Form_Group_Status"];
             
@@ -348,6 +389,7 @@
             }
             
         }
+        [_profilelisttableview reloadData];
     }
     if([[methodeDictionary valueForKey:@"name"] isEqualToString:@"logout"])
     {

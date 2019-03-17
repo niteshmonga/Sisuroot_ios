@@ -25,6 +25,9 @@
 #import "Bs3ViewController.h"
 #import "BS1ViewController.h"
 #import "UIView+RNActivityView.h"
+#import "CountryListViewController.h"
+#import "Reachability.h"
+
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
 //#import "GAIFields.h"
@@ -50,9 +53,8 @@
     NSString *searchtextstr;
     NSString *conatactname1;
     NSString *conatactphone1;
-
     NSMutableArray *contactarray;
-     UIRefreshControl *refreshControl;
+    UIRefreshControl *refreshControl;
     BOOL check;
     NSString *innercount;
     NSString *outercount;
@@ -60,6 +62,7 @@
     NSString *invitestrname;
     NSString *importcodestr;
      NSString *contactidstr;
+    NSString *selfcreatenumberstr;
 
 }
 @end
@@ -83,7 +86,7 @@
     }
     self.navigationController.navigationBar.hidden=YES;
 
-     _Addcontactview.hidden=YES;
+    // _Addcontactview.hidden=YES;
     _footerviewobj.hidden=YES;
     if ([_invitestr isEqualToString:@"invite"])
     {
@@ -94,14 +97,15 @@
         _Sosbtnobj.hidden=YES;
         _profileBtnobj1.hidden=YES;
         _profileiconimg.hidden=YES;
- [self contactList];
+        [self contactList];
         importcodestr=@"changedcode1";
 
     }
 }
  - (void)viewDidLoad {
     [super viewDidLoad];
-    
+     [self callnetconnection];
+
      _Editcontactview.hidden=YES;
      indexCount = 3000;
      importcodestr=@"changedcode1";
@@ -218,6 +222,46 @@
         [_DoneBtnobj setUserInteractionEnabled:YES];
 
      }
+    
+    if(textField==self.codeTF)
+    {
+ 
+        [_codeTF resignFirstResponder];
+        // _codelblobj.hidden=NO;
+        // _codedoneobj.hidden=NO;
+        // _codepickerobj.hidden=NO;
+        CountryListViewController *cv = [[CountryListViewController alloc] initWithNibName:@"CountryListViewController" delegate:self];
+        [self presentViewController:cv animated:YES completion:NULL];
+        //  [ _MobileTF endEditing:YES];
+        _Addcontactview.hidden=NO;
+
+    }
+    else if(textField==self.EcodeTF)
+    {
+        
+        
+        [_EcodeTF resignFirstResponder];
+        // _codelblobj.hidden=NO;
+        // _codedoneobj.hidden=NO;
+        // _codepickerobj.hidden=NO;
+        CountryListViewController *cv = [[CountryListViewController alloc] initWithNibName:@"CountryListViewController" delegate:self];
+        [self presentViewController:cv animated:YES completion:NULL];
+        //  [ _MobileTF endEditing:YES];
+    }
+}
+
+
+- (void)didSelectCountry:(NSDictionary *)country
+{
+    NSLog(@"Selected Country : %@", country);
+    if ([selfcreatenumberstr integerValue]==1)
+    {
+
+        _EcodeTF.text=[country valueForKey:@"dial_code"];
+
+    }
+    _codeTF.text=[country valueForKey:@"dial_code"];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -247,7 +291,7 @@
          NSArray * array =[[NSBundle mainBundle]loadNibNamed:@"FriendsTableViewCell" owner:self options:nil];
         cell=[array objectAtIndex:0];
         
- 
+    cell.CircleBtnobj.hidden=YES;
     if (isfiltered)
     {
         
@@ -315,16 +359,13 @@
                         
                     {
                         if ([[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"group"] isEqual: @"1"])
-                            
-                        {
+                         {
                             
                             cell.Circleimg.image = [UIImage imageNamed:@"inner_circle_green80.png"];
                             
-                        }
+                         }
                         
-                     
-                        
-                        else  if ([[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"group"] isEqual: @"2"])
+                         else  if ([[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"group"] isEqual: @"2"])
                         {
                              cell.Circleimg.image = [UIImage imageNamed:@"outer_circle_green80.png"];
                             
@@ -344,6 +385,8 @@
             }
             else if ([[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"status"] integerValue] == 0)
             {
+                cell.CircleBtnobj.hidden=NO;
+
                 cell.circlenamelbl.hidden=NO;
 
                 cell.Usernamelbl.text=[[FilteredDevices objectAtIndex:indexPath.row] valueForKey:@"contact_name"];
@@ -354,9 +397,7 @@
                 
             }
         }
-        
-        
-        
+ 
     }
     else
     {
@@ -448,6 +489,7 @@
             else if ([[[userarr objectAtIndex:indexPath.row] valueForKey:@"status"] integerValue] == 0)
             {
                 cell.circlenamelbl.hidden=NO;
+                cell.CircleBtnobj.hidden=NO;
 
                 cell.Usernamelbl.text=[[userarr objectAtIndex:indexPath.row] valueForKey:@"contact_name"];
                 cell.circlenamelbl.text=[[userarr objectAtIndex:indexPath.row] valueForKey:@"contact_phone"];
@@ -463,6 +505,10 @@
     cell.RequestBtnobj.tag = indexPath.row;
     
     [cell.RequestBtnobj addTarget:self action:@selector(RequestAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.CircleBtnobj.tag = indexPath.row;
+     [cell.CircleBtnobj addTarget:self action:@selector(EditAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return cell;
@@ -495,28 +541,42 @@
 //    }
     
 }
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return YES;
-//}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
 
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        //remove the deleted object from your data source.
-//        //If your data source is an NSMutableArray, do this
-//        if (isfiltered)
-//        {
-//            [userarr removeObjectAtIndex:indexPath.row];
-//
-//        }
-//        else
-//        {
-//            [FilteredDevices removeObjectAtIndex:indexPath.row];
-//
-//        }
-//        [FriendsTableviewobj reloadData];
-//        // tell table to refresh now
-//    }
-//}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //remove the deleted object from your data source.
+        //If your data source is an NSMutableArray, do this
+        NSString *contactidstr1;
+        if (isfiltered)
+        {
+             contactidstr1=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"contact_id"];
+        }
+        else
+        {
+             contactidstr1=[[userarr objectAtIndex:indexPath.row]valueForKey:@"contact_id"];
+
+        }
+ 
+            [self.view showActivityViewWithLabel:@"Loading"];
+            MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+            [dict setValue:@"deleteContact" forKey:@"name"];
+            
+            NSMutableDictionary *paramDict = [[NSMutableDictionary alloc]init];
+            [paramDict setValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"id"]] forKey:@"id"];
+            
+            [paramDict setObject:contactidstr1 forKey:@"contact_id"];
+            
+            [webServiceManager setDelegateMethode:self];
+            [webServiceManager callMyWebServiceManager:@"deleteContact" :dict :paramDict];
+            
+        
+         // tell table to refresh now
+     }
+}
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar                   // return NO to not become first
 {
@@ -557,6 +617,69 @@
     [paramDict setValue:_searchBar.text forKey:@"key"];
     [webServiceManager setDelegateMethode:self];
     [webServiceManager callMyWebServiceManager:@"searchFriends" :dict :paramDict];
+    
+}
+-(void)EditAction  : (UIButton *) btn
+{
+    if (isfiltered)
+    {
+        invitestr=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"contact_phone"];
+        contactidstr=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"contact_id"];
+        invitestrname=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"contact_name"];
+        selfcreatenumberstr=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"selfcreated_status"];
+        
+    }
+    else
+    {
+        contactidstr=[[userarr objectAtIndex:btn.tag] valueForKey:@"contact_id"];
+        
+        invitestr=[[userarr objectAtIndex:btn.tag] valueForKey:@"contact_phone"];
+        invitestrname=[[userarr objectAtIndex:btn.tag] valueForKey:@"contact_name"];
+        selfcreatenumberstr=[[userarr objectAtIndex:btn.tag] valueForKey:@"selfcreated_status"];
+        
+        // resendinvite1=[[userarr objectAtIndex:btn.tag] valueForKey:@"invite_status"];
+    }
+    
+    
+    if ([selfcreatenumberstr integerValue]==1 || [selfcreatenumberstr isEqual:[NSNull null]])
+    {
+        _Editcontactview.hidden=NO;
+        _EPhoneTF.text=invitestr;
+    }
+    else
+    {
+        ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+        // ABAddressBookRef addressBook = ABAddressBookCreate();
+        
+        __block BOOL accessGranted = NO;
+        
+        if (&ABAddressBookRequestAccessWithCompletion != NULL)
+        {
+            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+            
+            ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+                accessGranted = granted;
+                dispatch_semaphore_signal(semaphore);
+            });
+            
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+            NSArray *people = (NSArray *)CFBridgingRelease(ABAddressBookCopyPeopleWithName(addressBook, CFBridgingRetain(invitestrname)));
+            // Display "Appleseed" information if found in the address book
+            if ((people != nil) && [people count])
+            {
+                ABRecordRef person = (__bridge ABRecordRef)[people objectAtIndex:0];
+                ABPersonViewController *picker = [[ABPersonViewController alloc] init];
+                picker.personViewDelegate = self;
+                picker.displayedPerson = person;
+                // Allow users to edit the person’s information
+                picker.allowsEditing = YES;
+                [self.navigationController pushViewController:picker animated:YES];
+                self.navigationController.navigationBar.hidden=NO;
+                
+            }
+            importcodestr=@"changedcode";
+        }
+    }
     
 }
 
@@ -697,7 +820,8 @@
             invitestr=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"contact_phone"];
             contactidstr=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"contact_id"];
             invitestrname=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"contact_name"];
-            
+            selfcreatenumberstr=[[FilteredDevices objectAtIndex:btn.tag] valueForKey:@"selfcreated_status"];
+
         }
         else
         {
@@ -705,6 +829,7 @@
 
             invitestr=[[userarr objectAtIndex:btn.tag] valueForKey:@"contact_phone"];
             invitestrname=[[userarr objectAtIndex:btn.tag] valueForKey:@"contact_name"];
+            selfcreatenumberstr=[[userarr objectAtIndex:btn.tag] valueForKey:@"selfcreated_status"];
 
            // resendinvite1=[[userarr objectAtIndex:btn.tag] valueForKey:@"invite_status"];
          }
@@ -980,8 +1105,38 @@
                 
                 [_Sosbtnobj setUserInteractionEnabled:NO];
             }
-            chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
-            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+            
+            
+            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"Sisuchat_Status"] integerValue]==1)
+            {
+                
+                if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+                {
+                    chatnotification.hidden=YES;
+                    
+                }
+                else
+                {
+                    chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+                    
+                }
+ 
+            }
+            else
+            {
+                chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+                NSInteger b = [chatnotification.text integerValue];
+                
+                NSString *str = [[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"];
+                NSInteger j=[str integerValue];;
+                j=b+j;
+                NSString* myNewString = [NSString stringWithFormat:@"%li", (long)j];
+                
+                chatnotification.text=myNewString;
+                
+            }
+            
+            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"] && [[[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"] integerValue]==0)
             {
                 chatnotification.hidden=YES;
                 
@@ -1035,6 +1190,19 @@
             [alertcrp show];
         }
         
+    }
+    if([[methodeDictionary valueForKey:@"name"] isEqualToString:@"deleteContact"])
+    {
+        if ([[responseDictionary valueForKey:@"status"] integerValue] ==200)
+        {
+            
+            [self contactList];
+            [self callsearchmethod];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+ 
     }
     
 }
@@ -1215,12 +1383,10 @@
                 nameString2  = [NSString stringWithFormat:@"%@ ",ABRecordCopyValue(person, kABPersonSortByLastName)];
             }
             
-            
-            
+ 
             NSString *nameString1 = @"0";
             
-            
-            if (nameString3  != NULL   && nameString2  != NULL)
+             if (nameString3  != NULL   && nameString2  != NULL)
             {
                 nameString1=[NSString stringWithFormat:@"%@ %@",nameString3,nameString2];
                 
@@ -1459,38 +1625,46 @@
         }
         else if (alertView.tag == 31111)
         {
- 
-            ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-            // ABAddressBookRef addressBook = ABAddressBookCreate();
-            
-            __block BOOL accessGranted = NO;
-            
-            if (&ABAddressBookRequestAccessWithCompletion != NULL)
+            if ([selfcreatenumberstr integerValue]==1 || [selfcreatenumberstr isEqual:[NSNull null]])
             {
-                dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-                
-                ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-                    accessGranted = granted;
-                    dispatch_semaphore_signal(semaphore);
-                });
-                
-                dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-                NSArray *people = (NSArray *)CFBridgingRelease(ABAddressBookCopyPeopleWithName(addressBook, CFBridgingRetain(invitestrname)));
-                // Display "Appleseed" information if found in the address book
-                if ((people != nil) && [people count])
-                {
-                    ABRecordRef person = (__bridge ABRecordRef)[people objectAtIndex:0];
-                    ABPersonViewController *picker = [[ABPersonViewController alloc] init];
-                    picker.personViewDelegate = self;
-                    picker.displayedPerson = person;
-                    // Allow users to edit the person’s information
-                    picker.allowsEditing = YES;
-                    [self.navigationController pushViewController:picker animated:YES];
-                    self.navigationController.navigationBar.hidden=NO;
-
-                }
-                importcodestr=@"changedcode";
+                   _Editcontactview.hidden=NO;
+                    _EPhoneTF.text=invitestr;
             }
+            else
+            {
+                ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+                // ABAddressBookRef addressBook = ABAddressBookCreate();
+                
+                __block BOOL accessGranted = NO;
+                
+                if (&ABAddressBookRequestAccessWithCompletion != NULL)
+                {
+                    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+                    
+                    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+                        accessGranted = granted;
+                        dispatch_semaphore_signal(semaphore);
+                    });
+                    
+                    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+                    NSArray *people = (NSArray *)CFBridgingRelease(ABAddressBookCopyPeopleWithName(addressBook, CFBridgingRetain(invitestrname)));
+                    // Display "Appleseed" information if found in the address book
+                    if ((people != nil) && [people count])
+                    {
+                        ABRecordRef person = (__bridge ABRecordRef)[people objectAtIndex:0];
+                        ABPersonViewController *picker = [[ABPersonViewController alloc] init];
+                        picker.personViewDelegate = self; 
+                        picker.displayedPerson = person;
+                    // Allow users to edit the person’s information
+                        picker.allowsEditing = YES;
+                        [self.navigationController pushViewController:picker animated:YES];
+                        self.navigationController.navigationBar.hidden=NO;
+                        
+                    }
+                    importcodestr=@"changedcode";
+                }
+            }
+            
             
  
            
@@ -1514,15 +1688,7 @@
 
 - (void)deleteContactWithIdentifier:(NSString *)identifier {
     
-//    NSArray *keys = @[CNContactGivenNameKey,
-//                      CNContactPhoneNumbersKey,
-//                      CNContactEmailAddressesKey,
-//                      CNContactIdentifierKey];
-//    CNMutableContact *contact = [[store unifiedContactWithIdentifier:identifier keysToFetch:keys error:nil] mutableCopy];
-//    NSError *error;
-//    CNSaveRequest *saveRequest = [[CNSaveRequest alloc] init];
-//    [saveRequest deleteContact:contact];
-//    [store executeSaveRequest:saveRequest error:&error];
+ 
     
 }
 
@@ -1597,8 +1763,7 @@
                 [dict setValue:@"friendRequest" forKey:@"name"];
                 
                 NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
-                //[dict1 setValue:[[userarr objectAtIndex:btn.tag] valueForKey:@"id"] forKey:@"product_id"];
-                // [dict1 setValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"reuest_id"]] forKey:@"requestToId"];
+      
                     if(isfiltered)
                     {
                         [dict1 setValue:strsearch1 forKey:@"requestToId"];
@@ -1610,29 +1775,18 @@
 
                     }
                     
-//                if ([str21 integerValue] == 1)
-//                {
-//                    [dict1 setValue:str1 forKey:@"requestToId"];
-//                }
-//                else if ([strsearch3 integerValue] == 1)
-//                {
-//                    [dict1 setValue:strsearch1 forKey:@"requestToId"];
-//                }
+ 
                
                     
                 [dict1 setValue:@"1" forKey:@"circle"];
                 [dict1 setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] forKey:@"requestFromId"];
                 
-                //[dict1 setValue:@"0" forKey:@"status"];
-                // [dict1 setValue:@"1" forKey:@"request_status"];
+            
                 [webServiceManager setDelegateMethode:self];
                 [webServiceManager callMyWebServiceManager:@"friendRequest":dict :dict1];
                 
                  }
-                //            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-                //            {
-                //               // imagePicker.sourceType =UIImagePickerControllerSourceTypeCamera;
-                //                [self presentModalViewController:imagePicker animated:YES];
+            
             }
                 break;
             case 1:
@@ -1655,8 +1809,7 @@
                 [dict setValue:@"friendRequest" forKey:@"name"];
                 
                 NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
-                //[dict1 setValue:[[userarr objectAtIndex:btn.tag] valueForKey:@"id"] forKey:@"product_id"];
-                // [dict1 setValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"reuest_id"]] forKey:@"requestToId"];
+     
                 [dict1 setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] forKey:@"requestFromId"];
                 
                 [dict1 setValue:@"2" forKey:@"circle"];
@@ -1671,31 +1824,14 @@
                         [dict1 setValue:str1 forKey:@"requestToId"];
                         
                 }
-//                if ([str21 integerValue] == 1)
-//                {
-//                    [dict1 setValue:str1 forKey:@"requestToId"];
-//                }
-//                else if ([strsearch3 integerValue] == 1)
-//                {
-//                    [dict1 setValue:strsearch1 forKey:@"requestToId"];
-//
-//                }
-                //  [dict1 setValue:_friendstr forKey:@"requestToId"];
-                
-                // [dict1 setValue:@"0" forKey:@"request_status"];
+ 
                 
                 [webServiceManager setDelegateMethode:self];
                 [webServiceManager callMyWebServiceManager:@"friendRequest":dict :dict1];
             }
                 
             }
-                //            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
-                //            {
-                //
-                //                // Set source to the Photo Library
-                //               // imagePicker.sourceType =UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-                //                [self presentModalViewController:imagePicker animated:YES];
-                //            }
+ 
                 break;
             case 2:
             {
@@ -1991,7 +2127,7 @@
     _Addcontactview.hidden=YES;
 
 }
-- (IBAction)DoneBtnAction:(id)sender {
+- (IBAction)DoneButtonAction:(id)sender {
     
     [_FirstnameTF resignFirstResponder];
     [_LastnameTF resignFirstResponder];
@@ -2015,46 +2151,43 @@
      NSString *msg  = @"0";
     
     if([_FirstnameTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length < 1)
-    {
+     {
         msg = @"Please enter name";
      }
     else if (_LastnameTF.text.length < 1)
     {
         msg = @"Please enter your email address";
         
-     }
+    }
     else if([emailTest evaluateWithObject:_LastnameTF.text] == NO)
     {
         msg = @"Please enter valid email address";
-     }
+    }
+    else if (_codeTF.text.length < 1)
+    {
+        msg = @"Please select country code";
+    }
     else if (_PhoneTF.text.length == 0 || [_PhoneTF.text isEqualToString:@" "])
     {
         msg = @"Please enter mobile number";
     }
-    else if (_PhoneTF.text.length < 10 || _PhoneTF.text.length > 13)
+    else if (_PhoneTF.text.length < 10 || _PhoneTF.text.length > 14)
     {
         msg = @"Please enter valid mobile number";
     }
-    else if (_PhoneTF.text.length == 10)
-    {
-        if(![test evaluateWithObject:_PhoneTF.text])
-        {
-            msg =@"Please enter valid mobile number";
-         }
-        
-    }
     
     
- 
-    if (![msg isEqualToString:@"0"])
+     if (![msg isEqualToString:@"0"])
     {
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:msg delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:msg delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alert show];
         
     }
     else
     {
+        NSString *str = _codeTF.text;
+        str = [str stringByAppendingString:_PhoneTF.text];
+        _PhoneTF.text=str;
      [self.view showActivityViewWithLabel:@"Loading"];
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
@@ -2086,7 +2219,7 @@
     NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
     NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
     NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    //NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     
     NSString *regExPattern = @"^[01]?[- .]?(\([2-9]d{2})|[2-9]d{2})[- .]?d{3}[- .]?d{4}$";
     NSPredicate *phoneTest1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regExPattern];
@@ -2098,7 +2231,11 @@
     {
         msg = @"Please enter mobilr number";
     }
-    else if (_EPhoneTF.text.length < 11 || _EPhoneTF.text.length > 13)
+     else if (_EcodeTF.text.length < 1)
+     {
+         msg = @"Please select country code";
+     }
+    else if (_EPhoneTF.text.length < 8 || _EPhoneTF.text.length > 10)
     {
         msg = @"Please enter valid mobile number";
     }
@@ -2112,7 +2249,9 @@
     }
     else
     {
-        [self.view showActivityViewWithLabel:@"Loading"];
+        
+        
+         [self.view showActivityViewWithLabel:@"Loading"];
         MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
         NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
         [dict setValue:@"EditContacts" forKey:@"name"];
@@ -2132,6 +2271,31 @@
 {
      _Editcontactview.hidden=YES;
     [_EPhoneTF resignFirstResponder];
+}
+
+
+
+-(void)callnetconnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+     NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        alert.tag=2000;
+        [alert show];
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
 }
 @end
 

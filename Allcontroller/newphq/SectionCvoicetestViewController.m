@@ -83,18 +83,18 @@
           ,@"Have you noticed any changes to your weight? How active are you?"
           ,@"Do you actually enjoy food as you usually would?"
            ,@"What has your sleep been like lately?"
-          ,@"Do you find it difficult to fall asleep? (Initial insomnia)"
-           ,@"Do you find it difficult to stay asleep? (Middle insomnia)"
-          ,@"What time do you wake up?Is that usual for you? (Early morning wakening)"
+          ,@"Do you find it difficult to fall asleep?"
+           ,@"Do you find it difficult to stay asleep?"
+          ,@"What time do you wake up?Is that usual for you?"
            ,nil];
     
     
     arr1=[[NSMutableArray alloc]initWithObjects:@"Q2: Have you been able to focus on things lately?"
           ,@"Q2: What’s your concentration like?"
           ,@"Q2: When you watch TV, are you able to follow what you watch?"
-          ,@"Q2: Do you find it difficult to read books because you can’t concentrate? (if mention of reading as a hobby)"
+          ,@"Q2: Do you find it difficult to read books because you can’t concentrate?"
           ,@"Q2: Have you had problems making decisions?"
-          ,@"How has having to make decisions affected you lately? (empathy)"
+          ,@"How has having to make decisions affected you lately?"
           ,@"Q2: Can you watch a half-hour television show from start to finish without losing your focus?",nil];
     
     int count = [arr2 count];
@@ -121,12 +121,13 @@
     // _questionlbl.text=arr2str;
     _questionlbl2.text=arr1str;
     // _questionlbl2.textColor=[UIColor lightGrayColor];
-    _questionlbl.text=[NSString stringWithFormat:@"%@\n%@",aboutstr,arr2str];
+    _questionlbl.text=[NSString stringWithFormat:@"%@",arr2str];
     
     NSMutableArray *pathComponents = [NSMutableArray arrayWithObjects:
                                       [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
                                       @"MyAudioMemo.m4a",
                                       nil];
+    
     NSURL *soundFileURL = [NSURL fileURLWithPathComponents:pathComponents];
     
     
@@ -172,17 +173,11 @@
     //        [_audioRecorder prepareToRecord];
     //    }
     
-    
-    
-    
-    
-    
+ 
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    
     // Define the recorder setting
     NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
-    
     
     [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
     [recordSetting setValue:[NSNumber numberWithFloat:16000.0] forKey:AVSampleRateKey];
@@ -192,7 +187,6 @@
     [recordSetting setValue :[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
     [recordSetting setValue :[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
     [recordSetting setValue :[NSNumber numberWithInt:AVAudioQualityMin] forKey:AVEncoderAudioQualityKey];
-    
     
     //    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
     //    [recordSetting setValue:[NSNumber numberWithInt:AVAudioQualityMax] forKey:AVEncoderAudioQualityKey];
@@ -285,8 +279,7 @@
         
         [_progressbarobj setProgress:someFloat animated:YES];
         
-        
-    }
+     }
     else
     {
         

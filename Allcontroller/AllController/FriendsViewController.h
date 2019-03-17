@@ -75,7 +75,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *FirstnameTF;
 @property (weak, nonatomic) IBOutlet UITextField *LastnameTF;
 @property (weak, nonatomic) IBOutlet UITextField *PhoneTF;
-- (IBAction)DoneBtnAction:(id)sender;
+- (IBAction)DoneButtonAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *DoneBtnobj;
 @property (weak, nonatomic) IBOutlet UIView *footerviewobj;
 - (IBAction)SkipBtnAction:(id)sender;
@@ -85,6 +85,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *EPhoneTF;
 - (IBAction)updatecontact:(id)sender;
 - (IBAction)CancelBtn1Action:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *codeTF;
+@property (strong, nonatomic) IBOutlet UITextField *EcodeTF;
 
 @end
 

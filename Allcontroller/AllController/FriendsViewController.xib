@@ -17,6 +17,7 @@
                 <outlet property="Chatbtnobj" destination="YtF-UK-kum" id="awk-Is-gjt"/>
                 <outlet property="DoneBtnobj" destination="R5y-oy-SZy" id="2Xg-ld-4I4"/>
                 <outlet property="EPhoneTF" destination="VMk-jP-GoA" id="kf9-zu-CmG"/>
+                <outlet property="EcodeTF" destination="Uds-jm-Lm5" id="T9g-6s-kUx"/>
                 <outlet property="Editcontactview" destination="Qyf-uM-mBc" id="KBc-LD-HVB"/>
                 <outlet property="FirstnameTF" destination="9Ag-RZ-dFM" id="vAx-5v-Pn6"/>
                 <outlet property="FriendsTableviewobj" destination="78j-U6-IPT" id="zGw-ru-jJY"/>
@@ -28,6 +29,7 @@
                 <outlet property="TagBtnActionobj" destination="szU-jp-i3x" id="Py5-cu-FR8"/>
                 <outlet property="backBtnobj" destination="nBA-7w-5IX" id="WQ8-wc-Kfd"/>
                 <outlet property="chatnotification" destination="iGu-u3-JlV" id="KxA-HH-tdG"/>
+                <outlet property="codeTF" destination="bLe-tD-eMd" id="Gen-sb-4m4"/>
                 <outlet property="contactuserimg" destination="W7q-3G-HiJ" id="zzW-8E-t8h"/>
                 <outlet property="profileBtnobj1" destination="2tm-UD-SWJ" id="PLN-ur-BHG"/>
                 <outlet property="profileiconimg" destination="CLO-ii-emg" id="2iw-C6-7FE"/>
@@ -207,7 +209,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="Save"/>
                             <connections>
-                                <action selector="DoneBtnAction:" destination="-1" eventType="touchUpInside" id="E1u-yG-CkY"/>
+                                <action selector="DoneButtonAction:" destination="-1" eventType="touchUpInside" id="g4x-Zf-SY9"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newlogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="W7q-3G-HiJ">
@@ -250,7 +252,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1o8-VQ-hkF">
-                            <rect key="frame" x="62" y="127" width="221" height="30"/>
+                            <rect key="frame" x="114" y="127" width="176" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="textColor"/>
@@ -269,6 +271,17 @@
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="LbS-yq-EaH"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bLe-tD-eMd">
+                            <rect key="frame" x="62" y="127" width="50" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="0.35991010270000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="Z2n-1a-yOe"/>
                             </connections>
                         </textField>
                     </subviews>
@@ -308,7 +321,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-Zk-Ix7">
-                            <rect key="frame" x="62" y="99" width="222" height="1"/>
+                            <rect key="frame" x="48" y="99" width="236" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.23921568630000001" green="0.70980392160000005" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -316,7 +329,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VMk-jP-GoA">
-                            <rect key="frame" x="62" y="69" width="221" height="30"/>
+                            <rect key="frame" x="104" y="69" width="179" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="textColor"/>
@@ -324,6 +337,17 @@
                             <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="Xw8-7o-A5C"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uds-jm-Lm5">
+                            <rect key="frame" x="48" y="69" width="50" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="0.35991010270000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="W20-p5-BPm"/>
                             </connections>
                         </textField>
                     </subviews>

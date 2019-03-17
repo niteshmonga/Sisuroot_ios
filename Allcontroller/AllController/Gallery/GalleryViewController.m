@@ -20,6 +20,7 @@
 #import "Bs3ViewController.h"
 #import "BS1ViewController.h"
  #import "UIView+RNActivityView.h"
+ #import "Reachability.h"
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
 //#import "GAIFields.h"
@@ -35,6 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self Showallimages];
+    [self callnetconnection];
+
     [self.view showActivityViewWithLabel:@"Loading"];
     chatnotification.layer.cornerRadius=10;
     chatnotification.clipsToBounds=YES;
@@ -225,8 +228,36 @@
                 
                 [_Sosbtnobj setUserInteractionEnabled:NO];
             }
-            chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
-            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+            
+            
+            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"Sisuchat_Status"] integerValue]==1)
+            {
+                if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+                {
+                    chatnotification.hidden=YES;
+                    
+                }
+                else
+                {
+                    chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+                    
+                }
+            }
+            else
+            {
+                chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+                NSInteger b = [chatnotification.text integerValue];
+                
+                NSString *str = [[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"];
+                NSInteger j=[str integerValue];;
+                j=b+j;
+                NSString* myNewString = [NSString stringWithFormat:@"%li", (long)j];
+                
+                chatnotification.text=myNewString;
+                
+            }
+            
+            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"] && [[[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"] integerValue]==0)
             {
                 chatnotification.hidden=YES;
                 
@@ -454,6 +485,33 @@
     [webServiceManager callMyWebServiceManager:@"getProfileInfo" :dict :dict1];
     
     
+}
+
+
+
+
+-(void)callnetconnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        alert.tag=2000;
+        [alert show];
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
 }
 @end
 

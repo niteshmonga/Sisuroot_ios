@@ -10,4 +10,9 @@
 
 @interface CountryCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *countryImage;
+@property (strong, nonatomic) IBOutlet UILabel *countryName;
+@property (strong, nonatomic) IBOutlet UILabel *countrydialcode;
+@property (strong, nonatomic) IBOutlet UIButton *countrubtnobj;
+
 @end

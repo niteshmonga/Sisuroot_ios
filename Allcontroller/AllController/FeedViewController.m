@@ -22,21 +22,16 @@
 #import "BS1ViewController.h"
 #import "FrontViewController.h"
 #import "EditViewController.h"
-
-//#import "GAI.h"
-//#import "GAIDictionaryBuilder.h"
-//#import "GAIFields.h"
-//#import "GAILogger.h"
-
 #import "BS6ViewController.h"
 #import <sys/utsname.h>
+#import "Reachability.h"
+
 @interface FeedViewController ()
 {
     NSMutableArray *Earr;
     NSMutableArray *imgArr;
     NSMutableArray *Emotionarr;
-    //  AppDelegate *app;
-    BOOL *isfiltered;
+     BOOL *isfiltered;
     NSMutableArray *FilteredDevices;
     BOOL flag;
     UIRefreshControl *refreshControl;
@@ -45,19 +40,16 @@
     NSString *imgstruname;
     NSString *imgstrtagid1;
     NSString *imgstruname1;
+    NSTimer *idleTimer;
+
 }
 
 @end
+#define maxIdleTime 60.0
 
 @implementation FeedViewController
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    [self callTaglist];
-//    [self callfetchprofile];
-//
-//    // [self.view showActivityViewWithLabel:@"Loading"];
-//
-//}
+#pragma mark -
+#pragma mark Handling idle timeout
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -78,11 +70,12 @@
 }
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden=YES;
     _Nointernetviewobj.hidden=YES;
-    
+    [self callnetconnection];
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] isEqual:@""])
     {
         
@@ -266,9 +259,9 @@
     
     [cell.OtherEmoBtnobj addTarget:self action:@selector(OtherEmotionAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    cell.chatBtnobj.tag = indexPath.row;
+     cell.chatBtnobj.tag = indexPath.row;
+     [cell.chatBtnobj addTarget:self action:@selector(ChatAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    [cell.chatBtnobj addTarget:self action:@selector(ChatAction:) forControlEvents:UIControlEventTouchUpInside];
     //    [cell.EmotionBtnobj setTitle:[Emotionarr objectAtIndex:indexPath.row] forState:UIControlStateNormal];
     //
     //    cell.listprofileimg.image = [UIImage imageNamed:[imgArr objectAtIndex:indexPath.row]];
@@ -349,22 +342,45 @@
                 
             }
             
-            NSString *commentstr=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"comment"];
+            NSString *commentstr=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
             if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
             {
-                cell.Liststmtlblobj.text=@"No Comments";
+                NSString *commentstr=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+                {
+                    cell.Liststmtlblobj.text=@"No Comments";
+                }
+                else
+                {
+                    cell.Liststmtlblobj.text=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                }
             }
             else
             {
-                cell.Liststmtlblobj.text=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                cell.Liststmtlblobj.text=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
             }
+            
+            
+            
+            
+            
+            
+           
         }
         else
         {
             NSString *commentstr=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
             if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
             {
-                cell.Liststmtlblobj.text=@"No Comments";
+                NSString *commentstr=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+                {
+                    cell.Liststmtlblobj.text=@"No Comments";
+                }
+                else
+                {
+                    cell.Liststmtlblobj.text=[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                }
             }
             else
             {
@@ -610,14 +626,22 @@
                 cell.OtherEmoBtnobj.hidden=NO;
                 
             }
-            NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+            NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
             if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
             {
-                cell.Liststmtlblobj.text=@"No Comments";
+                NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+                {
+                    cell.Liststmtlblobj.text=@"No Comments";
+                }
+                else
+                {
+                    cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                }
             }
             else
             {
-                cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
             }
             
         }
@@ -646,12 +670,24 @@
                 NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
                 if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
                 {
-                    cell.Liststmtlblobj.text=@"No Comments";
+                    NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                    if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+                    {
+                        cell.Liststmtlblobj.text=@"No Comments";
+                    }
+                    else
+                    {
+                        cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                    }
                 }
                 else
                 {
                     cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
                 }
+                
+                
+                
+                
                 cell.usernamelblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"username"];
  
                 cell.shareimg.image = [UIImage imageNamed:@"tag.png"];
@@ -686,7 +722,6 @@
                 else
                 {
                     cell.OtherEmoBtnobj.hidden=NO;
-                    
                 }
                 
             }
@@ -697,7 +732,15 @@
                 NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
                 if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
                 {
-                    cell.Liststmtlblobj.text=@"No Comments";
+                    NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                    if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+                    {
+                        cell.Liststmtlblobj.text=@"No Comments";
+                    }
+                    else
+                    {
+                        cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                    }
                 }
                 else
                 {
@@ -954,24 +997,33 @@
         }
     }
     
-    //}
+     //}
     //    Tag_ProfileViewController *TPVC=[[Tag_ProfileViewController alloc]init];
     //    [self.navigationController pushViewController:TPVC animated:YES];
+    
 }
 
 
 -(void)OtherEmotionAction : (UIButton *) btn
 {
     
-    if (isfiltered)
+     [self.view showActivityViewWithLabel:@"Loading"];
+//    if([btn.currentImage isEqual:[UIImage imageNamed:@"play_button_green.png"]])
+//    {
+//
+//    }
+//    else
+//    {
+//             [self.view hideActivityView];
+//    }
+     if (isfiltered)
     {
          if (audioPlayer.playing)
          {
              _indicatorviewobj.hidden=YES;
-
-            [audioPlayer stop];
+             [audioPlayer stop];
             [btn setBackgroundImage:[UIImage imageNamed:@"play_button_green.png"] forState:UIControlStateNormal];
-            
+             [self.view hideActivityView];
         }
         else
         {
@@ -990,7 +1042,11 @@
         [btn setBackgroundImage:[UIImage imageNamed:@"pause_button_green.png"] forState:UIControlStateNormal];
             
             [_indicatorview stopAnimating];
-
+            if([btn.currentImage isEqual:[UIImage imageNamed:@"pause_button_green.png"]])
+            {
+                [self.view hideActivityView];
+            }
+             [self.view hideActivityView];
             _indicatorviewobj.hidden=YES;
         }
         
@@ -1000,13 +1056,13 @@
     {
  
     
-   
+ 
     if (audioPlayer.playing)
     {
         _indicatorviewobj.hidden=YES;
         [audioPlayer stop];
         [btn setBackgroundImage:[UIImage imageNamed:@"play_button_green.png"] forState:UIControlStateNormal];
-        
+         [self.view hideActivityView];
     }
     else
     {
@@ -1023,8 +1079,12 @@
         
          [btn setBackgroundImage:[UIImage imageNamed:@"pause_button_green.png"] forState:UIControlStateNormal];
         [_indicatorview stopAnimating];
-
-        _indicatorviewobj.hidden=YES;
+         [self.view hideActivityView];
+        if([btn.currentImage isEqual:[UIImage imageNamed:@"pause_button_green.png"]])
+        {
+            //[self.view hideActivityView];
+        }
+        //_indicatorviewobj.hidden=YES;
      }
     }
     
@@ -1034,7 +1094,8 @@
 
 -(void)EmotionAction : (UIButton *) btn
 {
-    
+    [self.view showActivityViewWithLabel:@"Loading"];
+
      if (isfiltered)
     {
        
@@ -1042,6 +1103,7 @@
         {
             _indicatorviewobj.hidden=YES;
             [audioPlayer stop];
+            [self.view hideActivityView];
          [btn setBackgroundImage:[UIImage imageNamed:@"play_button_white.png"] forState:UIControlStateNormal];
             
          }
@@ -1061,7 +1123,7 @@
         [btn setBackgroundImage:[UIImage imageNamed:@"pause_button_white.png"] forState:UIControlStateNormal];
             _indicatorviewobj.hidden=YES;
             [_indicatorview stopAnimating];
-
+           [self.view hideActivityView];
         }
     }
     else
@@ -1073,7 +1135,7 @@
             _indicatorviewobj.hidden=YES;
             [audioPlayer stop];
             [btn setBackgroundImage:[UIImage imageNamed:@"play_button_white.png"] forState:UIControlStateNormal];
-
+             [self.view hideActivityView];
         }
         else
         {
@@ -1086,7 +1148,7 @@
             NSData *data = [NSData dataWithContentsOfURL:url];
             audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
             [audioPlayer play];
-
+             [self.view hideActivityView];
             audioPlayer.delegate = self;
             [btn setBackgroundImage:[UIImage imageNamed:@"pause_button_white.png"] forState:UIControlStateNormal];
             
@@ -1307,14 +1369,10 @@
                 [alert show];
             }
             
-            
-            
-           
-            
+ 
              if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"Chat_Status"] isEqual:@"0"])
             {
-                
-                [_Chatbtnobj setUserInteractionEnabled:YES];
+                 [_Chatbtnobj setUserInteractionEnabled:YES];
                 
             }
             else
@@ -1328,8 +1386,7 @@
             {
                 [_Sosbtnobj setUserInteractionEnabled:YES];
                 
-                
-            }
+             }
             else
             {
                 
@@ -1354,8 +1411,41 @@
             
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Outer_frnd_count"] forKey:@"Outer_frnd_count"];
             
-            chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
-            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+ 
+            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"Sisuchat_Status"] integerValue]==1)
+            {
+                
+                
+                if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+                {
+                    chatnotification.hidden=YES;
+                    
+                }
+                else
+                {
+                    chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+
+                }
+                
+                
+
+            }
+            else
+            {
+                chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+                NSInteger b = [chatnotification.text integerValue];
+
+                 NSString *str = [[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"];
+                NSInteger j=[str integerValue];;
+                j=b+j;
+                NSString* myNewString = [NSString stringWithFormat:@"%li", (long)j];
+
+                chatnotification.text=myNewString;
+ 
+            }
+            
+            
+            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"] && [[[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"] integerValue]==0)
             {
                 chatnotification.hidden=YES;
                 
@@ -1518,6 +1608,7 @@
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+    
 }
 
 
@@ -1637,6 +1728,47 @@
         }
     }
  }
+
+
+-(void)callnetconnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        alert.tag=2000;
+        [alert show];
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
+}
+
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    
+    [audioPlayer stop];
+    [_FeedlistTableViewobj reloadData];
+    //[_voiceBtnobj setBackgroundImage:[UIImage imageNamed:@"play_button_green.png"] forState:UIControlStateNormal];
+    
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Done"
+                                                    message: @"Finish playing the recording!"
+                                                   delegate: nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+}
 @end
     
    

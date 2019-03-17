@@ -17,4 +17,7 @@
 @property (nonatomic, assign) id<CountryListViewDelegate>delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil delegate:(id)delegate;
+
+@property (strong, nonatomic) IBOutlet UISearchBar *searchbar;
+
 @end

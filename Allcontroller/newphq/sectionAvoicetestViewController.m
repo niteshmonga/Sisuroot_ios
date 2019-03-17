@@ -4,7 +4,6 @@
 //
 //  Created by Epikso on 18/10/18.
 //  Copyright © 2018 EpikSolutions. All rights reserved.
-//
 
 #import "sectionAvoicetestViewController.h"
 #import "VoiceTestViewController.h"
@@ -92,22 +91,22 @@
     
     arr2=[[NSMutableArray alloc]initWithObjects:@"Have you felt low or depressed in yourself lately?"
           ,@"How have you felt? Have you felt low/depressed/tearful every day, for most of the day, over the last two weeks?"
-          ,@"Does your mood improve or get worse as the day goes on (Diurnal variation)"
-          ,@"When was the last time you smiled? How often do you smile? (Mood)"
-          ,@"What are kinds of things that you normally enjoy doing? (Anhedonia)"
-          ,@"Have you been enjoying activities as much as you’ve done in the past? (Anhedonia)"
-          ,@"When was the last time you were involved in an enjoyable activity? (Anhedonia)"
-          ,@"How has your energy levels been? (Anergia)"
-          ,@"Have you been feeling unusually tired in yourself lately? If not, what is your energy level? (Anergia)"
+          ,@"Does your mood improve or get worse as the day goes on"
+          ,@"When was the last time you smiled? How often do you smile?"
+          ,@"What are kinds of things that you normally enjoy doing?"
+          ,@"Have you been enjoying activities as much as you’ve done in the past?"
+          ,@"When was the last time you were involved in an enjoyable activity?"
+          ,@"How has your energy levels been?"
+          ,@"Have you been feeling unusually tired in yourself lately? If not, what is your energy level?"
           ,@"How have your energy levels been over the past couple of weeks?"
            ,nil];
     
     arr1=[[NSMutableArray alloc]initWithObjects:@"Have you been able to focus on things lately?"
           ,@"What's your concentration like?"
           ,@"When you watch TV,are you able to follow what you watch?"
-          ,@"Do you find it difficult to read books because you can't concentrate? (if mention of reading as a hobby)"
+          ,@"Do you find it difficult to read books because you can't concentrate?"
           ,@"Have you had problems making decisions?"
-          ,@"How has having to make decisions affected you lately? (empathy)"
+          ,@"How has having to make decisions affected you lately?"
           ,@"Can you watch a half-hour television show from start to finish without losing your focus?",nil];
     
     int count = [arr2 count];
@@ -134,7 +133,7 @@
     // _questionlbl.text=arr2str;
     _questionlbl2.text=arr1str;
     // _questionlbl2.textColor=[UIColor lightGrayColor];
-    _questionlbl.text=[NSString stringWithFormat:@"%@\n%@",aboutstr,arr2str];
+    _questionlbl.text=[NSString stringWithFormat:@"%@",arr2str];
     
     NSMutableArray *pathComponents = [NSMutableArray arrayWithObjects:
                                       [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],

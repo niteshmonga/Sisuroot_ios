@@ -22,8 +22,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nil];
     if (self) {
-        // Custom initialization
+        
         _delegate = delegate;
+        
     }
     return self;
 }
@@ -31,8 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
+ 
     CountryListDataSource *dataSource = [[CountryListDataSource alloc] init];
     _dataRows = [dataSource countries];
     [_tableView reloadData];
@@ -42,7 +42,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 #pragma mark - UITableView Datasource

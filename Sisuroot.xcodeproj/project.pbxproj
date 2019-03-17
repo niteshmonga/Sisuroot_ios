@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F224A782224219A00A66CB5 /* CountryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F224A702224219900A66CB5 /* CountryCell.m */; };
-		6F224A792224219A00A66CB5 /* CountryListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F224A722224219900A66CB5 /* CountryListDataSource.m */; };
-		6F224A7A2224219A00A66CB5 /* CountryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F224A732224219900A66CB5 /* CountryListViewController.xib */; };
-		6F224A7B2224219A00A66CB5 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F224A742224219900A66CB5 /* countries.json */; };
-		6F224A7C2224219A00A66CB5 /* CountryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F224A762224219900A66CB5 /* CountryListViewController.m */; };
+		12C3F3DB403259CF9AEF90CB /* libPods-SisurootTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3B3408057A03756C9B415B /* libPods-SisurootTests.a */; };
 		6F2FE92C220DC7A9006E2B26 /* DietaryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FE92A220DC7A9006E2B26 /* DietaryCollectionViewCell.m */; };
 		6F2FE92D220DC7A9006E2B26 /* DietaryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2FE92B220DC7A9006E2B26 /* DietaryCollectionViewCell.xib */; };
 		6F6B271221F10FAC0055B854 /* 211876-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B271021F10FAB0055B854 /* 211876-128.png */; };
 		6F6B271321F10FAC0055B854 /* 211871-pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B271121F10FAC0055B854 /* 211871-pause.png */; };
+		6F6BA835222D3E69004DCCCC /* editnumber.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6BA834222D3E69004DCCCC /* editnumber.png */; };
+		6F6BA837222D44E1004DCCCC /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6BA836222D44E1004DCCCC /* pencil.png */; };
+		6F75858E22396815004D5F83 /* NotificationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F75858C22396815004D5F83 /* NotificationListViewController.m */; };
+		6F75858F22396815004D5F83 /* NotificationListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F75858D22396815004D5F83 /* NotificationListViewController.xib */; };
+		6F75859322396835004D5F83 /* NotificationListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F75859122396835004D5F83 /* NotificationListTableViewCell.m */; };
+		6F75859422396835004D5F83 /* NotificationListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F75859222396835004D5F83 /* NotificationListTableViewCell.xib */; };
+		6F758596223991B8004D5F83 /* danger.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F758595223991B7004D5F83 /* danger.png */; };
+		6F758598223995EA004D5F83 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F758597223995EA004D5F83 /* warning.png */; };
 		6F80A83121EFA4330018A2C8 /* 1814090-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F80A83021EFA4320018A2C8 /* 1814090-128.png */; };
 		6F80A87B21EFACA50018A2C8 /* WARVChatPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80A86921EFACA40018A2C8 /* WARVChatPanelView.m */; };
 		6F80A87C21EFACA50018A2C8 /* bk.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F80A86B21EFACA40018A2C8 /* bk.png */; };
@@ -31,11 +35,19 @@
 		6F80A88621EFACA50018A2C8 /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80A87921EFACA40018A2C8 /* FBShimmeringLayer.m */; };
 		6F80A88721EFACA50018A2C8 /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80A87A21EFACA40018A2C8 /* FBShimmeringView.m */; };
 		6F914CEB2214672000F63615 /* 9-Home-Settings.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F914CEA2214672000F63615 /* 9-Home-Settings.jpg */; };
+		6FA835312236762A00439C64 /* Thank_you111.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA835302236762A00439C64 /* Thank_you111.jpg */; };
 		6FA9975621F8A3B300FA0C8B /* pause_button_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9975221F8A3B200FA0C8B /* pause_button_green.png */; };
 		6FA9975721F8A3B300FA0C8B /* play_button_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9975321F8A3B200FA0C8B /* play_button_white.png */; };
 		6FA9975821F8A3B300FA0C8B /* play_button_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9975421F8A3B200FA0C8B /* play_button_green.png */; };
 		6FA9975921F8A3B300FA0C8B /* pause_button_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9975521F8A3B300FA0C8B /* pause_button_white.png */; };
+		6FAACA78222E9EF60014CBFF /* CountryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAACA70222E9EF60014CBFF /* CountryCell.m */; };
+		6FAACA79222E9EF60014CBFF /* CountryListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAACA72222E9EF60014CBFF /* CountryListDataSource.m */; };
+		6FAACA7A222E9EF60014CBFF /* CountryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAACA73222E9EF60014CBFF /* CountryListViewController.xib */; };
+		6FAACA7B222E9EF60014CBFF /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FAACA74222E9EF60014CBFF /* countries.json */; };
+		6FAACA7C222E9EF60014CBFF /* CountryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAACA76222E9EF60014CBFF /* CountryListViewController.m */; };
+		6FAACA7E222EA2E60014CBFF /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAACA7D222EA2E60014CBFF /* CountryCell.xib */; };
 		6FC752ED21F779610056D220 /* Sisuchat (1).jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FC752E421F779600056D220 /* Sisuchat (1).jpg */; };
+		6FDD5660222E76030061CAC7 /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD5656222E76030061CAC7 /* CountryPicker.bundle */; };
 		6FF1EC2121E67CCB00420FF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF1EC2021E67CCB00420FF7 /* AppDelegate.m */; };
 		6FF1EC2A21E67CCB00420FF7 /* Sisuroot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FF1EC2821E67CCB00420FF7 /* Sisuroot.xcdatamodeld */; };
 		6FF1EC2C21E67CCE00420FF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FF1EC2B21E67CCE00420FF7 /* Assets.xcassets */; };
@@ -520,6 +532,8 @@
 		6FF6921721E8CCD600D666C2 /* outer_circle_green80.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FF6921621E8CCD500D666C2 /* outer_circle_green80.png */; };
 		6FF8C96621EF9850006322C2 /* 701492-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FF8C96421EF983F006322C2 /* 701492-128.png */; };
 		6FF8C96721EF9850006322C2 /* 701492-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FF8C96521EF9842006322C2 /* 701492-256.png */; };
+		A9BF50ECC7EC16C2A70C839B /* libPods-SisurootUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3632E3C497E814F418A1AE40 /* libPods-SisurootUITests.a */; };
+		BC4F35124AAE953C85B0CBBF /* libPods-Sisuroot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB1CA373CB2A7F26F7175BF /* libPods-Sisuroot.a */; };
 		FD1EAF9C21E7389300A2279C /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1EAF9B21E7389300A2279C /* AVKit.framework */; };
 		FD1EAF9E21E7389F00A2279C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1EAF9D21E7389E00A2279C /* AVFoundation.framework */; };
 		FD1EAFA021E7528500A2279C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1EAF9F21E7528500A2279C /* Security.framework */; };
@@ -582,19 +596,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6F224A702224219900A66CB5 /* CountryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryCell.m; sourceTree = "<group>"; };
-		6F224A712224219900A66CB5 /* CountryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListViewController.h; sourceTree = "<group>"; };
-		6F224A722224219900A66CB5 /* CountryListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListDataSource.m; sourceTree = "<group>"; };
-		6F224A732224219900A66CB5 /* CountryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryListViewController.xib; sourceTree = "<group>"; };
-		6F224A742224219900A66CB5 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
-		6F224A752224219900A66CB5 /* CountryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryCell.h; sourceTree = "<group>"; };
-		6F224A762224219900A66CB5 /* CountryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListViewController.m; sourceTree = "<group>"; };
-		6F224A772224219900A66CB5 /* CountryListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListDataSource.h; sourceTree = "<group>"; };
+		1B94EE74D455A5F698EDD7F5 /* Pods-SisurootTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SisurootTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SisurootTests/Pods-SisurootTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1F3B3408057A03756C9B415B /* libPods-SisurootTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SisurootTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3632E3C497E814F418A1AE40 /* libPods-SisurootUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SisurootUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DB1CA373CB2A7F26F7175BF /* libPods-Sisuroot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Sisuroot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F2FE929220DC7A9006E2B26 /* DietaryCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DietaryCollectionViewCell.h; sourceTree = "<group>"; };
 		6F2FE92A220DC7A9006E2B26 /* DietaryCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DietaryCollectionViewCell.m; sourceTree = "<group>"; };
 		6F2FE92B220DC7A9006E2B26 /* DietaryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DietaryCollectionViewCell.xib; sourceTree = "<group>"; };
 		6F6B271021F10FAB0055B854 /* 211876-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "211876-128.png"; sourceTree = "<group>"; };
 		6F6B271121F10FAC0055B854 /* 211871-pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "211871-pause.png"; sourceTree = "<group>"; };
+		6F6BA834222D3E69004DCCCC /* editnumber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editnumber.png; sourceTree = "<group>"; };
+		6F6BA836222D44E1004DCCCC /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil.png; sourceTree = "<group>"; };
+		6F75858B22396815004D5F83 /* NotificationListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationListViewController.h; sourceTree = "<group>"; };
+		6F75858C22396815004D5F83 /* NotificationListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationListViewController.m; sourceTree = "<group>"; };
+		6F75858D22396815004D5F83 /* NotificationListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationListViewController.xib; sourceTree = "<group>"; };
+		6F75859022396835004D5F83 /* NotificationListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationListTableViewCell.h; sourceTree = "<group>"; };
+		6F75859122396835004D5F83 /* NotificationListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationListTableViewCell.m; sourceTree = "<group>"; };
+		6F75859222396835004D5F83 /* NotificationListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationListTableViewCell.xib; sourceTree = "<group>"; };
+		6F758595223991B7004D5F83 /* danger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = danger.png; sourceTree = "<group>"; };
+		6F758597223995EA004D5F83 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		6F80A83021EFA4320018A2C8 /* 1814090-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1814090-128.png"; sourceTree = "<group>"; };
 		6F80A86821EFACA40018A2C8 /* WARVChatPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WARVChatPanelView.h; path = WhatsAppRecordVoice/WARVChatPanelView.h; sourceTree = "<group>"; };
 		6F80A86921EFACA40018A2C8 /* WARVChatPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WARVChatPanelView.m; path = WhatsAppRecordVoice/WARVChatPanelView.m; sourceTree = "<group>"; };
@@ -614,11 +634,22 @@
 		6F80A87921EFACA40018A2C8 /* FBShimmeringLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringLayer.m; sourceTree = "<group>"; };
 		6F80A87A21EFACA40018A2C8 /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
 		6F914CEA2214672000F63615 /* 9-Home-Settings.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "9-Home-Settings.jpg"; path = "Allcontroller/9-Home-Settings.jpg"; sourceTree = SOURCE_ROOT; };
+		6FA835302236762A00439C64 /* Thank_you111.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Thank_you111.jpg; sourceTree = "<group>"; };
 		6FA9975221F8A3B200FA0C8B /* pause_button_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_button_green.png; sourceTree = "<group>"; };
 		6FA9975321F8A3B200FA0C8B /* play_button_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_button_white.png; sourceTree = "<group>"; };
 		6FA9975421F8A3B200FA0C8B /* play_button_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_button_green.png; sourceTree = "<group>"; };
 		6FA9975521F8A3B300FA0C8B /* pause_button_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_button_white.png; sourceTree = "<group>"; };
+		6FAACA70222E9EF60014CBFF /* CountryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryCell.m; sourceTree = "<group>"; };
+		6FAACA71222E9EF60014CBFF /* CountryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListViewController.h; sourceTree = "<group>"; };
+		6FAACA72222E9EF60014CBFF /* CountryListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListDataSource.m; sourceTree = "<group>"; };
+		6FAACA73222E9EF60014CBFF /* CountryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryListViewController.xib; sourceTree = "<group>"; };
+		6FAACA74222E9EF60014CBFF /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
+		6FAACA75222E9EF60014CBFF /* CountryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryCell.h; sourceTree = "<group>"; };
+		6FAACA76222E9EF60014CBFF /* CountryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryListViewController.m; sourceTree = "<group>"; };
+		6FAACA77222E9EF60014CBFF /* CountryListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryListDataSource.h; sourceTree = "<group>"; };
+		6FAACA7D222EA2E60014CBFF /* CountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryCell.xib; path = "countrySelector-master/CountryCell.xib"; sourceTree = SOURCE_ROOT; };
 		6FC752E421F779600056D220 /* Sisuchat (1).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Sisuchat (1).jpg"; sourceTree = "<group>"; };
+		6FDD5656222E76030061CAC7 /* CountryPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CountryPicker.bundle; sourceTree = "<group>"; };
 		6FF1EC1C21E67CCB00420FF7 /* Sisuroot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sisuroot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF1EC1F21E67CCB00420FF7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6FF1EC2021E67CCB00420FF7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1233,6 +1264,11 @@
 		6FF6921621E8CCD500D666C2 /* outer_circle_green80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = outer_circle_green80.png; path = AllController/Rooticon/outer_circle_green80.png; sourceTree = "<group>"; };
 		6FF8C96421EF983F006322C2 /* 701492-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "701492-128.png"; sourceTree = "<group>"; };
 		6FF8C96521EF9842006322C2 /* 701492-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "701492-256.png"; sourceTree = "<group>"; };
+		79D36F66FF28AEE82754462D /* Pods-Sisuroot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sisuroot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sisuroot/Pods-Sisuroot.debug.xcconfig"; sourceTree = "<group>"; };
+		7C44E0ED480A5FF4A435A427 /* Pods-SisurootUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SisurootUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SisurootUITests/Pods-SisurootUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A2FB2FC722AE055529DC6196 /* Pods-SisurootUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SisurootUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SisurootUITests/Pods-SisurootUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A79EB604D0EE89476DD001E3 /* Pods-Sisuroot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sisuroot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sisuroot/Pods-Sisuroot.release.xcconfig"; sourceTree = "<group>"; };
+		E84236D02F41C69B7AA30CB5 /* Pods-SisurootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SisurootTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SisurootTests/Pods-SisurootTests.release.xcconfig"; sourceTree = "<group>"; };
 		FD1EAF9B21E7389300A2279C /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		FD1EAF9D21E7389E00A2279C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FD1EAF9F21E7528500A2279C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1317,6 +1353,7 @@
 				FD1EAF9E21E7389F00A2279C /* AVFoundation.framework in Frameworks */,
 				FD1EAF9C21E7389300A2279C /* AVKit.framework in Frameworks */,
 				FD1EAFD121E7557C00A2279C /* MapKit.framework in Frameworks */,
+				BC4F35124AAE953C85B0CBBF /* libPods-Sisuroot.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1324,6 +1361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12C3F3DB403259CF9AEF90CB /* libPods-SisurootTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1331,25 +1369,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9BF50ECC7EC16C2A70C839B /* libPods-SisurootUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6F224A6F2224219900A66CB5 /* CountryList */ = {
+		0153999F3BE999E51921E6B4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6F224A702224219900A66CB5 /* CountryCell.m */,
-				6F224A712224219900A66CB5 /* CountryListViewController.h */,
-				6F224A722224219900A66CB5 /* CountryListDataSource.m */,
-				6F224A732224219900A66CB5 /* CountryListViewController.xib */,
-				6F224A742224219900A66CB5 /* countries.json */,
-				6F224A752224219900A66CB5 /* CountryCell.h */,
-				6F224A762224219900A66CB5 /* CountryListViewController.m */,
-				6F224A772224219900A66CB5 /* CountryListDataSource.h */,
+				79D36F66FF28AEE82754462D /* Pods-Sisuroot.debug.xcconfig */,
+				A79EB604D0EE89476DD001E3 /* Pods-Sisuroot.release.xcconfig */,
+				1B94EE74D455A5F698EDD7F5 /* Pods-SisurootTests.debug.xcconfig */,
+				E84236D02F41C69B7AA30CB5 /* Pods-SisurootTests.release.xcconfig */,
+				A2FB2FC722AE055529DC6196 /* Pods-SisurootUITests.debug.xcconfig */,
+				7C44E0ED480A5FF4A435A427 /* Pods-SisurootUITests.release.xcconfig */,
 			);
-			path = CountryList;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		6F80A86A21EFACA40018A2C8 /* resources */ = {
@@ -1383,16 +1420,45 @@
 			path = WhatsAppRecordVoice/FBShimmering;
 			sourceTree = "<group>";
 		};
+		6FAACA6F222E9EF60014CBFF /* CountryList */ = {
+			isa = PBXGroup;
+			children = (
+				6FA835302236762A00439C64 /* Thank_you111.jpg */,
+				6FAACA7D222EA2E60014CBFF /* CountryCell.xib */,
+				6FDD5656222E76030061CAC7 /* CountryPicker.bundle */,
+				6FAACA70222E9EF60014CBFF /* CountryCell.m */,
+				6FAACA71222E9EF60014CBFF /* CountryListViewController.h */,
+				6FAACA72222E9EF60014CBFF /* CountryListDataSource.m */,
+				6FAACA73222E9EF60014CBFF /* CountryListViewController.xib */,
+				6FAACA74222E9EF60014CBFF /* countries.json */,
+				6FAACA75222E9EF60014CBFF /* CountryCell.h */,
+				6FAACA76222E9EF60014CBFF /* CountryListViewController.m */,
+				6FAACA77222E9EF60014CBFF /* CountryListDataSource.h */,
+			);
+			path = CountryList;
+			sourceTree = "<group>";
+		};
 		6FF1EC1321E67CCB00420FF7 = {
 			isa = PBXGroup;
 			children = (
-				6F224A6F2224219900A66CB5 /* CountryList */,
+				6F758597223995EA004D5F83 /* warning.png */,
+				6F758595223991B7004D5F83 /* danger.png */,
+				6F75859022396835004D5F83 /* NotificationListTableViewCell.h */,
+				6F75859122396835004D5F83 /* NotificationListTableViewCell.m */,
+				6F75859222396835004D5F83 /* NotificationListTableViewCell.xib */,
+				6F75858B22396815004D5F83 /* NotificationListViewController.h */,
+				6F75858C22396815004D5F83 /* NotificationListViewController.m */,
+				6F75858D22396815004D5F83 /* NotificationListViewController.xib */,
+				6FAACA6F222E9EF60014CBFF /* CountryList */,
+				6F6BA834222D3E69004DCCCC /* editnumber.png */,
+				6F6BA836222D44E1004DCCCC /* pencil.png */,
 				6FF1EC5421E688B000420FF7 /* Allcontroller */,
 				6FF1EC1E21E67CCB00420FF7 /* Sisuroot */,
 				6FF1EC3A21E67CCE00420FF7 /* SisurootTests */,
 				6FF1EC4521E67CCE00420FF7 /* SisurootUITests */,
 				6FF1EC1D21E67CCB00420FF7 /* Products */,
 				F8D96CF145423E0BE0A013DA /* Frameworks */,
+				0153999F3BE999E51921E6B4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2310,6 +2376,9 @@
 				FD1EAF9F21E7528500A2279C /* Security.framework */,
 				FD1EAF9D21E7389E00A2279C /* AVFoundation.framework */,
 				FD1EAF9B21E7389300A2279C /* AVKit.framework */,
+				3DB1CA373CB2A7F26F7175BF /* libPods-Sisuroot.a */,
+				1F3B3408057A03756C9B415B /* libPods-SisurootTests.a */,
+				3632E3C497E814F418A1AE40 /* libPods-SisurootUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2321,6 +2390,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FF1EC4B21E67CCE00420FF7 /* Build configuration list for PBXNativeTarget "Sisuroot" */;
 			buildPhases = (
+				75C9CB3030E4096C3EAC7B1E /* [CP] Check Pods Manifest.lock */,
 				6FF1EC1821E67CCB00420FF7 /* Sources */,
 				6FF1EC1921E67CCB00420FF7 /* Frameworks */,
 				6FF1EC1A21E67CCB00420FF7 /* Resources */,
@@ -2449,6 +2519,8 @@
 				6FF1F15E21E688B300420FF7 /* OtherFriendViewController.xib in Resources */,
 				6F80A88321EFACA50018A2C8 /* MicRecBtn.png in Resources */,
 				6FF1F26621E688B400420FF7 /* SelectContactViewController.xib in Resources */,
+				6F6BA837222D44E1004DCCCC /* pencil.png in Resources */,
+				6FA835312236762A00439C64 /* Thank_you111.jpg in Resources */,
 				6FF1F00521E688B200420FF7 /* feed.png in Resources */,
 				6FF1F0B121E688B300420FF7 /* inner_circle.png in Resources */,
 				6FF1F10221E688B300420FF7 /* inner_circle_green150.png in Resources */,
@@ -2498,6 +2570,7 @@
 				6FF1F13121E688B300420FF7 /* checkbox_40px.png in Resources */,
 				6FF1F0E921E688B300420FF7 /* play_button_white1.png in Resources */,
 				6FF1F28B21E688B400420FF7 /* OpenSans-BoldItalic.ttf in Resources */,
+				6F75859422396835004D5F83 /* NotificationListTableViewCell.xib in Resources */,
 				6FC752ED21F779610056D220 /* Sisuchat (1).jpg in Resources */,
 				6FF1F13421E688B300420FF7 /* Icon-20.png in Resources */,
 				6FF1F0C021E688B300420FF7 /* ImageBubbleMask.png in Resources */,
@@ -2515,6 +2588,8 @@
 				6FF1F1BB21E688B300420FF7 /* EmotionViewController.xib in Resources */,
 				6F80A87E21EFACA50018A2C8 /* BucketBodyTemplate@2x.png in Resources */,
 				6FF1F20021E688B300420FF7 /* profile_iconblack.png in Resources */,
+				6F758598223995EA004D5F83 /* warning.png in Resources */,
+				6FAACA7B222E9EF60014CBFF /* countries.json in Resources */,
 				6FF1F1DB21E688B300420FF7 /* green_botton.png in Resources */,
 				6FF1F25D21E688B400420FF7 /* SectionBvoicetestViewController.xib in Resources */,
 				6FF1F1E321E688B300420FF7 /* README.md in Resources */,
@@ -2538,6 +2613,7 @@
 				6FF1F03F21E688B300420FF7 /* dummy_contact_a.png in Resources */,
 				6FF1F1BA21E688B300420FF7 /* SettingTableViewCell.xib in Resources */,
 				6F80A88221EFACA50018A2C8 /* SlideArrow@2x.png in Resources */,
+				6F75858F22396815004D5F83 /* NotificationListViewController.xib in Resources */,
 				6FF1F0DE21E688B300420FF7 /* no-internet-connection.png in Resources */,
 				6FF1F0FE21E688B300420FF7 /* both_circle_golden80.png in Resources */,
 				6FF1F22121E688B300420FF7 /* dashboard_icon_feed_white.png in Resources */,
@@ -2606,6 +2682,7 @@
 				FD9D5E4C220DA555003A3484 /* chats.jpg in Resources */,
 				6FF1F03621E688B200420FF7 /* camera_white_profile.png in Resources */,
 				6FF1F09721E688B300420FF7 /* FontAwesome.ttf in Resources */,
+				6F6BA835222D3E69004DCCCC /* editnumber.png in Resources */,
 				6FF1F27421E688B400420FF7 /* Bs2ViewController.xib in Resources */,
 				6FF1F24521E688B300420FF7 /* side_menu (1).jpg in Resources */,
 				6FF1F01C21E688B200420FF7 /* root_app_v7 1.png in Resources */,
@@ -2622,6 +2699,7 @@
 				6FF1F01321E688B200420FF7 /* screen_a_logo.png in Resources */,
 				6FF1F24921E688B300420FF7 /* closebtn.png in Resources */,
 				6FF1F22D21E688B300420FF7 /* blue_botton (1).png in Resources */,
+				6FAACA7E222EA2E60014CBFF /* CountryCell.xib in Resources */,
 				6FF1F11B21E688B300420FF7 /* img5.jpg in Resources */,
 				6FF1F09121E688B300420FF7 /* GoogleService-Info-6.plist in Resources */,
 				6FF1F1A921E688B300420FF7 /* ViewController.xib in Resources */,
@@ -2655,7 +2733,6 @@
 				6FF1F03E21E688B300420FF7 /* search_white_nav.png in Resources */,
 				6FF1F13521E688B300420FF7 /* icons8-right_4.png in Resources */,
 				6FF1F04821E688B300420FF7 /* back_white_nav.png in Resources */,
-				6F224A7A2224219A00A66CB5 /* CountryListViewController.xib in Resources */,
 				6FF1F26C21E688B400420FF7 /* BS4ViewController.xib in Resources */,
 				6FF1F08F21E688B300420FF7 /* welcome (2).jpg in Resources */,
 				6FF1F02C21E688B200420FF7 /* dummy_user_d.jpg in Resources */,
@@ -2728,6 +2805,7 @@
 				6FF1F01B21E688B200420FF7 /* invite_fill.png in Resources */,
 				6FF1F0C421E688B300420FF7 /* icon@2x.png in Resources */,
 				6F80A87C21EFACA50018A2C8 /* bk.png in Resources */,
+				6F758596223991B8004D5F83 /* danger.png in Resources */,
 				6FF6921521E8CCBB00D666C2 /* inner_circle_green80.png in Resources */,
 				6FF1F02A21E688B200420FF7 /* icons8-full_moon.png in Resources */,
 				6FF1F0EC21E688B300420FF7 /* EmotionCollectionViewCell.xib in Resources */,
@@ -2758,11 +2836,11 @@
 				6FF1F21921E688B300420FF7 /* add_profile.png in Resources */,
 				FD9D5E42220DA423003A3484 /* icons8-question_group_filled.png in Resources */,
 				6FF1F02421E688B200420FF7 /* icons8-user_group_man_man.png in Resources */,
-				6F224A7B2224219A00A66CB5 /* countries.json in Resources */,
 				6FF1F2C221E688B400420FF7 /* BriefstateViewController.xib in Resources */,
 				6FF1F0BD21E688B300420FF7 /* Default@2x.png in Resources */,
 				6FF1F1DF21E688B300420FF7 /* form_icon.png in Resources */,
 				6FF1F1E521E688B300420FF7 /* 353466-64.png in Resources */,
+				6FAACA7A222E9EF60014CBFF /* CountryListViewController.xib in Resources */,
 				6FF1F0BC21E688B300420FF7 /* chat_textBox@2x.png in Resources */,
 				6FF1F2A821E688B400420FF7 /* welcome (1).jpg in Resources */,
 				6FF1F29521E688B400420FF7 /* Feedback.png in Resources */,
@@ -2776,6 +2854,7 @@
 				6FF1F23C21E688B300420FF7 /* orange-icon.png in Resources */,
 				6FF1F1F721E688B300420FF7 /* chaticonblack.png in Resources */,
 				6FF1F0AE21E688B300420FF7 /* brief-state.png in Resources */,
+				6FDD5660222E76030061CAC7 /* CountryPicker.bundle in Resources */,
 				6FF1F0D821E688B300420FF7 /* Default.png in Resources */,
 				6FF1F2C321E688B400420FF7 /* PPDTest1CollectionViewCell.xib in Resources */,
 				6FF1F2C721E688B400420FF7 /* DemoOtherViewController.xib in Resources */,
@@ -2881,6 +2960,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		75C9CB3030E4096C3EAC7B1E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sisuroot-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2908,6 +3009,7 @@
 				6FF1F17F21E688B300420FF7 /* AFURLSessionManager.m in Sources */,
 				6FF1F19C21E688B300420FF7 /* SDWebImageDecoder.m in Sources */,
 				6FF1F26B21E688B400420FF7 /* SelectContactViewController.m in Sources */,
+				6F75859322396835004D5F83 /* NotificationListTableViewCell.m in Sources */,
 				6FF1F17D21E688B300420FF7 /* AFHTTPSessionManager.m in Sources */,
 				6FF1F23821E688B300420FF7 /* STBubbleTableViewCell.m in Sources */,
 				6FF1F1C921E688B300420FF7 /* chatfriendTableViewCell.m in Sources */,
@@ -2916,6 +3018,7 @@
 				6FF1F14621E688B300420FF7 /* LoginViewController.m in Sources */,
 				6F80A87B21EFACA50018A2C8 /* WARVChatPanelView.m in Sources */,
 				6FF1F24321E688B300420FF7 /* PHQ9ViewController.m in Sources */,
+				6FAACA78222E9EF60014CBFF /* CountryCell.m in Sources */,
 				6FF1F25C21E688B400420FF7 /* BS1ViewController.m in Sources */,
 				6FF1F0F921E688B300420FF7 /* EditViewController.m in Sources */,
 				6FF1F2BA21E688B400420FF7 /* BriefstartViewController.m in Sources */,
@@ -2928,6 +3031,7 @@
 				6FF1F1CD21E688B300420FF7 /* UIView+RNActivityView.m in Sources */,
 				6FF1F26021E688B400420FF7 /* SelectContactTableViewCell.m in Sources */,
 				6FF1F2A121E688B400420FF7 /* SCLTextView.m in Sources */,
+				6FAACA79222E9EF60014CBFF /* CountryListDataSource.m in Sources */,
 				FD9D5E56220DB934003A3484 /* DietaryinfoViewController.m in Sources */,
 				6FF1F1B421E688B300420FF7 /* SettingViewController.m in Sources */,
 				6FF1F18421E688B300420FF7 /* AFSecurityPolicy.m in Sources */,
@@ -2971,12 +3075,10 @@
 				6F80A88621EFACA50018A2C8 /* FBShimmeringLayer.m in Sources */,
 				6FF1F16E21E688B300420FF7 /* LeftViewController.m in Sources */,
 				6FF1F2B621E688B400420FF7 /* PPDTestDViewController.m in Sources */,
-				6F224A7C2224219A00A66CB5 /* CountryListViewController.m in Sources */,
 				6FF1F1C321E688B300420FF7 /* ChatTableViewCell.m in Sources */,
 				6FF1F14721E688B300420FF7 /* GalleryCollectionViewCell.m in Sources */,
 				6FF1F09821E688B300420FF7 /* UIFont+FontAwesome.m in Sources */,
 				6FF1F27121E688B400420FF7 /* VoiceTestViewController.m in Sources */,
-				6F224A792224219A00A66CB5 /* CountryListDataSource.m in Sources */,
 				6FF1F26321E688B400420FF7 /* SectionBvoicetestViewController.m in Sources */,
 				6FF1F26F21E688B400420FF7 /* BS5ViewController.m in Sources */,
 				6FF1F2B821E688B400420FF7 /* BriefstateViewController.m in Sources */,
@@ -3001,7 +3103,6 @@
 				6FF1F26D21E688B400420FF7 /* TestlistViewController.m in Sources */,
 				6FF1F1B821E688B300420FF7 /* ShareTableViewCell.m in Sources */,
 				6FF1F09521E688B300420FF7 /* FAImageView.m in Sources */,
-				6F224A782224219A00A66CB5 /* CountryCell.m in Sources */,
 				6F80A88721EFACA50018A2C8 /* FBShimmeringView.m in Sources */,
 				6FF1F2C621E688B400420FF7 /* PHQ9CollectionViewCell.m in Sources */,
 				6FF1F2C821E688B400420FF7 /* PPDTestEViewController.m in Sources */,
@@ -3011,10 +3112,12 @@
 				6FF1F29B21E688B400420FF7 /* MessageData.m in Sources */,
 				6FF1F18321E688B300420FF7 /* AFNetworkReachabilityManager.m in Sources */,
 				6FF1F00121E688B200420FF7 /* ResponseViewController.m in Sources */,
+				6F75858E22396815004D5F83 /* NotificationListViewController.m in Sources */,
 				6FF1F16D21E688B300420FF7 /* ResponseTableViewCell.m in Sources */,
 				6FF1F1CB21E688B300420FF7 /* ChatSendTableViewCell.m in Sources */,
 				6FF1F15221E688B300420FF7 /* FriendsTableViewCell.m in Sources */,
 				6FF1F09621E688B300420FF7 /* UIImage+FontAwesome.m in Sources */,
+				6FAACA7C222E9EF60014CBFF /* CountryListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3175,8 +3278,10 @@
 		};
 		6FF1EC4C21E67CCE00420FF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79D36F66FF28AEE82754462D /* Pods-Sisuroot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Sisuroot/Sisuroot.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -3188,13 +3293,13 @@
 					"$(PROJECT_DIR)/Allcontroller",
 				);
 				INFOPLIST_FILE = Sisuroot/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "";
-				ONLY_ACTIVE_ARCH = NO;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
@@ -3209,8 +3314,10 @@
 		};
 		6FF1EC4D21E67CCE00420FF7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A79EB604D0EE89476DD001E3 /* Pods-Sisuroot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Sisuroot/Sisuroot.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -3222,13 +3329,13 @@
 					"$(PROJECT_DIR)/Allcontroller",
 				);
 				INFOPLIST_FILE = Sisuroot/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "";
-				ONLY_ACTIVE_ARCH = NO;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
@@ -3243,6 +3350,7 @@
 		};
 		6FF1EC4F21E67CCE00420FF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B94EE74D455A5F698EDD7F5 /* Pods-SisurootTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -3262,6 +3370,7 @@
 		};
 		6FF1EC5021E67CCE00420FF7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E84236D02F41C69B7AA30CB5 /* Pods-SisurootTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -3281,6 +3390,7 @@
 		};
 		6FF1EC5221E67CCE00420FF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2FB2FC722AE055529DC6196 /* Pods-SisurootUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9JDZBP3UZ3;
@@ -3299,6 +3409,7 @@
 		};
 		6FF1EC5321E67CCE00420FF7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C44E0ED480A5FF4A435A427 /* Pods-SisurootUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9JDZBP3UZ3;

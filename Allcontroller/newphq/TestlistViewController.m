@@ -24,6 +24,7 @@
 //#import "GAIDictionaryBuilder.h"
 //#import "GAIFields.h"
 //#import "GAILogger.h"
+
 #import "PHQ2ViewController.h"
 
 @interface TestlistViewController ()
@@ -51,7 +52,11 @@
     NSString *arr1str;
     int n1;
     int n2;
-    
+    NSString *voicestrA;
+    NSString *voicestrB;
+    NSString *voicestrC;
+    NSString *voicestatusstr;
+
 }
 
 @end
@@ -60,6 +65,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   voicestrA= [[NSUserDefaults standardUserDefaults]valueForKey:@"Voice_Test_StatusA"];
+    voicestrB= [[NSUserDefaults standardUserDefaults]valueForKey:@"Voice_Test_StatusB"];
+    voicestrC= [[NSUserDefaults standardUserDefaults]valueForKey:@"Voice_Test_StatusC"];
+    if ([voicestrA integerValue]==1 && [voicestrB integerValue]==1 && [voicestrC integerValue]==1)
+    {
+        voicestatusstr=@"1";
+    }
+    else
+    {
+        voicestatusstr=@"0";
+
+    }
     //  [self callfetchprofile];
     self.navigationController.navigationBar.hidden=YES;
     self.contentviewobj.hidden=YES;
@@ -116,6 +133,7 @@
     //                                    @{@"value":@"RESILIENCY", @"PPDTestSecD_Group_Status":@"0"},
     //                                    @{@"value":@"EDINBROUGH PPD", @"Phq_Test_Status":@"0"},
     //                                    ]
+    
     
     NSArray *listarr14=_listarray12;
     
@@ -227,13 +245,23 @@
     [newDict addEntriesFromDictionary:oldDict];
     [newDict setObject:[listarr valueForKey:@"Voice_Test_Group_Status"] forKey:@"is_Select"];
     [testarray1 replaceObjectAtIndex:8 withObject:newDict];
-    
-    
+ 
     newDict1 = [[NSMutableDictionary alloc] init];
     [newDict1 addEntriesFromDictionary:oldDict];
-    [newDict1 setObject:[listarr valueForKey:@"Voice_Test_Status"] forKey:@"is_Select1"];
+    [newDict1 setObject:voicestatusstr forKey:@"is_Select1"];
     [testarray11 replaceObjectAtIndex:8 withObject:newDict1];
     
+    
+    newDict = [[NSMutableDictionary alloc] init];
+    oldDict = (NSDictionary *)[testarray1 objectAtIndex:9];
+    [newDict addEntriesFromDictionary:oldDict];
+    [newDict setObject:[listarr valueForKey:@"nutrition_Test_Group_Status"] forKey:@"is_Select"];
+    [testarray1 replaceObjectAtIndex:9 withObject:newDict];
+ 
+    newDict1 = [[NSMutableDictionary alloc] init];
+    [newDict1 addEntriesFromDictionary:oldDict];
+    [newDict1 setObject:[listarr valueForKey:@"nutrition_status"] forKey:@"is_Select1"];
+    [testarray11 replaceObjectAtIndex:9 withObject:newDict1];
     
     
     if ([_nextpagestr isEqualToString:@"nextpage"])
@@ -363,8 +391,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-
-{
+ {
     static NSString *simpleTableIdentifier = @"ListtableView";
     
     SettingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -391,8 +418,7 @@
         }
         else
         {
-            
-            
+ 
             cell.backlblobj.backgroundColor=[[UIColor alloc] initWithRed:61.0/255.0 green:181.0/255.0 blue:230.0/255.0 alpha:1.0];
         }
     }

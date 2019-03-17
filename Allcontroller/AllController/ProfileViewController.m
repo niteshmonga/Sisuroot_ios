@@ -245,12 +245,10 @@
     [cell.listprofileimg setImageWithURL:[NSString stringWithFormat:@"https://w2.sisuroot.com/servicebus/tag_photo/%@",[[imgArr objectAtIndex:indexPath.row]valueForKey:@"tagImg"]] placeholderImage:nil];
     cell.listprofileimg.contentMode=UIViewContentModeScaleToFill;
     
-    NSString *userstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"username"];
+     NSString *userstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"username"];
     if ( [userstr isEqualToString:_profilelblobj.text ]) {
         
-             //[cell.EmotionBtnobj setTitle:[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionName"] forState:UIControlStateNormal];
-        //cell.EmotionBtnlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionName"];
-        
+        //[cell.EmotionBtnobj setTitle:[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionName"] forState:UIControlStateNormal];
         NSString *countstr11=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotion_txt"];
         if ([countstr11 isEqual:(id)[NSNull null]] || countstr11.length <1)
         {
@@ -275,24 +273,25 @@
             
         }
         
-            cell.usernamelblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"username"];
-            //cell.usernamelblobj.textColor=[UIColor orangeColor];
-            cell.shareimg.hidden = YES;
-            cell.share1img.hidden = NO;
-            cell.inviteBtnobj.hidden=NO;
-            
-            cell.taggedimg.hidden=YES;
+        cell.usernamelblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"username"];
+        //cell.usernamelblobj.textColor=[UIColor orangeColor];
+        cell.shareimg.hidden = YES;
+        cell.share1img.hidden = NO;
+        cell.inviteBtnobj.hidden=NO;
+        
+        cell.taggedimg.hidden=YES;
         cell.backlbl.layer.cornerRadius=10;
         cell.backlbl.layer.borderColor=[UIColor colorWithRed:(61.0/255.0) green:(181.0/255) blue:(230.0/255) alpha:1].CGColor;
         cell.backlbl.layer.borderWidth =1.0f;
         cell.backlbl.clipsToBounds=YES;
-            // cell.inviteBtnobj.frame = CGRectMake(300.0, 21.0, 25.0, 25.0);
-            
-            // [cell.EmotionBtnobj setTitle:[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionName"] forState:UIControlStateNormal];
-            // [cell.EmotionBtnobj setBackgroundImage:[UIImage imageNamed:@"green_botton.png"] forState:UIControlStateNormal];
-            // cell.Taggedlbl.text=@"Last Tagged";
-            cell.chatBtnobj.hidden=YES;
-            
+        
+        // cell.inviteBtnobj.frame = CGRectMake(300.0, 21.0, 25.0, 25.0);
+        // [cell.EmotionBtnobj setTitle:[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionName"] forState:UIControlStateNormal];
+        // [cell.EmotionBtnobj setBackgroundImage:[UIImage imageNamed:@"green_botton.png"] forState:UIControlStateNormal];
+        // cell.Taggedlbl.text=@"Last Tagged";
+        
+        cell.chatBtnobj.hidden=YES;
+        
         NSString *countstr2=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
         
         if ([countstr2 isEqual:(id)[NSNull null]] || countstr2.length < 1)
@@ -308,158 +307,196 @@
         
         if ([countstr3 isEqual:(id)[NSNull null]] || countstr3.length < 1)
         {
-          // cell.EmotionBtnlblobj.text=@"";
-            
+            // cell.EmotionBtnlblobj.text=@"";
             cell.OtherEmoBtnobj.hidden=YES;
             cell.OtherEmoBtnlblobj.frame = CGRectMake(195, 58, 119, 21);
-
+            
         }
         else
         {
+            
             cell.OtherEmoBtnobj.hidden=NO;
             
         }
-        NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
-        if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
-        {
-            cell.Liststmtlblobj.text=@"No Comments";
-        }
-        else
-        {
-            cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
-        }
         
-        }
- else
-    {
+        
         NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
         if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
         {
-            cell.Liststmtlblobj.text=@"No Comments";
+            NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+            if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+            {
+                cell.Liststmtlblobj.text=@"No Comments";
+            }
+            else
+            {
+                cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+            }
         }
         else
         {
             cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
-            
         }
         
-            cell.chatBtnobj.hidden=NO;
-            // cell.inviteBtnobj.frame = CGRectMake(319.0, 48.0, 25.0, 25.0);
-            cell.EmotionBtnlblobj.hidden=YES;
-            cell.EmotionBtnobj.hidden=YES;
-            // [cell.EmotionBtnobj setTitle:@"Tagme" forState:UIControlStateNormal];
-            //[cell.EmotionBtnobj setTitle:@"Tag Me" forState:UIControlStateNormal];
-            //  [cell.EmotionBtnobj setBackgroundImage:[UIImage imageNamed:@"tagmeback.png"] forState:UIControlStateNormal];
-            //  cell.Taggedlbl.text=@"Tagged";
-            cell.taggedimg.hidden=NO;
-            
-            NSString *imgStr3 = [[imgArr objectAtIndex:indexPath.row]valueForKey:@"tagging_status"];
-            
-            if ([imgStr3 isEqual:(id)[NSNull null]] || [imgStr3 isEqual:@"0"] )
-            {
-                //[cell.OtherEmoBtnobj setTitle:@"None" forState:UIControlStateNormal];
-                //[cell.EmotionBtnobj setTitle:@"Tag Me" forState:UIControlStateNormal];
-                NSString *imgStr3 = [[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionLatest"];
- 
-                NSString *countstr2=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
-                
-                if ([countstr2 isEqual:(id)[NSNull null]] || countstr2.length < 1)
-                {
-                    cell.OtherEmoBtnlblobj.text=@"None";
-                }
-                else
-                {
-                    cell.OtherEmoBtnlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
-                }
-                
-                NSString *countstr3=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionLatest"];
-                
-                if ([countstr3 isEqual:(id)[NSNull null]] || countstr3.length < 1)
-                {
-                    // cell.EmotionBtnlblobj.text=@"";
-                    
-                    cell.OtherEmoBtnobj.hidden=YES;
-                    cell.OtherEmoBtnlblobj.frame = CGRectMake(195, 58, 119, 21);
-                 }
-                else
-                {
-                    cell.OtherEmoBtnobj.hidden=NO;
-                    
-                }
-                 cell.usernamelblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"username"];
-                
-                cell.shareimg.image = [UIImage imageNamed:@"tag.png"];
-                cell.taggedimg.image = [UIImage imageNamed:@"tag_me1.png"];
-                cell.shareimg.hidden = NO;
-                cell.share1img.hidden = YES;
-                cell.inviteBtnobj.hidden=YES;
-                cell.backlbl.layer.cornerRadius=10;
-                cell.backlbl.layer.borderColor=[UIColor orangeColor].CGColor;
-                cell.backlbl.layer.borderWidth =1.f;
-                cell.backlbl.clipsToBounds=YES;
-            }
-            else
-            {
-                cell.usernamelblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"username"];
-                //  cell.usernamelblobj.textColor=[UIColor blackColor];
-                
-                cell.shareimg.image = [UIImage imageNamed:@"tagged.png"];
-                cell.taggedimg.image = [UIImage imageNamed:@"tag_me.png"];
-                cell.shareimg.hidden = NO;
-                cell.share1img.hidden = YES;
-                cell.inviteBtnobj.hidden=YES;
-                cell.backlbl.layer.cornerRadius=10;
-                cell.backlbl.layer.borderColor=[UIColor colorWithRed:(61.0/255.0) green:(230.0/255) blue:(181.0/255) alpha:1].CGColor;
-                cell.backlbl.layer.borderWidth =1.0f;
-                cell.backlbl.clipsToBounds=YES;
-                //[cell.EmotionBtnobj setTitle:@"Tagged" forState:UIControlStateNormal];
-                // [cell.EmotionBtnobj setBackgroundImage:[UIImage imageNamed:@"green_botton1.png"] forState:UIControlStateNormal];
-                
-                //[cell.OtherEmoBtnobj setTitle:[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"emotionLatest"] forState:UIControlStateNormal];
-                
-                NSString *countstr2=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
-                
-                if ([countstr2 isEqual:(id)[NSNull null]] || countstr2.length < 1)
-                {
-                    cell.OtherEmoBtnlblobj.text=@"None";
-                }
-                else
-                {
-                    cell.OtherEmoBtnlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
-                }
-                
-                NSString *countstr3=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionLatest"];
-                
-                if ([countstr3 isEqual:(id)[NSNull null]] || countstr3.length < 1)
-                {
-                    // cell.EmotionBtnlblobj.text=@"";
-                    cell.OtherEmoBtnobj.hidden=YES;
-                    cell.OtherEmoBtnlblobj.frame = CGRectMake(195, 58, 119, 21);
-
-                }
-                else
-                {
-                    cell.OtherEmoBtnobj.hidden=NO;
-                    
-                }
-            }
-        }
-    
-    //[cell.EmotionBtnobj setTitle:[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionName"] forState:UIControlStateNormal];
-    [cell.listprofileimg setImageWithURL:[NSString stringWithFormat:@"https://w2.sisuroot.com/servicebus/tag_photo/%@",[[imgArr objectAtIndex:indexPath.row]valueForKey:@"tagImg"]] placeholderImage:nil];
-    cell.listprofileimg.contentMode=UIViewContentModeScaleToFill;
-    
-    NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
-    if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
-    {
-        cell.Liststmtlblobj.text=@"No Comments";
     }
     else
     {
-        cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
         
+        cell.chatBtnobj.hidden=NO;
+        // cell.inviteBtnobj.frame = CGRectMake(319.0, 48.0, 25.0, 25.0);
+        cell.EmotionBtnlblobj.hidden=YES;
+        cell.EmotionBtnobj.hidden=YES;
+        
+        // [cell.EmotionBtnobj setTitle:@"Tagme" forState:UIControlStateNormal];
+        //[cell.EmotionBtnobj setTitle:@"Tag Me" forState:UIControlStateNormal];
+        //  [cell.EmotionBtnobj setBackgroundImage:[UIImage imageNamed:@"tagmeback.png"] forState:UIControlStateNormal];
+        //  cell.Taggedlbl.text=@"Tagged";
+        cell.taggedimg.hidden=NO;
+        
+        NSString *imgStr3 = [[imgArr objectAtIndex:indexPath.row]valueForKey:@"tagging_status"];
+        
+        if ([imgStr3 isEqual:(id)[NSNull null]] || [imgStr3 isEqual:@"0"] )
+        {
+            //[cell.OtherEmoBtnobj setTitle:@"None" forState:UIControlStateNormal];
+            //[cell.EmotionBtnobj setTitle:@"Tag Me" forState:UIControlStateNormal];
+            //cell.OtherEmoBtnlblobj.text=@"None";
+            
+            NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
+            if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+            {
+                NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+                {
+                    cell.Liststmtlblobj.text=@"No Comments";
+                }
+                else
+                {
+                    cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                    
+                }
+            }
+            else
+            {
+                cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
+            }
+            
+            
+            cell.usernamelblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"username"];
+            
+            cell.shareimg.image = [UIImage imageNamed:@"tag.png"];
+            cell.taggedimg.image = [UIImage imageNamed:@"tag_me1.png"];
+            cell.shareimg.hidden = NO;
+            cell.share1img.hidden = YES;
+            cell.inviteBtnobj.hidden=YES;
+            cell.backlbl.layer.cornerRadius=10;
+            cell.backlbl.layer.borderColor=[UIColor orangeColor].CGColor;
+            cell.backlbl.layer.borderWidth =1.0f;
+            cell.backlbl.clipsToBounds=YES;
+            
+            NSString *countstr2=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
+            
+            if ([countstr2 isEqual:(id)[NSNull null]] || countstr2.length < 1)
+            {
+                cell.OtherEmoBtnlblobj.text=@"None";
+            }
+            else
+            {
+                cell.OtherEmoBtnlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
+            }
+            
+            NSString *countstr3=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionLatest"];
+            
+            if ([countstr3 isEqual:(id)[NSNull null]] || countstr3.length < 1)
+            {
+                // cell.EmotionBtnlblobj.text=@"";
+                cell.OtherEmoBtnobj.hidden=YES;
+                cell.OtherEmoBtnlblobj.frame = CGRectMake(195, 58, 119, 21);
+            }
+            else
+            {
+                cell.OtherEmoBtnobj.hidden=NO;
+                
+            }
+            
+        }
+        else
+        {
+            cell.usernamelblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"username"];
+            //  cell.usernamelblobj.textColor=[UIColor blackColor];
+            
+            NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
+             if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+            {
+                NSString *commentstr=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                if ([commentstr isEqual:(id)[NSNull null]] || commentstr.length < 1 )
+                {
+                    cell.Liststmtlblobj.text=@"No Comments";
+                    
+                }
+                else
+                {
+                    cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"comment"];
+                }
+            }
+            else
+            {
+                cell.Liststmtlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"commentLatest"];
+            }
+            
+            
+            cell.shareimg.image = [UIImage imageNamed:@"tagged.png"];
+            cell.taggedimg.image = [UIImage imageNamed:@"tag_me.png"];
+            cell.shareimg.hidden = NO;
+            cell.share1img.hidden = YES;
+            cell.inviteBtnobj.hidden=YES;
+            cell.backlbl.layer.cornerRadius=10;
+            cell.backlbl.layer.borderColor=[UIColor colorWithRed:(61.0/255.0) green:(230.0/255) blue:(181.0/255) alpha:1].CGColor;
+            cell.backlbl.layer.borderWidth =1.0f;
+            cell.backlbl.clipsToBounds=YES;
+            
+            //[cell.EmotionBtnobj setTitle:@"Tagged" forState:UIControlStateNormal];
+            // [cell.EmotionBtnobj setBackgroundImage:[UIImage imageNamed:@"green_botton1.png"] forState:UIControlStateNormal];
+            
+            //[cell.OtherEmoBtnobj setTitle:[[FilteredDevices objectAtIndex:indexPath.row]valueForKey:@"emotionLatest"] forState:UIControlStateNormal];
+            NSString *countstr2=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
+            
+            if ([countstr2 isEqual:(id)[NSNull null]] || countstr2.length < 1)
+            {
+                cell.OtherEmoBtnlblobj.text=@"None";
+            }
+            else
+            {
+                cell.OtherEmoBtnlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
+            }
+            
+            NSString *countstr3=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionLatest"];
+            
+            if ([countstr3 isEqual:(id)[NSNull null]] || countstr3.length < 1)
+            {
+                // cell.EmotionBtnlblobj.text=@"";
+                cell.OtherEmoBtnobj.hidden=YES;
+                cell.OtherEmoBtnlblobj.frame = CGRectMake(195, 58, 119, 21);
+                
+            }
+            else
+            {
+                cell.OtherEmoBtnobj.hidden=NO;
+                
+            }
+            // cell.OtherEmoBtnlblobj.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionLatest"];
+            
+        }
     }
     
+    //[cell.EmotionBtnobj setTitle:[[imgArr objectAtIndex:indexPath.row]valueForKey:@"emotionName"] forState:UIControlStateNormal];
+    
+    [cell.listprofileimg setImageWithURL:[NSString stringWithFormat:@"https://w2.sisuroot.com/servicebus/tag_photo/%@",[[imgArr objectAtIndex:indexPath.row]valueForKey:@"tagImg"]] placeholderImage:nil];
+    
+    cell.listprofileimg.contentMode=UIViewContentModeScaleToFill;
+    
+    
+    
+    // cell.usernamelblobj.text=@"My Post";
     
     if([[[imgArr objectAtIndex:indexPath.row]valueForKey:@"circle"] isEqual:@"1"])
     {
@@ -482,27 +519,27 @@
         
     }
     
-
-NSString *imgStr = [[imgArr objectAtIndex:indexPath.row]valueForKey:@"profile_pic"];
-
-if ([imgStr isEqual:(id)[NSNull null]] || imgStr.length < 1 )
-{
-    cell.profileimg.image = [UIImage imageNamed:@"user.png"];
     
-}
-//
-else if([[[imgArr objectAtIndex:indexPath.row]valueForKey:@"img_status"] integerValue]==1)
-
-{
-    [cell.profileimg setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://w2.sisuroot.com/servicebus/profile_pic/%@",[[imgArr objectAtIndex:indexPath.row]valueForKey:@"profile_pic"]]] placeholderImage:nil];
-    cell.profileimg.contentMode=UIViewContentModeScaleToFill;
-}
-else
-{
+    NSString *imgStr = [[imgArr objectAtIndex:indexPath.row]valueForKey:@"profile_pic"];
     
-    [cell.profileimg setImageWithURL:[[imgArr objectAtIndex:indexPath.row]valueForKey:@"profile_pic"] placeholderImage:nil];
-    cell.profileimg.contentMode=UIViewContentModeScaleToFill;
-}
+    if ([imgStr isEqual:(id)[NSNull null]] || imgStr.length < 1 )
+    {
+        cell.profileimg.image = [UIImage imageNamed:@"user.png"];
+        
+    }
+    //
+    else if([[[imgArr objectAtIndex:indexPath.row]valueForKey:@"img_status"] integerValue]==1)
+        
+    {
+        [cell.profileimg setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://w2.sisuroot.com/servicebus/profile_pic/%@",[[imgArr objectAtIndex:indexPath.row]valueForKey:@"profile_pic"]]] placeholderImage:nil];
+        cell.profileimg.contentMode=UIViewContentModeScaleToFill;
+    }
+    else
+    {
+        
+        [cell.profileimg setImageWithURL:[[imgArr objectAtIndex:indexPath.row]valueForKey:@"profile_pic"] placeholderImage:nil];
+        cell.profileimg.contentMode=UIViewContentModeScaleToFill;
+    }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
@@ -905,7 +942,6 @@ else
 
 -(void)callfetchprofile
 {
-    
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
     [dict setValue:@"getProfileInfo" forKey:@"name"];
@@ -974,8 +1010,34 @@ else
             // fetcharr =[[NSMutableArray alloc]initWithArray:[responseDictionary valueForKey:@"data"]];
             
             //  [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"UserImage"] forKey:@"UserImage"];
-            chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
-            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"Sisuchat_Status"] integerValue]==1)
+            {
+                if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"])
+                {
+                    chatnotification.hidden=YES;
+                    
+                }
+                else
+                {
+                    chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+                    
+                }
+            }
+            else
+            {
+                chatnotification.text=[[responseDictionary valueForKey:@"data"]valueForKey:@"count"];
+                NSInteger b = [chatnotification.text integerValue];
+                
+                NSString *str = [[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"];
+                NSInteger j=[str integerValue];;
+                j=b+j;
+                NSString* myNewString = [NSString stringWithFormat:@"%li", (long)j];
+                
+                chatnotification.text=myNewString;
+                
+            }
+            
+            if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"count"] isEqual:@"0"] && [[[responseDictionary valueForKey:@"data"]valueForKey:@"therapist_chat_count"] integerValue]==0)
             {
                 chatnotification.hidden=YES;
                 

@@ -25,7 +25,6 @@
 #import "BS6ViewController.h"
 #import "BS4ViewController.h"
 #import "BS1ViewController.h"
-
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
 //#import "GAIFields.h"
@@ -52,7 +51,6 @@
     NSString *imgstruname1;
     NSString *selectid;
     NSString *selectid1;
-    
     NSMutableDictionary *dict11;
     
 }
@@ -73,44 +71,21 @@
 {
     [self callfetchprofile];
     
-//        if ([_therapistviewstr isEqualToString:@"showmhpview"])
-//        {
-//            _sisuchatview.hidden=NO;
-//
-//        }
-//    else
-//    {
-//        _sisuchatview.hidden=YES;
-//
-//    }
-    
-    //        _MenuBtnobj.hidden=NO;
-    //        _backbtnobj1.hidden=YES;
-    //
-    //       // [self callchattherapistlist];
-    //        _addgroupbtnobj.hidden=YES;
-    //
-    //    }
-    //    else
-    //    {
-    //        [self callchatlist];
-    //        _MenuBtnobj.hidden=YES;
-    //        _backbtnobj1.hidden=NO;
-    //
-    //    }
+ 
     if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"Sisuchat_Status"] isEqual:@"0"])
     {
-        
+         _therapistcountlbl.hidden=NO;
         [_SisuchatBtnobj setUserInteractionEnabled:YES];
         
     }
     else
     {
 //        _SisuchatBtnobj.alpha = 0.5;
-//
-//        [_SisuchatBtnobj setUserInteractionEnabled:NO];
+//      [_SisuchatBtnobj setUserInteractionEnabled:NO];
+        
         [_SisuchatBtnobj setUserInteractionEnabled:YES];
         [_SisuchatBtnobj setBackgroundImage:[UIImage imageNamed:@"sos_icon1 (2).png"] forState:UIControlStateNormal];
+          _therapistcountlbl.hidden=YES;
     }
     
     [self callchatlist];
@@ -130,8 +105,8 @@
     [super viewDidLoad];
     _mhpinfoview.hidden=YES;
     
-   
-    self.navigationController.navigationBar.hidden=YES;
+     self.navigationController.navigationBar.hidden=YES;
+    
     _MenuBtnobj.hidden=YES;
     
     _mhpprofileimg.layer.cornerRadius=35;
@@ -155,7 +130,6 @@
     {
         _sisuchatview.hidden=NO;
         _therapistcountlbl.hidden=NO;
-
     }
     else
     {
@@ -309,8 +283,7 @@
         if ([imgStr3 isEqual:(id)[NSNull null]] || [imgStr3 isEqualToString:@""])
         {
             cell.datelbl.text=@"mobile";
-            
-            
+ 
         }
         else
         {
@@ -777,8 +750,16 @@
             }
             else
             {
-                _therapistcountlbl.hidden=NO;
-                
+                if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"Sisuchat_Status"] isEqual:@"0"])
+                {
+                    _therapistcountlbl.hidden=NO;
+ 
+                }
+                else
+                {
+                       _therapistcountlbl.hidden=YES;
+                }
+ 
                 _therapistcountlbl.text=[responseDictionary valueForKey:@"total_count"];
             }
             [_therapisttableview reloadData];

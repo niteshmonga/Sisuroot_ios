@@ -18,11 +18,12 @@
 #import "Bs3ViewController.h"
 #import "BS1ViewController.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "Reachability.h"
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
 //#import "GAIFields.h"
 //#import "GAILogger.h"
+
 @interface Tag_ProfileViewController ()
 {
     NSMutableArray *fetcharr;
@@ -49,7 +50,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self callnetconnection];
+
     [self.view showActivityViewWithLabel:@"Loading"];
     //    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     //    [tracker set:kGAIScreenName value:@"tag_profile Screen"];
@@ -57,7 +59,7 @@
     _ShareViewobj.hidden=YES;
  
     //_CircleBtnobj.hidden=YES;
-   // [self callEmotionlist];
+    [self callEmotionlist];
      flag=1;
     if ([_sharestr isEqualToString:@"Share"])
     {
@@ -75,15 +77,12 @@
         {
             _voiceBtnobj.hidden=YES;
             _Emotionlbl.hidden=NO;
-
-
-        }
+          }
         _CircleBtnobj.hidden=NO;
         //    _MenuBtnobj.hidden=NO;
         [self calltagdetail];
         
-        
-    }
+     }
     if ([_sharestr isEqualToString:@"Shared"])
     {
         _CircleBtnobj.hidden=NO;
@@ -145,7 +144,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake([UIScreen mainScreen].bounds.size.width/3, 45);
+    return CGSizeMake([UIScreen mainScreen].bounds.size.width/2, 20);
     
 }
 
@@ -156,23 +155,103 @@
     EmotionCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
     //        [cell.mproductimg setImageWithURL:[NSString stringWithFormat:@"http://swadeshiayurved.com/admin/admin/category_image/%@",[[arr objectAtIndex:indexPath.row]valueForKey:@"cat_image"]]placeholderImage:nil];
-    //
+    
+     cell.OtherEmoBtnobj.tag = indexPath.row;
+     [cell.OtherEmoBtnobj addTarget:self action:@selector(OtherEmotionAction:) forControlEvents:UIControlEventTouchUpInside];
     //cell.Emotion2lbl.text=[[Earr objectAtIndex:indexPath.row] valueForKey:@"with_emotion"];
+    
     if([[[Earr objectAtIndex:indexPath.row] valueForKey:@"VALUE"] integerValue]==1)
     {
-        cell.Emotion2lbl.text=[[Earr objectAtIndex:indexPath.row] valueForKey:@"with_emotion"];
+       // cell.Emotion2lbl.text=[[Earr objectAtIndex:indexPath.row] valueForKey:@"with_emotion_txt"];
+        NSString *countstr5=[[Earr objectAtIndex:indexPath.row]valueForKey:@"username"];
+        if ([countstr5 isEqual:(id)[NSNull null]] || countstr5.length < 1)
+        {
+            cell.usernamelbl.text=@" ";
+        }
+        else
+        {
+            NSString *stradd=[[Earr objectAtIndex:indexPath.row]valueForKey:@"username"];
+            stradd=[stradd stringByAppendingString:@" :"];
+            cell.usernamelbl.text=stradd;
+        }
         
+       
+
+        NSString *countstr2=[[Earr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
+        
+        if ([countstr2 isEqual:(id)[NSNull null]] || countstr2.length < 1)
+        {
+            cell.Emotion2lbl.text=@"None";
+        }
+        else
+        {
+            cell.Emotion2lbl.text=[[Earr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
+        }
+        
+        NSString *countstr3=[[Earr objectAtIndex:indexPath.row]valueForKey:@"with_emotion"];
+        
+        if ([countstr3 isEqual:(id)[NSNull null]] || countstr3.length < 1)
+        {
+            // cell.EmotionBtnlblobj.text=@"";
+            cell.OtherEmoBtnobj.hidden=YES;
+            //cell.Emotion2lbl.frame = CGRectMake(195, 58, 119, 21);
+            
+         }
+        else
+        {
+            cell.OtherEmoBtnobj.hidden=NO;
+            
+        }
+        
+ 
     }
     else
     {
-        cell.Emotion2lbl.text=[[Earr objectAtIndex:indexPath.row] valueForKey:@"with_emotion"];
-        cell.Emotion2lbl.textColor = [UIColor colorWithRed:(203/255.f) green:(133/255.f) blue:(64/255.f) alpha:1.0];
+        //cell.Emotion2lbl.text=[[Earr objectAtIndex:indexPath.row] valueForKey:@"with_emotion_txt"];
+       // cell.Emotion2lbl.textColor = [UIColor colorWithRed:(203/255.f) green:(133/255.f) blue:(64/255.f) alpha:1.0];
+        NSString *countstr5=[[Earr objectAtIndex:indexPath.row]valueForKey:@"username"];
+        if ([countstr5 isEqual:(id)[NSNull null]] || countstr5.length < 1)
+        {
+            cell.usernamelbl.text=@" ";
+        }
+        else
+        {
+            NSString *stradd=[[Earr objectAtIndex:indexPath.row]valueForKey:@"username"];
+            stradd=[stradd stringByAppendingString:@" :"];
+            cell.usernamelbl.text=stradd;
+         }
+        NSString *countstr2=[[Earr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
+        
+        if ([countstr2 isEqual:(id)[NSNull null]] || countstr2.length < 1)
+        {
+            cell.Emotion2lbl.text=@"None";
+        }
+        else
+        {
+            cell.Emotion2lbl.text=[[Earr objectAtIndex:indexPath.row]valueForKey:@"with_emotion_txt"];
+        }
+        
+        NSString *countstr3=[[Earr objectAtIndex:indexPath.row]valueForKey:@"with_emotion"];
+        
+        if ([countstr3 isEqual:(id)[NSNull null]] || countstr3.length < 1)
+        {
+            // cell.EmotionBtnlblobj.text=@"";
+            cell.OtherEmoBtnobj.hidden=YES;
+            //cell.Emotion2lbl.frame = CGRectMake(195, 58, 119, 21);
+            
+        }
+        else
+        {
+            cell.OtherEmoBtnobj.hidden=NO;
+            
+        }
         
     }
-    if ([[[Earr objectAtIndex:indexPath.row] valueForKey:@"with_emotion"] isEqualToString:@""])
-    {
-        cell.Emotion2lbl.text=@"None";
-    }
+    
+//    if ([[[Earr objectAtIndex:indexPath.row] valueForKey:@"with_emotion_txt"] isEqualToString:@""])
+//    {
+//        cell.Emotion2lbl.text=@"None";
+//    }
     
     return cell;
     
@@ -442,17 +521,12 @@
         NSLog(@"Long Press");
         
         [_CircleBtnobj setImage:[UIImage imageNamed:@"both_circle-green150.png"] forState:UIControlStateNormal];
-        // [_CircleBtnobj setSelected:YES];
         
-        //                ActivityIdenter.hidden = NO;
-        //                [ActivityIdenter startAnimating];
-        // _indcatorlbl.hidden=NO;
         
         [self CallTagEmotioninandout];
         [_CircleBtnobj setEnabled:NO];
         
-        //  [_BackBtnobj setEnabled:NO];
-        //  [_HomeBtnobj setEnabled:NO];
+       
     }
 }
 
@@ -671,5 +745,63 @@
     
 }
 
+-(void)OtherEmotionAction : (UIButton *) btn
+{
+
+if (audioPlayer.playing)
+{
+     [audioPlayer stop];
+    [btn setBackgroundImage:[UIImage imageNamed:@"play_button_green.png"] forState:UIControlStateNormal];
+    
+}
+else
+{
+    //_indicatorviewobj.hidden=NO;
+    //[_indicatorview startAnimating];
+    
+    NSString *voicename=[[Earr objectAtIndex:btn.tag]valueForKey:@"with_emotion"];
+    NSString *mainUrl = [NSString stringWithFormat:@"https://w2.sisuroot.com/servicebus/EmotionAudio/%@",voicename];
+    NSURL *url = [NSURL URLWithString:mainUrl];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
+    [audioPlayer play];
+    audioPlayer.delegate = self;
+    
+    [btn setBackgroundImage:[UIImage imageNamed:@"pause_button_green.png"] forState:UIControlStateNormal];
+  //  [_indicatorview stopAnimating];
+    
+    //_indicatorviewobj.hidden=YES;
+}
+    
+}
+
+
+
+
+
+
+-(void)callnetconnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        alert.tag=2000;
+        [alert show];
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
+}
 @end
 

@@ -10,6 +10,14 @@
 
 @implementation CountryCell
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+    
+    self.countryImage.layer.masksToBounds = YES;
+    self.countryImage.layer.cornerRadius = self.countryImage.frame.size.height / 2;
+    
+}
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

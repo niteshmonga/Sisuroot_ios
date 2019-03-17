@@ -1,10 +1,4 @@
-//
-//  FirstViewController.m
-//  Root_App
-//
-//  Created by BRIJESH KUMAR on 12/04/1939 IST.
-//  Copyright © 1939 Saka EpikSolutions. All rights reserved.
-//
+
 
 #import "FirstViewController.h"
 #import "FrontViewController.h"
@@ -23,14 +17,18 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     self.navigationController.navigationBar.hidden=YES;
+    
     [self.view addSubview:_pagecontrol];
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)])
+    {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     
     self.navigationController.navigationBar.hidden=YES;
-    Arrayimage=[NSArray arrayWithObjects:@"welcome (4).jpg",@"thank_you (1).jpg",@"get_started (1).jpg",nil];
+    Arrayimage=[NSArray arrayWithObjects:@"welcome (4).jpg",@"Thank_you111.jpg",@"get_started (1).jpg",nil];
     //arraylabel=[NSArray arrayWithObjects:@"Search Schools & Colleges because Edubuddy is a right choice",@"Select your Schools and Colleges",@"Apply by one Click on Edubudy And Find Best Result", nil];
     [_introcollection registerNib:[UINib nibWithNibName:@"FirstCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"FirstCollectionViewCell"];
     
@@ -38,10 +36,9 @@
 }
 -(void)swipeleft:(UISwipeGestureRecognizer*)gestureRecognizer
 {
+     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    
-}
+ }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0)
 {

@@ -17,11 +17,11 @@
 #import "FeedViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "Reachability.h"
-//#import "GAI.h"
-//#import "GAIDictionaryBuilder.h"
-//#import "GAIFields.h"
-//#import "GAILogger.h"
- #import "FrontViewController.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+#import "GAILogger.h"
+#import "FrontViewController.h"
 #import "TIMERUIApplication.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -90,13 +90,13 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     
 //    GAI *gai = [GAI sharedInstance];
 //    [gai trackerWithTrackingId:@"UA-112860070-1"];
-    
-    // Optional: automatically report uncaught exceptions.
-   // gai.trackUncaughtExceptions = YES;
-    
-    // Optional: set Logger to VERBOSE for debug information.
-    // Remove before app release.
-   // gai.logger.logLevel = kGAILogLevelVerbose;
+//
+//    // Optional: automatically report uncaught exceptions.
+//    gai.trackUncaughtExceptions = YES;
+//
+//    // Optional: set Logger to VERBOSE for debug information.
+//    // Remove before app release.
+//    gai.logger.logLevel = kGAILogLevelVerbose;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     
@@ -115,7 +115,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     
     [GIDSignIn sharedInstance].clientID = @"58322627713-osm3rh040j4gvnavjfdretl6oobq3je3.apps.googleusercontent.com";
     
-   
+    
     
     //    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound |    UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
     //    [[UIApplication sharedApplication] registerForRemoteNotifications];
@@ -184,7 +184,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     {
         
         FirstViewController *frontViewController=[[FirstViewController alloc]init];
-         // [[NSUserDefaults standardUserDefaults] setValue:@"true" forKey:@"launch"];
+        // [[NSUserDefaults standardUserDefaults] setValue:@"true" forKey:@"launch"];
         LeftViewController *leftMenuViewController = [[LeftViewController alloc] init];
         
         UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
@@ -252,6 +252,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     //                       {
     //                           [ self callstorelocation ];
     //                       }];
+    
     NSTimer *timerr = [NSTimer timerWithTimeInterval:20.0 target:self selector:@selector(callstorelocation) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timerr forMode:NSDefaultRunLoopMode];
     
@@ -544,7 +545,7 @@ forRemoteNotification:(NSDictionary *)notification completionHandler:(void(^)())
     if(alertView.tag==2000)
     {
         // [self callstorelocation];
-    NSTimer *timerr = [NSTimer timerWithTimeInterval:10.0 target:self selector:@selector(callstorelocation) userInfo:nil repeats:YES];
+        NSTimer *timerr = [NSTimer timerWithTimeInterval:10.0 target:self selector:@selector(callstorelocation) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:timerr forMode:NSDefaultRunLoopMode];
     }
 }
@@ -558,18 +559,18 @@ forRemoteNotification:(NSDictionary *)notification completionHandler:(void(^)())
     
     if(status == NotReachable)
     {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
-                alert.tag=2000;
-                [alert show];
+        alert.tag=2000;
+        [alert show];
     }
     else if (status == ReachableViaWiFi)
     {
-            //WiFi
+        //WiFi
     }
     else if (status == ReachableViaWWAN)
     {
-            //3G
+        //3G
     }
 }
 
@@ -582,8 +583,8 @@ forRemoteNotification:(NSDictionary *)notification completionHandler:(void(^)())
     
     //    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"id"] > 0)
     //    {
-    [self callThisForeGroundMethode];
     
+    [self callThisForeGroundMethode];
     // }
     NSTimer *timerr = [NSTimer timerWithTimeInterval:10.0 target:self selector:@selector(callnetconnection) userInfo:nil repeats:NO];
     [[NSRunLoop currentRunLoop] addTimer:timerr forMode:NSDefaultRunLoopMode];

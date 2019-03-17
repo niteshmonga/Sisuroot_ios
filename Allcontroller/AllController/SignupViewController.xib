@@ -26,7 +26,6 @@
                 <outlet property="codeTF" destination="0gY-XO-8l5" id="zTO-fJ-QLk"/>
                 <outlet property="codedoneobj" destination="W0e-ED-WeC" id="Blq-0Q-Qru"/>
                 <outlet property="codelblobj" destination="Nju-F3-1hm" id="Bzs-oa-Nm3"/>
-                <outlet property="codepickerobj" destination="VfJ-PP-eFO" id="Ela-Nr-FQc"/>
                 <outlet property="contactimg" destination="WtR-zX-SMH" id="pI2-gb-pQw"/>
                 <outlet property="logoimg" destination="pgU-D0-u6l" id="fpv-cP-Tac"/>
                 <outlet property="mobileTF" destination="FT8-Z9-VWh" id="ggW-Wi-H0d"/>
@@ -225,15 +224,6 @@
                         <outlet property="delegate" destination="-1" id="ZQR-dc-e6W"/>
                     </connections>
                 </pickerView>
-                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VfJ-PP-eFO">
-                    <rect key="frame" x="0.0" y="498" width="375" height="170"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="0.88923637010000001" green="0.89557674620000005" blue="0.91459787439999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="ZuX-dR-j2x"/>
-                        <outlet property="delegate" destination="-1" id="sFR-UA-asl"/>
-                    </connections>
-                </pickerView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nju-F3-1hm">
                     <rect key="frame" x="-1" y="466" width="376" height="37"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -255,7 +245,7 @@
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gY-XO-8l5">
                     <rect key="frame" x="60" y="359" width="50" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666669999997" alpha="0.35991010270000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>

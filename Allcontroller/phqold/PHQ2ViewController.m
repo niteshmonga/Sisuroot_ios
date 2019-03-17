@@ -270,8 +270,7 @@
         if (indexPath.row == 0)
         {
             cell.backbtnobj.hidden=YES;
-            
-            cell.Questionlbl.hidden=NO;
+             cell.Questionlbl.hidden=NO;
             cell.BSAlbl.hidden=NO;
             cell.Btn1obj.hidden=NO;
             cell.Btn2obj.hidden=NO;

@@ -19,6 +19,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "BS1ViewController.h"
 #import "CountryListViewController.h"
+#import "Reachability.h"
+
 
 @interface EditViewController ()
 {
@@ -55,7 +57,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden=YES;
-    
+    [self callnetconnection];
+
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
@@ -226,6 +229,8 @@
 }
 
 
+
+
 -(void)doneWithNumberPad
 {
     [_MobileTF resignFirstResponder];
@@ -288,6 +293,7 @@
        // _codelblobj.hidden=NO;
        // _codedoneobj.hidden=NO;
        // _codepickerobj.hidden=NO;
+        
         CountryListViewController *cv = [[CountryListViewController alloc] initWithNibName:@"CountryListViewController" delegate:self];
         [self presentViewController:cv animated:YES completion:NULL];
         //  [ _MobileTF endEditing:YES];
@@ -368,7 +374,6 @@
         [_Datepickerobj reloadInputViews];
         
     }
-    
     
 }
 
@@ -608,7 +613,7 @@
         msg =@"Please enter mobile number";
         
     }
-    else if(_MobileTF.text.length >13 || _MobileTF.text.length < 8)
+    else if(_MobileTF.text.length >10 || _MobileTF.text.length < 8)
     {
          msg =@"Please enter your valid mobile number";
         
@@ -958,6 +963,32 @@
 {
           _codeTF.text = [codearr objectAtIndex:row];
         
+}
+
+
+
+-(void)callnetconnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        alert.tag=2000;
+        [alert show];
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
 }
 @end
 

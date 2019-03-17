@@ -102,9 +102,9 @@
     arr2=[[NSMutableArray alloc]initWithObjects:@"Have you been able to focus on things lately?"
           ,@"What's your concentration like?"
           ,@"When you watch TV, are you able to follow what you watch?"
-          ,@"Do you find it difficult to read books because you can't concentrate? (if mention of reading as a hobby)"
+          ,@"Do you find it difficult to read books because you can't concentrate?"
           ,@"Have you had problems making decisions?"
-          ,@"How has having to make decisions affected you lately? (empathy)"
+          ,@"How has having to make decisions affected you lately?"
           ,@"Can you watch a half-hour television show from start to finish without losing your focus?"
           ,@"How do you see the future?"
           ,@"Do you see a future?"
@@ -139,7 +139,7 @@
     // _questionlbl.text=arr2str;
     _questionlbl2.text=arr1str;
     // _questionlbl2.textColor=[UIColor lightGrayColor];
-    _questionlbl.text=[NSString stringWithFormat:@"%@\n%@",aboutstr,arr2str];
+    _questionlbl.text=[NSString stringWithFormat:@"%@",arr2str];
     
     NSMutableArray *pathComponents = [NSMutableArray arrayWithObjects:
                                       [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],

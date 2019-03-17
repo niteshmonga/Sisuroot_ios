@@ -176,7 +176,8 @@
     [paramDict setValue:_headlineTF.text forKey:@"title"];
     
     [paramDict setValue:_commentsTV.text forKey:@"comment"];
-    
+    [paramDict setValue:@"0" forKey:@"device_type"];
+
     [paramDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] forKey:@"id"];
     
     [webServiceManager setDelegateMethode:self];

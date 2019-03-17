@@ -5,7 +5,7 @@
 #import "FeedViewController.h"
 #import "FriendsViewController.h"
 #import "SelectContactViewController.h"
-
+#import "Reachability.h"
 @interface DemoOtherViewController ()
 {
     
@@ -30,6 +30,8 @@
 //}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self callnetconnection];
+
     self.navigationController.navigationBar.hidden=YES;
     _MenuBtnobj.hidden=YES;
     _footerlbl.hidden=YES;
@@ -273,4 +275,29 @@
  }
  */
 
+
+
+-(void)callnetconnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"You should connect with wifi for optimal use." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        alert.tag=2000;
+        [alert show];
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+    }
+}
 @end

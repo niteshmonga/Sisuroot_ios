@@ -1,10 +1,3 @@
-//
-//  ChatViewController.m
-//  Root
-//
-//  Created by BRIJESH KUMAR on 12/02/18.
-//  Copyright © 2018 EpikSolutions. All rights reserved.
-//
 
 #import "ChatViewController.h"
 #import "ChatTableViewCell.h"
@@ -47,6 +40,7 @@
     NSString *checktimer;
     BOOL isScrollingStart;
 }
+
 //@property (strong, nonatomic) TableArray *tableArray;
 
 @end
@@ -190,6 +184,7 @@
     
     _tableviewbj.rowHeight = UITableViewAutomaticDimension;
     _tableviewbj.estimatedRowHeight = 44;
+    
 }
 
 
@@ -200,6 +195,7 @@
         //[self textViewFitToContent:textView];
         
         // [self.viewobj addSubview:_textview];
+        
         if ([text isEqualToString:@"\n"])
         {
             
@@ -498,7 +494,7 @@
 
 -(void)callchatService
 {
-    
+   
 //    NSArray* words = [_textview.text componentsSeparatedByCharactersInSet :[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 //    NSString* nospacestring = [words componentsJoinedByString:@""];
 
@@ -560,6 +556,9 @@
     [webServiceManager setDelegateMethode:self];
     [webServiceManager callMyWebServiceManager:@"chat" :dict :dict1];
     
+     _textview.text=@" ";
+    [_chatbtnobj setUserInteractionEnabled:YES];
+
     //    senderidlbl=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"id"]];
     //
     //    if ([_strdetail isEqualToString:@"search"]) {
@@ -1220,11 +1219,13 @@
                 
                 cell.frndtimelbl.lineBreakMode = NSLineBreakByWordWrapping;
                 
-                //        cell.frndlblview.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+                //cell.frndlblview.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
                 
                 //if (cell.mytextview.text.length <1) {
                 cell.mylblview.hidden=YES;
+                
                 //}
+                
             }
         }
         
@@ -1236,11 +1237,11 @@
             if ([[[strarr1 objectAtIndex:indexPath.row]valueForKey:@"sender_id"] isEqual:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"id"]]] && [[[strarr1 objectAtIndex:indexPath.row] valueForKey:@"receiver_id"] isEqual:_detail] ) {
                 
                 cell.mytextview.text=[[strarr1 objectAtIndex:indexPath.row]valueForKey:@"msg"];
+                
                 // cell.mytextview.text= [[strarr1 objectAtIndex:indexPath.row]valueForKey:@"m_msg"];
+                  // cell.mytextview.text = [dbString stringByReplacingOccurrencesOfString: @"\\n" withString: @"\n"];
                 
-                // cell.mytextview.text = [dbString stringByReplacingOccurrencesOfString: @"\\n" withString: @"\n"];
-                
-                cell.mytimelbl.text=@" ";
+                 cell.mytimelbl.text=@" ";
                 cell.mytextview.textContainer.lineBreakMode = NSLineBreakByCharWrapping;
                 
                 //[[strarr1 objectAtIndex:indexPath.row]valueForKey:@"MsgTime"];
@@ -1940,9 +1941,7 @@
         }
         
         
-        
-
-    }
+     }
     
     
 }
