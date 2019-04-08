@@ -36,6 +36,7 @@
 @implementation VoiceTestViewController
 
 - (void)viewDidLoad {
+     [FIRAnalytics setScreenName:@"Voice Test" screenClass:@"Voice Test"];
     [super viewDidLoad];
   
     _stopButton.hidden=YES;

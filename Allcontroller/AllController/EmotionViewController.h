@@ -18,7 +18,9 @@
 @property (strong, nonatomic) IBOutlet UITextView *commentsTV;
 - (IBAction)SubmitAction:(id)sender;
 - (IBAction)HomeBtnAction:(id)sender;
-
 @property (strong, nonatomic) IBOutlet UIButton *submitbtnobj;
+@property (strong, nonatomic) IBOutlet UILabel *kiwainfolbl;
+@property (strong, nonatomic) IBOutlet UILabel *infolbl;
+@property (strong, nonatomic) IBOutlet UILabel *infofirstlbl;
 
 @end

@@ -44,6 +44,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+      [FIRAnalytics setScreenName:@"My Profile" screenClass:@"My Profile"];
+    
     chatnotification.layer.cornerRadius=10;
     chatnotification.clipsToBounds=YES;
     

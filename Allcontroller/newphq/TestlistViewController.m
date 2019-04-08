@@ -65,6 +65,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [FIRAnalytics setScreenName:@"Test" screenClass:@"Test"];
    voicestrA= [[NSUserDefaults standardUserDefaults]valueForKey:@"Voice_Test_StatusA"];
     voicestrB= [[NSUserDefaults standardUserDefaults]valueForKey:@"Voice_Test_StatusB"];
     voicestrC= [[NSUserDefaults standardUserDefaults]valueForKey:@"Voice_Test_StatusC"];

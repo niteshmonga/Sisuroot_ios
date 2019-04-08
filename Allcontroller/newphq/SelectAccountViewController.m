@@ -18,6 +18,7 @@
 @implementation SelectAccountViewController
 
 - (void)viewDidLoad {
+    [FIRAnalytics setScreenName:@"Select Account" screenClass:@"Select Account"];
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden=YES;
     // Do any additional setup after loading the view from its nib.

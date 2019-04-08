@@ -20,6 +20,7 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+   //  [FIRAnalytics setScreenName:@"Select Tags" screenClass:@"Select Tags"];
     tblSimpleTable.delegate=self;
     tblSimpleTable.dataSource=self;
     arryData = [[NSArray alloc] initWithObjects:@"iPhone",@"iPod",@"MacBook",@"MacBook Pro",nil];

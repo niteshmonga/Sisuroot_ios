@@ -41,6 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [FIRAnalytics setScreenName:@"Setting" screenClass:@"Setting"];
     _MenuBtnobj.hidden=YES;
     self.navigationController.navigationBar.hidden=YES;
     

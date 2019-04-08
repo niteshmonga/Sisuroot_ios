@@ -573,8 +573,7 @@
             [self.view hideActivityView];
             
             SectionBvoicetestViewController *LVC3=[[SectionBvoicetestViewController alloc]init];
-            
-            [self.navigationController pushViewController:LVC3 animated:YES];
+             [self.navigationController pushViewController:LVC3 animated:YES];
         }
         
     }

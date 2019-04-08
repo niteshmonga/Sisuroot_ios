@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [FIRAnalytics setScreenName:@"Demographic Form" screenClass:@"Demographic Form"];
     //_view1obj.hidden=YES;
     self.navigationController.navigationBar.hidden=YES;
 

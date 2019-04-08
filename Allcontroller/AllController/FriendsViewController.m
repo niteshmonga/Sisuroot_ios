@@ -103,6 +103,7 @@
     }
 }
  - (void)viewDidLoad {
+       [FIRAnalytics setScreenName:@"Friends" screenClass:@"Friends"];
     [super viewDidLoad];
      [self callnetconnection];
 
@@ -225,7 +226,7 @@
     
     if(textField==self.codeTF)
     {
- 
+        
         [_codeTF resignFirstResponder];
         // _codelblobj.hidden=NO;
         // _codedoneobj.hidden=NO;
@@ -234,12 +235,11 @@
         [self presentViewController:cv animated:YES completion:NULL];
         //  [ _MobileTF endEditing:YES];
         _Addcontactview.hidden=NO;
-
-    }
+        
+     }
     else if(textField==self.EcodeTF)
     {
-        
-        
+ 
         [_EcodeTF resignFirstResponder];
         // _codelblobj.hidden=NO;
         // _codedoneobj.hidden=NO;
@@ -602,7 +602,7 @@
         isfiltered=true;
         [self callsearchmethod];
         searchtextstr=searchText;
-        
+
     }
 }
 -(void)callsearchmethod
@@ -1453,6 +1453,7 @@
                 {
                     if (nameString1.length > 0)
                     {
+                        
 //                        [arrayTableData addObject:contacName];
 //                        NSSortDescriptor *sortDescriptor;
 //                        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
@@ -1463,7 +1464,7 @@
                     }
                 }
             }
-            }
+        }
             
         
             
@@ -1547,7 +1548,7 @@
 //
 //            //  [_contactList addObject:contacName];
 //
-        
+ 
     }
     
      [self callstorecontact];
@@ -1565,10 +1566,62 @@
              [refreshControl endRefreshing];
 
         }
-        
+        if (alertView.tag == 2009)
+        {
+            [self.view showActivityViewWithLabel:@"Loading"];
+            MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+            [dict setValue:@"friendRequest" forKey:@"name"];
+            
+            NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
+             if(isfiltered)
+            {
+                [dict1 setValue:strsearch1 forKey:@"requestToId"];
+            }
+            else
+            {
+                [dict1 setValue:str1 forKey:@"requestToId"];
+            }
+            
+            [dict1 setValue:@"1" forKey:@"circle"];
+            [dict1 setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] forKey:@"requestFromId"];
+            
+            [webServiceManager setDelegateMethode:self];
+            [webServiceManager callMyWebServiceManager:@"friendRequest":dict :dict1];
+            
+        }
     }
     else if(buttonIndex == 1)
     {
+        if (alertView.tag == 2009)
+        {
+            SettingViewController *svc=[[SettingViewController alloc]init];
+            [self.navigationController pushViewController:svc animated:YES];
+            [svc setStr1:@"done"];
+
+            [self.view showActivityViewWithLabel:@"Loading"];
+            MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+            [dict setValue:@"friendRequest" forKey:@"name"];
+            
+            NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
+            
+            if(isfiltered)
+            {
+                [dict1 setValue:strsearch1 forKey:@"requestToId"];
+            }
+            else
+            {
+                [dict1 setValue:str1 forKey:@"requestToId"];
+            }
+            
+            [dict1 setValue:@"1" forKey:@"circle"];
+            [dict1 setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] forKey:@"requestFromId"];
+            
+            [webServiceManager setDelegateMethode:self];
+            [webServiceManager callMyWebServiceManager:@"friendRequest":dict :dict1];
+            
+        }
         if (alertView.tag == 30001)
         {
             BOOL stricterFilter = NO;
@@ -1693,8 +1746,7 @@
 }
 
 
-
- - (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person
                     property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
 {
     return NO;
@@ -1747,8 +1799,7 @@
         {
             case 0:
             {
-               
-                if ([innercount integerValue] >=25)
+                 if ([innercount integerValue] >=25)
                 {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"You Exceeded the Limit to add friend in Inner Circle" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     [alert show];
@@ -1757,34 +1808,13 @@
                 else
                 {
                     
-                [self.view showActivityViewWithLabel:@"Loading"];
-                MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
-                NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-                [dict setValue:@"friendRequest" forKey:@"name"];
-                
-                NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
-      
-                    if(isfiltered)
-                    {
-                        [dict1 setValue:strsearch1 forKey:@"requestToId"];
-
-                    }
-                    else
-                    {
-                        [dict1 setValue:str1 forKey:@"requestToId"];
-
-                    }
+                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT!" message:@"Do you want to share your red flags with your inner circle?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
                     
+                    alert.tag=2009;
+                    [alert show];
  
-               
+                  
                     
-                [dict1 setValue:@"1" forKey:@"circle"];
-                [dict1 setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] forKey:@"requestFromId"];
-                
-            
-                [webServiceManager setDelegateMethode:self];
-                [webServiceManager callMyWebServiceManager:@"friendRequest":dict :dict1];
-                
                  }
             
             }
@@ -1800,9 +1830,8 @@
  
                 }
                 else
-                {
-                
-                [self.view showActivityViewWithLabel:@"Loading"];
+            {
+                 [self.view showActivityViewWithLabel:@"Loading"];
                 
                 MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
                 NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
@@ -1815,17 +1844,14 @@
                 [dict1 setValue:@"2" forKey:@"circle"];
                 if(isfiltered)
                 {
-                    
-                        [dict1 setValue:strsearch1 forKey:@"requestToId"];
-                        
-                }
+                         [dict1 setValue:strsearch1 forKey:@"requestToId"];
+                 }
                 else
                 {
-                        [dict1 setValue:str1 forKey:@"requestToId"];
-                        
+                         [dict1 setValue:str1 forKey:@"requestToId"];
+                    
                 }
  
-                
                 [webServiceManager setDelegateMethode:self];
                 [webServiceManager callMyWebServiceManager:@"friendRequest":dict :dict1];
             }
@@ -1929,6 +1955,7 @@
                 }
                 
             }
+                
                 break;
             case 3:
             {
@@ -1940,9 +1967,7 @@
                 break;
         }
         
-        
-        
-    }
+     }
     
  }
 
@@ -1981,9 +2006,7 @@
 
 - (IBAction)TagBtnAction:(id)sender {
     check=YES;
-    
-    
-    
+ 
     UIActionSheet *selectImgAS = [[UIActionSheet alloc] initWithTitle:@"Source Type?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Camera" otherButtonTitles:@"Gallery", nil];
     [selectImgAS setTag:6];
     selectImgAS.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
@@ -2297,5 +2320,97 @@
         //3G
     }
 }
+
+
+
+
+//- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
+//{
+//
+//    [searchBar resignFirstResponder];
+//    return  YES;
+//}// return NO to not resign first responder
+//
+//
+//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+//{
+//    //isSearching = YES;
+//
+//}
+//
+//- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+//    NSLog(@"Text change - %d",isSearching);
+//
+//    //Remove all objects first.
+//    // [filterArray removeAllObjects];
+//
+//    if([searchText length] != 0)
+//    {
+//        isSearching = YES;
+//        [self searchTableList];
+//
+//        [contactlistingtable reloadData];
+//
+//    }
+//
+//    //    else if ([searchText isEqualToString:@""])
+//    //    {
+//    //        //isSearching= YES;
+//    //       // [self callThisFatchProfile];
+//    //         [contactlistingtable reloadData];
+//    //    }
+//
+//    else {
+//        isSearching = NO;
+//        [contactlistingtable reloadData];
+//    }
+//    // [self.tblContentList reloadData];
+//}
+//
+//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+//{
+//    NSLog(@"Cancel clicked");
+//
+//}
+//
+//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+//{
+//    NSLog(@"Search Clicked");
+//    [self searchTableList];
+//    [searchBar resignFirstResponder];
+//}
+//
+//- (void)searchTableList
+//{
+//    NSPredicate *bPredicate;
+//    BOOL stricterFilter = NO;
+//    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+//    NSString *laxString = @"^(?:|0|[1-9]\\d*)(?:\\.\\d*)?$";
+//
+//    NSString *mobileRegex = stricterFilter ? stricterFilterString : laxString;
+//    NSPredicate *numberTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", mobileRegex];
+//
+//    // NSString *msg = @"0";
+//    // bPredicate=[NSPredicate predicateWithFormat:@"SELF.name contains[cd] %@",searchBar.text];
+//
+//    if([numberTest evaluateWithObject:searchBar.text] == NO)
+//    {
+//        bPredicate=[NSPredicate predicateWithFormat:@"SELF.name contains[cd] %@",searchBar.text];
+//
+//    }
+//    else
+//    {
+//        bPredicate=[NSPredicate predicateWithFormat:@"SELF.mobile contains[cd] %@",searchBar.text];
+//
+//    }
+//
+//    // NSPredicate *bPredicate1 =[NSCompoundPredicate andPredicateWithSubpredicates:@[selfname, selfmobile]];
+//    //    NSPredicate *bPredicate =[NSCompoundPredicate andPredicateWithSubpredicates:@[selfname, selfmobile]];
+//    // filterArray = [profilArray filteredArrayUsingPredicate:bPredicate];
+//
+//    filterArray = [profilArray filteredArrayUsingPredicate:bPredicate];
+//    NSLog(@"HERE %@",filterArray);
+//}
+
 @end
 

@@ -1,10 +1,4 @@
-//
-//  EditViewController.m
-//  Root_App
-//
-//  Created by BRIJESH KUMAR on 13/04/1939 IST.
-//  Copyright © 1939 Saka EpikSolutions. All rights reserved.
-//
+
 
 #import "EditViewController.h"
 #import "SWRevealViewController.h"
@@ -55,6 +49,7 @@
     return YES;
 }
 - (void)viewDidLoad {
+     [FIRAnalytics setScreenName:@"Edit Profile" screenClass:@"Edit Profile"];
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden=YES;
     [self callnetconnection];
@@ -526,32 +521,23 @@
     }
     if(check1==YES)
     {
-        
-        _profilebackimg.image=chosenImage;
-        
-        
+         _profilebackimg.image=chosenImage;
+ 
         CGRect rect = CGRectMake(0,0,300,200);
         
         UIImage *imggs = [self  imageResize :[info objectForKey:UIImagePickerControllerEditedImage] andResizeTo:rect.size];
-        
-        
-        // NSData *daataa = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
+          // NSData *daataa = UIImagePNGRepresentation([info objectForKey:UIImagePickerControllerEditedImage]);
         NSData *daataa1 = UIImagePNGRepresentation(imggs);
-        
-        base64_encoded_image1 =  [Base64 encode:daataa1];
-        
-        NSDate *dtTime = [NSDate date];
+         base64_encoded_image1 =  [Base64 encode:daataa1];
+         NSDate *dtTime = [NSDate date];
         NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
         [df1 setDateFormat:@"dd-MMM-yyyy hh-MM-ss"];
         imageNameStr1 = [df1 stringFromDate:dtTime];
-        
         NSArray *arra1 = [imageNameStr1 componentsSeparatedByString:@" "];
-        
         imageNameStr1 = [NSString stringWithFormat:@"%@%@",[arra1 objectAtIndex:0],[arra1 objectAtIndex:1]];
-        
         check1=NO;
         
-    }
+     }
     
     [picker dismissModalViewControllerAnimated:YES];
     
@@ -603,6 +589,11 @@
     {
         msg = @"Please enter username";
      }
+    else if (_EmailTF.text.length < 1)
+    {
+        msg = @"Please enter email address";
+        
+    }
     else if(_codeTF.text.length < 1)
     {
         msg =@"Please select country code";
@@ -623,32 +614,23 @@
         msg =@"Please enter your valid mobile number";
 
     }
-     else if (_EmailTF.text.length < 1)
-    {
-        msg = @"Please enter email address";
-        
-    }
+    
     else if([emailTest evaluateWithObject:_EmailTF.text] == NO)
     {
         msg = @"Please enter valid email address";
-        
     }
     else if (_locationTF.text.length < 1)
     {
         msg = @"Please enter location";
-        
     }
+    
+    
     //   else if ([specialchar evaluateWithObject:_locationTF.text] == NO)
     //    {
     //        msg = @"Please enter valid location";
     //
     //    }
-    
-    else if (_DobTF.text.length < 1)
-    {
-        msg = @"Please select date of birth";
-    }
-    
+ 
     if (![msg isEqualToString:@"0"])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:msg delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
@@ -662,12 +644,9 @@
 }
 -(void)CallEditProfile
 {
-    NSString *mobilestr1=_codeTF.text;
-    NSString *mobilestr2=_MobileTF.text;
+  
 
-    NSString *mobilestr3=[mobilestr1 stringByAppendingString:mobilestr2];
-    _MobileTF.text=mobilestr3;
-    [self.view showActivityViewWithLabel:@"Loading"];
+      [self.view showActivityViewWithLabel:@"Loading"];
     
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
@@ -676,12 +655,10 @@
     NSMutableDictionary *paramDict = [[NSMutableDictionary alloc]init];
     [paramDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] forKey:@"id"];
     [paramDict setValue:_UserTF.text forKey:@"username"];
-    [paramDict setValue:_DobTF.text forKey:@"dob"];
+   // [paramDict setValue:_DobTF.text forKey:@"dob"];
+    [paramDict setValue:_EmailTF.text forKey:@"email_id"];
     [paramDict setValue:_MobileTF.text forKey:@"mobile_no"];
     [paramDict setValue:_codeTF.text forKey:@"phonenum_country_code"];
-
-    [paramDict setValue:_EmailTF.text forKey:@"email_id"];
-    
     //        if (![_locationTF.text isEqualToString:[NSNull null]] || ![_locationTF.text isEqualToString:@" "])
     //        {
     [paramDict setValue:_locationTF.text forKey:@"location"];
@@ -690,9 +667,9 @@
     [paramDict setValue:base64_encoded_image forKey:@"img_file"];
     [paramDict setValue:imageNameStr forKey:@"img_name"];
     [paramDict setValue:@"png" forKey:@"img_ext"];
-    [paramDict setValue:base64_encoded_image1 forKey:@"img_file_two"];
-    [paramDict setValue:imageNameStr1 forKey:@"img_name_two"];
-    [paramDict setValue:@"png" forKey:@"img_ext_two"];
+//    [paramDict setValue:base64_encoded_image1 forKey:@"img_file_two"];
+//    [paramDict setValue:imageNameStr1 forKey:@"img_name_two"];
+//    [paramDict setValue:@"png" forKey:@"img_ext_two"];
     
     [webServiceManager setDelegateMethode:self];
     [webServiceManager callMyWebServiceManager:@"profile_update" :dict :paramDict];
@@ -804,7 +781,7 @@
             {
                 _ChangePasswordBtnobj.hidden=YES;
 
-                _UserTF.enabled = NO;
+                _UserTF.enabled = YES;
                 _EmailTF.enabled = NO;
 
             }

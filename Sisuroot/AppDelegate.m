@@ -17,12 +17,15 @@
 #import "FeedViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "Reachability.h"
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
+//#import "GAI.h"
+//#import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 #import "GAILogger.h"
 #import "FrontViewController.h"
 #import "TIMERUIApplication.h"
+@import Firebase;
+#import <GoogleAnalytics/GAI.h>
+#import <GoogleAnalytics/GAIDictionaryBuilder.h>
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
@@ -97,6 +100,30 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 //    // Optional: set Logger to VERBOSE for debug information.
 //    // Remove before app release.
 //    gai.logger.logLevel = kGAILogLevelVerbose;
+    
+    
+    //GAI *gai = [GAI sharedInstance];
+    ///[gai trackerWithTrackingId:@"YOUR_TRACKING_ID"];
+    
+    // Optional: automatically report uncaught exceptions.
+   // gai.trackUncaughtExceptions = YES;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    // Remove before app release.
+    //gai.logger.logLevel = kGAILogLevelVerbose;
+   // GAI *gai = [GAI sharedInstance];
+  //  [gai trackerWithTrackingId:@"UA-72873-8"];
+    
+    // Optional: automatically report uncaught exceptions.
+   // gai.trackUncaughtExceptions = YES;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    // Remove before app release.
+  //  gai.logger.logLevel = kGAILogLevelVerbose;
+    
+    [FIRApp configure];
+    
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     
@@ -113,7 +140,9 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
     
     
-    [GIDSignIn sharedInstance].clientID = @"58322627713-osm3rh040j4gvnavjfdretl6oobq3je3.apps.googleusercontent.com";
+    //[GIDSignIn sharedInstance].clientID = @"58322627713-osm3rh040j4gvnavjfdretl6oobq3je3.apps.googleusercontent.com";
+    
+    [GIDSignIn sharedInstance].clientID = @"1041594852089-su8rgqnhe2edbbo3quggtir3hedp39b4.apps.googleusercontent.com";
     
     
     
@@ -128,8 +157,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     }
     else
     {
-        
-        if (@available(iOS 10.0, *)) {
+       if (@available(iOS 10.0, *)) {
             UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
             center.delegate = self;
             
@@ -269,8 +297,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 //-(void)applicationDidTimeout:(NSNotification *) notif
 //{
 //    NSLog (@"time exceeded!!");
-//
-//    //This is where storyboarding vs xib files comes in. Whichever view controller you want to revert back to, on your storyboard, make sure it is given the identifier that matches the following code. In my case, "mainView". My storyboard file is called MainStoryboard.storyboard, so make sure your file name matches the storyboardWithName property.
+ //    //This is where storyboarding vs xib files comes in. Whichever view controller you want to revert back to, on your storyboard, make sure it is given the identifier that matches the following code. In my case, "mainView". My storyboard file is called MainStoryboard.storyboard, so make sure your file name matches the storyboardWithName property.
 //    UIViewController *controller = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:NULL] instantiateViewControllerWithIdentifier:@"mainView"];
 //
 //    [(UINavigationController *)self.window.rootViewController pushViewController:controller animated:YES];

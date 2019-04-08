@@ -25,7 +25,14 @@
 #import "BS6ViewController.h"
 #import <sys/utsname.h>
 #import "Reachability.h"
-
+#import <GoogleAnalytics/GAI.h>
+#import <GoogleAnalytics/GAIDictionaryBuilder.h>
+#import <GoogleAnalytics/GAIFields.h>
+#import "GAITrackedViewController.h"
+#import "BriefstateQ1ViewController.h"
+#import "DemoGraphicViewController.h"
+#import "DemoOtherViewController.h"
+#import "dietaryinfo_FormViewController.h"
 @interface FeedViewController ()
 {
     NSMutableArray *Earr;
@@ -51,8 +58,19 @@
 #pragma mark -
 #pragma mark Handling idle timeout
 
+
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    [super viewWillAppear:animated];
+    
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    [tracker set:kGAIScreenName value:@"HomeView"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] isEqual:@""])
     {
@@ -69,9 +87,9 @@
     
 }
 
-
-
 - (void)viewDidLoad {
+    
+   [FIRAnalytics setScreenName:@"HomeView" screenClass:@"HomeView"];
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden=YES;
     _Nointernetviewobj.hidden=YES;
@@ -1359,8 +1377,39 @@
         {
             
             NSString *phonestr = [[responseDictionary valueForKey:@"data"]valueForKey:@"mobile_no"];
+            NSString *GAD7_required_status = [[responseDictionary valueForKey:@"data"]valueForKey:@"GAD7_required_status"];
+            NSString *DietaryInfo_required_status = [[responseDictionary valueForKey:@"data"]valueForKey:@"DietaryInfo_required_status"];
+            NSString *PHQ9_required_status = [[responseDictionary valueForKey:@"data"]valueForKey:@"PHQ9_required_status"];
+            _Dafault_demographic_form_status = [[responseDictionary valueForKey:@"data"]valueForKey:@"Dafault_demographic_form_status"];
             
-            if ([phonestr isEqual:(id)[NSNull null]] || phonestr.length < 1 )
+            
+            
+            
+        if ([GAD7_required_status isEqual:@"1"] )
+            {
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Please give GAD-7 test to use the app" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                
+                alert.tag=2001;
+                [alert show];
+            }
+      else  if ([PHQ9_required_status isEqual:@"1"])
+            {
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Please give PHQ9 test to use the app" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                
+                alert.tag=2002;
+                [alert show];
+            }
+      else     if ([DietaryInfo_required_status isEqual:@"1"])
+            {
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Please fill Dietary info form" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                
+                alert.tag=2003;
+                [alert show];
+            }
+        else    if ([phonestr isEqual:(id)[NSNull null]] || phonestr.length < 1 )
             {
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Please fill your mobile number first" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -1368,7 +1417,6 @@
                 alert.tag=2000;
                 [alert show];
             }
-            
  
              if ([[[responseDictionary valueForKey:@"data"]valueForKey:@"Chat_Status"] isEqual:@"0"])
             {
@@ -1452,7 +1500,15 @@
             }
             NSString *imgStr = [[responseDictionary valueForKey:@"data"]valueForKey:@"profile_img"];
             
+            NSString *nameStr = [[responseDictionary valueForKey:@"data"]valueForKey:@"username"];
             
+            if ([nameStr isEqual:(id)[NSNull null]] || nameStr.length < 1 )
+            {
+            }
+            else
+            {
+                [FIRAnalytics setUserID:nameStr];
+            }
             if ([imgStr isEqual:(id)[NSNull null]] || imgStr.length < 1 )
             {
                 _profileiconimg.image = [UIImage imageNamed:@"user.png"];
@@ -1722,6 +1778,32 @@
              [self.navigationController pushViewController:Hgn animated:YES];
             
         }
+        else
+            if(alertView.tag == 2001)
+            {
+                BriefstateViewController *bsvc=[[BriefstateViewController alloc]init];
+                [bsvc setIdentifystr:@"done1"];
+                bsvc.teststatus=@"1";
+               [self.navigationController pushViewController:bsvc animated:YES];
+                
+            }
+        else
+            if(alertView.tag == 2002)
+            {
+                BriefstateQ1ViewController *bsvc=[[BriefstateQ1ViewController alloc]init];
+                bsvc.teststatus=@"1";
+                [self.navigationController pushViewController:bsvc animated:YES];
+                
+            }
+            else if(alertView.tag == 2003)
+            {
+                dietaryinfo_FormViewController *EVC=[[dietaryinfo_FormViewController alloc]init];
+                        //DemoGraphicViewController *EVC=[[DemoGraphicViewController alloc]init];
+                        [self.navigationController pushViewController:EVC animated:YES];
+                
+          
+            }
+        
         else
         {
             

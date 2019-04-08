@@ -75,7 +75,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+     [FIRAnalytics setScreenName:@"Profile" screenClass:@"Profile"];
     self.navigationController.navigationBar.hidden=YES;
     //_Searchbarobj.hidden=YES;
     // [self countNotifications];

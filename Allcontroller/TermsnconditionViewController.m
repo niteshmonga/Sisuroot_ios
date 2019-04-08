@@ -21,7 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+     [FIRAnalytics setScreenName:@"Term and Condition" screenClass:@"Term and Condition"];
     //    if ([_typeString isEqualToString:@"service"])
     //    {
     

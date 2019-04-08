@@ -30,6 +30,8 @@
 //}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [FIRAnalytics setScreenName:@"Demographic Form" screenClass:@"Demographic Form"];
+    
     [self callnetconnection];
 
     self.navigationController.navigationBar.hidden=YES;
@@ -84,43 +86,31 @@
     else if([_typeString isEqualToString:@"demo4"])
     {
         _headerLbl.text=@"Dietary info form";
-        
         NSString *i=[[NSUserDefaults standardUserDefaults] valueForKey:@"id"];
         NSString *url=@"https://w2.sisuroot.com/servicebus/DietaryInfo.php?id=";
         NSString *url1=[url stringByAppendingString:i];
-        
         [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url1]]];
-        
     }
     else if([_typeString isEqualToString:@"Quiz1"])
     {
         _footerlbl.hidden=NO;
         _quizstmtlbl.hidden=NO;
         _quizstmtlbl.text=@"Dairy Quiz";
-        
-        
         _headerLbl.text=@"Quiz Time";
         NSString *i=[[NSUserDefaults standardUserDefaults] valueForKey:@"id"];
         NSString *url=@"https://w1.sisuroot.com/DairyQuiz.php?id=";
         NSString *url1=[url stringByAppendingString:i];
-        
         [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url1]]];
-        
     }
     else if([_typeString isEqualToString:@"Quiz2"])
     {
-        
-        
         _footerlbl.hidden=NO;
         _quizstmtlbl.hidden=NO;
         _quizstmtlbl.text=@"Vegetable Quiz";
-        
-        
         _headerLbl.text=@"Quiz Time";
         NSString *i=[[NSUserDefaults standardUserDefaults] valueForKey:@"id"];
         NSString *url=@"https://w1.sisuroot.com/VegetableQuiz.php?id=";
         NSString *url1=[url stringByAppendingString:i];
-        
         [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url1]]];
         
     }

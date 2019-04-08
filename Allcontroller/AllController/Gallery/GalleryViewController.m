@@ -34,6 +34,7 @@
 @implementation GalleryViewController
 
 - (void)viewDidLoad {
+     [FIRAnalytics setScreenName:@"Gallery" screenClass:@"Gallery"];
     [super viewDidLoad];
     [self Showallimages];
     [self callnetconnection];

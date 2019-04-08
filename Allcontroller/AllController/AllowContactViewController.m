@@ -33,6 +33,8 @@
 @implementation AllowContactViewController
 
 - (void)viewDidLoad {
+    
+     [FIRAnalytics setScreenName:@"Allow Contact" screenClass:@"Allow Contact"];
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden=YES;
     activityIden.hidden=YES;

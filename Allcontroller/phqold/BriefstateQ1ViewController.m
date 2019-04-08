@@ -58,6 +58,14 @@
 
 - (void)viewDidLoad {
     
+    if([_teststatus isEqualToString:@"1"])
+    {
+        _backbtnobj1.hidden=YES;
+    }
+    else
+    {
+        _backbtnobj1.hidden=NO;
+    }
     selectedIndexArray = [[NSMutableArray alloc] init];
     for(int i =0 ; i < 11; i++)
     {
@@ -158,15 +166,13 @@
 }
 -(void)swipeleft:(UISwipeGestureRecognizer*)gestureRecognizer
 {
-    
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0)
 {
-    
-    
+ 
     selectedIndex = indexPath.row;
     _pagecontrol.currentPage = indexPath.row;
     
@@ -225,6 +231,14 @@
     cell.skipBtnobj.tag = indexPath.row;
     [cell.skipBtnobj addTarget:self action:@selector(SkipAction:) forControlEvents:UIControlEventTouchUpInside];
     cell.Homebtnobj.tag = indexPath.row;
+    if([_teststatus isEqualToString:@"1"])
+    {
+        cell.Homebtnobj.hidden=YES;
+    }
+    else
+    {
+        cell.Homebtnobj.hidden=NO;
+    }
     [cell.Homebtnobj addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     cell.backbtnobj.tag = indexPath.row;
     [cell.backbtnobj addTarget:self action:@selector(BackBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -261,8 +275,7 @@
     [cell.samaritansbtnobj addTarget:self action:@selector(samaritonsAction:) forControlEvents:UIControlEventTouchUpInside];
     cell.crisisbtnobj.tag = indexPath.row;
     [cell.crisisbtnobj addTarget:self action:@selector(crisisAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
+ 
 
     int lastindex=[Arr2 count]-1;
     
@@ -344,7 +357,7 @@
             cell.skipBtnobj.hidden=NO;
             //cell.skipbacklbl.hidden=YES;
             cell.backbtnobj.hidden=NO;
-            cell.newzealantviewobj.hidden=NO;
+            cell.newzealantviewobj.hidden=YES;
         }
         else
         {

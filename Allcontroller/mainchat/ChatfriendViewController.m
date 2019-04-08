@@ -1,15 +1,8 @@
-//
-//  ChatfriendViewController.m
-//  Root
-//
-//  Created by BRIJESH KUMAR on 30/03/18.
-//  Copyright © 2018 EpikSolutions. All rights reserved.
-//
+
 
 #import "ChatfriendViewController.h"
 #import "chatfriendTableViewCell.h"
 #import "FeedViewController.h"
-
 #import "AppDelegate.h"
 #import "FriendsViewController.h"
 #import "SettingViewController.h"
@@ -38,8 +31,7 @@
     NSMutableArray *imgArr2;
     
     NSMutableArray *Emotionarr;
-    //AppDelegate *app;
-    BOOL *isfiltered;
+     BOOL *isfiltered;
     NSMutableArray *FilteredDevices;
     BOOL flag;
     BOOL check;
@@ -52,7 +44,8 @@
     NSString *selectid;
     NSString *selectid1;
     NSMutableDictionary *dict11;
-    
+    NSString *checkstr;
+
 }
 @end
 
@@ -65,8 +58,7 @@
         _sisuchatview.hidden=NO;
         
     
-    // data will come here inside of ViewControllerA
-}
+ }
 -(void)viewDidAppear:(BOOL)animated
 {
     [self callfetchprofile];
@@ -100,12 +92,64 @@
     
 }
 
+- (IBAction)btn_okalert:(id)sender {
+    _view_Alert.hidden=YES;
+    
+    MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    [dict setValue:@"chatwindowstatus" forKey:@"name"];
+    NSMutableDictionary *dict1 = [[NSMutableDictionary alloc]init];
+    [dict1 setValue:checkstr forKey:@"status"];
+    
+    [dict1 setValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"id"]] forKey:@"id"];
+    
+    [webServiceManager setDelegateMethode:self];
+    [webServiceManager callMyWebServiceManager:@"chatwindowstatus" :dict :dict1];
+}
+
+- (IBAction)btn_checkbox:(id)sender {
+    if([_chck_alert isSelected]==YES)
+    {
+        //uncheck_60px.png
+         [_chck_alert setBackgroundImage:[UIImage imageNamed:@"uncheck_60px.png"] forState:UIControlStateNormal];
+         checkstr=@"0";
+        [_chck_alert setSelected:NO];
+        
+    }
+    else
+    {
+        [_chck_alert setBackgroundImage:[UIImage imageNamed:@"check_60px (1).png"] forState:UIControlStateNormal];
+        checkstr=@"1";
+        
+        //check_60px (1).png
+        [_chck_alert setSelected:YES];
+
+        
+    }
+    
+}
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+     [FIRAnalytics setScreenName:@"Chat Friends" screenClass:@"Chat Friends"];
+    _btn_okalert.layer.borderColor = [UIColor blackColor].CGColor;
+    _btn_okalert.layer.borderWidth=2;
+    _btn_okalert.layer.cornerRadius=2;
+    
+       [self callfetchprofile];
+ 
+     [super viewDidLoad];
     _mhpinfoview.hidden=YES;
     
      self.navigationController.navigationBar.hidden=YES;
+    
+    _view_Alert.layer.cornerRadius=10;
+    _view_Alert.layer.borderColor=[UIColor colorWithRed:(61.0/255.0) green:(181.0/255) blue:(230.0/255) alpha:1].CGColor;
+    _view_Alert.layer.borderWidth =2.0f;
+    
+    _view_Alert.clipsToBounds=YES;
+    
+    
+    
     
     _MenuBtnobj.hidden=YES;
     
@@ -259,9 +303,7 @@
     cell.mhpinfo.hidden=YES;
     cell.mhpinfoimg.hidden=YES;
 
-    
-    
-    if (tableView== chattableview)
+     if (tableView== chattableview)
     {
         cell.cellBtnobj.hidden=YES;
         cell.Usernamelbl.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"friend_username"];
@@ -270,10 +312,10 @@
         if ([imgStr2 isEqual:(id)[NSNull null]] || [imgStr2 isEqualToString:@""])
         {
             cell.messagenamelbl.text=@"";
-            
         }
         else
         {
+            
             cell.messagenamelbl.text=[[imgArr objectAtIndex:indexPath.row]valueForKey:@"LastMessage"];
             
         }
@@ -813,14 +855,26 @@
         //        {
         //
         //        }
+        
     }
+    if([[methodeDictionary valueForKey:@"name"] isEqualToString:@"chatwindowstatus"])
+    {
+        
+     }
     if([[methodeDictionary valueForKey:@"name"] isEqualToString:@"getProfileInfo"])
     {
         if ([[responseDictionary valueForKey:@"status"] integerValue] ==200)
         {
             
-           
-         
+            NSString *stralert=[[responseDictionary valueForKey:@"data"] valueForKey:@"chat_window_status"];
+            if ([stralert isEqualToString:@"0"])
+            {
+                _view_Alert.hidden=NO;
+            }
+            else
+            {
+                _view_Alert.hidden=YES;
+            }
             
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Phq_Test_Status"] forKey:@"Phq_Test_Status"];
             
@@ -1233,9 +1287,7 @@
 
     }
     
-  
-    
-}
+ }
 
 - (IBAction)TherapistbackbtnAction:(id)sender {
     _sisuchatview.hidden=YES;

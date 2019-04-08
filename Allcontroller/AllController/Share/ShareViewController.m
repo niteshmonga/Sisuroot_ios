@@ -36,6 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [FIRAnalytics setScreenName:@"Share to inner friends" screenClass:@"Share to inner friends"];
     self.navigationController.navigationBar.hidden=YES;
     // Do any additional setup after loading the view from its nib.
     _Postbtnobj.layer.cornerRadius=15;

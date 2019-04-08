@@ -21,8 +21,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 
-@interface ViewController () <AVAudioRecorderDelegate, AVAudioPlayerDelegate> 
- {
+@interface ViewController () <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+{
     NSMutableArray *Colores1;
     NSMutableArray *Colores2;
     NSMutableArray *Colores3;
@@ -44,7 +44,7 @@
     int inddd;
     NSString *setimgstr;
     UILongPressGestureRecognizer *longpress;
-     UITapGestureRecognizer *tapOnce;
+    UITapGestureRecognizer *tapOnce;
     UITapGestureRecognizer *tapTwice;
     UITapGestureRecognizer *tapper;
     NSString *recordstr;
@@ -56,7 +56,7 @@
     NSMutableArray *arr1;
     int i;
     int j;
-     NSString *base64_encoded_image11;
+    NSString *base64_encoded_image11;
     
     int count;
     NSString *imageNameStr11;
@@ -67,9 +67,10 @@
     NSString *checkstr;
     NSString *base64_encoded_image1;
     NSString *imageNameStr1;
-     NSString *voicestr;
+    NSString *voicestr;
     AVAudioPlayer *audioPlayer;
-
+    NSString *mainemotionstr;
+    NSString *subemotionid;
 }
 @property (nonatomic, strong) WARVChatPanelView *chatPanelView;
 
@@ -82,29 +83,29 @@
     [textField setUserInteractionEnabled:YES];
     [textField resignFirstResponder];
     [self.scrollViewObj setContentOffset:CGPointMake(0, 0)animated:YES];
-
+    
     return YES;
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-     [self emotionsListingcall];
+    [self emotionsListingcall];
     [self callfetchprofile];
-
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self callfetchprofile];
     [self callnetconnection];
-
- 
+    
+    
     self.voicerecordviewobj.hidden=YES;
     inddd = 0;
     _progressLabel.hidden=YES;
     publicstr=@"public";
     privatestr=@"private";
     _TagEmotionTF.text=@"What are you feeling?";
-     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     count =0;
     someFloat = 0;
     recordeddata=[[NSMutableArray alloc]init];
@@ -114,8 +115,8 @@
     [self emotionsListingcall];
     [self.CommentTF setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.TagEmotionTF setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-     _TagPostBtnobj.hidden=YES;
-     ActivityIdenter.hidden=YES;
+    _TagPostBtnobj.hidden=YES;
+    ActivityIdenter.hidden=YES;
     _indcatorlbl.hidden=YES;
     _Emotionlblobj.clipsToBounds=YES;
     _datelbl.hidden=YES;
@@ -133,37 +134,37 @@
     
     _emobacklbl.layer.cornerRadius=8;
     _emobacklbl.clipsToBounds=YES;
- 
+    
     _indcatorlbl.layer.cornerRadius=2;
     _indcatorlbl.clipsToBounds=YES;
     _indcatorlbl.layer.borderWidth =1.0f;
     
-     isfiltered=false;
+    isfiltered=false;
     _pickerviewobj11.hidden=YES;
     _pickerviewobj12.hidden=YES;
     _hardTaglbl.hidden=YES;
     _SoftTaglbl.hidden=YES;
     _selecttaglbl.hidden=YES;
     _DoneBtnobj.hidden=YES;
-     if ([_detailstr isEqualToString:@"done"])
+    if ([_detailstr isEqualToString:@"done"])
     {
         _Backgroundimg.image=_Backimg;
         imageNameStr=_imageNameStr1;
         base64_encoded_image=_base64_encoded_image1;
         _voiceplayBtnobj.hidden=YES;
         _imgbuttonobj.hidden=NO;
-
-         _BackBtnobj.hidden=NO;
         
-     }
+        _BackBtnobj.hidden=NO;
+        
+    }
     
     if ([_tagmestr isEqualToString:@"tagme"])
     {
         // _BackBtnobj.hidden=YES;
         _TagEmotionTF.text=@"What feeling do you read?";
-
+        
         _HomeBtnobj.hidden=NO;
-       // _CommentTF.hidden=YES;
+        // _CommentTF.hidden=YES;
         _CircleBtnobj.hidden=YES;
         _Switchobj.hidden=YES;
         _Switchstmtlbl.hidden=YES;
@@ -174,7 +175,7 @@
         [self calltagMeFatch];
         _voiceplayBtnobj.hidden=YES;
         _imgbuttonobj.hidden=NO;
-
+        
     }
     
     if ([_tagmestr isEqualToString:@"tagged"])
@@ -208,9 +209,9 @@
         else
         {
             strdate=[strdate stringByAppendingString:strdate1];
-
+            
         }
- 
+        
         _playButton1.hidden=YES;
         
         NSString *countstr2=[_datestrarr valueForKey:@"with_emotion_txt"];
@@ -222,7 +223,7 @@
         else
         {
             _emonamelbl.text=[_datestrarr valueForKey:@"with_emotion_txt"];
-
+            
         }
         
         NSString *countstr3=[_datestrarr valueForKey:@"emotionLatest"];
@@ -231,19 +232,19 @@
         {
             // cell.EmotionBtnlblobj.text=@"";
             _voiceplayBtnobj.hidden=YES;
-             //_emonamelbl.frame = CGRectMake(210, 522, 171, 45);
-
+            //_emonamelbl.frame = CGRectMake(210, 522, 171, 45);
+            
         }
         else
         {
             voicestr=[_datestrarr valueForKey:@"emotionLatest"];
-
+            
             _voiceplayBtnobj.hidden=NO;
             
         }
         
         
-
+        
         
         _datelbl.text=strdate;
     }
@@ -253,19 +254,19 @@
         _BackBtnobj.hidden=YES;
         _HomeBtnobj.hidden=NO;
         [self calldefaultcameragallery];
-     }
+    }
     
     // Do any additional setup after loading the view from its nib.
     //pictableObj=[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     //pictableObj1=[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _Switchstmtlbl.text=@"Private";
-     public=false;
+    public=false;
     
-     flag=1;
+    flag=1;
     
     [self.scrollViewObj setContentOffset:CGPointMake(0, 0)animated:YES];
-
- 
+    
+    
     tapOnce = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tapOnce:)];
     tapTwice = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tapTwice:)];
     UITapGestureRecognizer *tapTrice = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tapTrice:)];
@@ -286,7 +287,7 @@
     // [self.CircleBtnobj addGestureRecognizer:tapTrice];
     
     
-
+    
     UILongPressGestureRecognizer *gesture1 = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
     gesture1.delegate = self;
     [gesture1 setMinimumPressDuration:0];
@@ -295,7 +296,7 @@
     
     [super viewDidLoad];
     recordstr=@"deleterecorded";
-
+    
     // Disable Stop/Play button when application launches
     [_playButton setEnabled:NO];
     
@@ -322,7 +323,7 @@
     audioRecorder.delegate = self;
     audioRecorder.meteringEnabled = YES;
     [audioRecorder prepareToRecord];
-
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -344,156 +345,154 @@
     //        _FriendCircleView.hidden=YES;
     //
     //    }
-    
-}
+ }
 
 
 - (void)longPressed:(UIGestureRecognizer *)longPress {
     
-    
-         if(([longPress state] == UIGestureRecognizerStateEnded) || ([longPress state] == UIGestureRecognizerStateEnded)) {
-            NSLog(@"long press ended");
-             _imgbuttonobj.hidden=YES;
-             [audioRecorder stop];
-             checkstr=@"nonvoice";
+     if(([longPress state] == UIGestureRecognizerStateEnded) || ([longPress state] == UIGestureRecognizerStateEnded)) {
+        NSLog(@"long press ended");
+        _imgbuttonobj.hidden=YES;
+        [audioRecorder stop];
+        checkstr=@"nonvoice";
+        
+        if (count <= 3)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your message for at least 3 seconds" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
             
-             if (count <= 3)
-             {
-                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your message for at least 3 seconds" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                  [alert show];
-                 
-                 _progressLabel.text=@"0 Sec";
-                 _imgbuttonobj.hidden=NO;
-                 // NSString *urr=[url absoluteString];
-                 // [recordeddata addObject:urr];
-                 int lastindex=[recordeddata count]-1;
-                 if (lastindex >1)
-                 {
-                     [recordeddata removeObjectAtIndex:lastindex];
-                 }
-                 // NSString *laststr=[recordeddata objectAtIndex:lastindex];
-                 recordstr=@"deleterecorded";
-                 
-                 _voicerecordviewobj.hidden=YES;
-             }
-             
-             count=0;
-             
-            // [audioRecorder record];
-             if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone) {
-                 
-                 switch ((int)[[UIScreen mainScreen] nativeBounds].size.height) {
-                         
-                     case 1136:
-                         printf("iPhone 5 or 5S or 5C");
-                         _playButton1.frame = CGRectMake(230, 12, 36, 36);
-                         break;
-                     case 1334:
-                         printf("iPhone 6/6S/7/8");
-                         _playButton1.frame = CGRectMake(285, 12, 36, 36);
-                          break;
-                     case 2208:
-                         printf("iPhone 6+/6S+/7+/8+");
-                         _playButton1.frame = CGRectMake(325, 12, 36, 36);
-                         
-                         break;
-                     case 2436:
-                         printf("iPhone X, XS");
-                         _playButton1.frame = CGRectMake(288, 12, 36, 36);
-                         
-                         break;
-                     case 2688:
-                         printf("iPhone XS Max");
-                         _playButton1.frame = CGRectMake(325, 12, 36, 36);
-
-                         break;
-                         
-                     case 1792:
-                         printf("iPhone XR");
-                         _playButton1.frame = CGRectMake(325, 12, 36, 36);
-
-                         break;
-                     default:
-                         printf("unknown");
-                 }
-             }
- 
-             [_playButton1 setBackgroundImage:[UIImage imageNamed:@"701492-128.png"] forState:UIControlStateNormal];
-             self.deletebtnobj.hidden=NO;
-             [self.myTimer1 invalidate];
-             self.myTimer1 = nil;
-            AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-            [audioSession setActive:NO error:nil];
+            _progressLabel.text=@"0 Sec";
+            _imgbuttonobj.hidden=NO;
+            // NSString *urr=[url absoluteString];
+            // [recordeddata addObject:urr];
+            int lastindex=[recordeddata count]-1;
+            if (lastindex >1)
+            {
+                [recordeddata removeObjectAtIndex:lastindex];
+            }
+            // NSString *laststr=[recordeddata objectAtIndex:lastindex];
+            recordstr=@"deleterecorded";
+            
+            _voicerecordviewobj.hidden=YES;
+        }
+        
+        count=0;
+        
+        // [audioRecorder record];
+        if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone) {
+            
+            switch ((int)[[UIScreen mainScreen] nativeBounds].size.height) {
+                    
+                case 1136:
+                    printf("iPhone 5 or 5S or 5C");
+                    _playButton1.frame = CGRectMake(230, 12, 36, 36);
+                    break;
+                case 1334:
+                    printf("iPhone 6/6S/7/8");
+                    _playButton1.frame = CGRectMake(285, 12, 36, 36);
+                    break;
+                case 2208:
+                    printf("iPhone 6+/6S+/7+/8+");
+                    _playButton1.frame = CGRectMake(325, 12, 36, 36);
+                    
+                    break;
+                case 2436:
+                    printf("iPhone X, XS");
+                    _playButton1.frame = CGRectMake(288, 12, 36, 36);
+                    
+                    break;
+                case 2688:
+                    printf("iPhone XS Max");
+                    _playButton1.frame = CGRectMake(325, 12, 36, 36);
+                    
+                    break;
+                    
+                case 1792:
+                    printf("iPhone XR");
+                    _playButton1.frame = CGRectMake(325, 12, 36, 36);
+                    
+                    break;
+                default:
+                    printf("unknown");
+            }
+        }
+        
+        [_playButton1 setBackgroundImage:[UIImage imageNamed:@"701492-128.png"] forState:UIControlStateNormal];
+        self.deletebtnobj.hidden=NO;
+        [self.myTimer1 invalidate];
+        self.myTimer1 = nil;
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
+        
+    }
+    else if([longPress state] == UIGestureRecognizerStateBegan) {
+        
+        NSLog(@"long press detected");
+        recordstr=@"recorded";
+        
+        if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone) {
+            
+            switch ((int)[[UIScreen mainScreen] nativeBounds].size.height) {
+                    
+                case 1136:
+                    printf("iPhone 5 or 5S or 5C");
+                    _playButton1.frame = CGRectMake(223, 4, 50, 50);
+                    break;
+                case 1334:
+                    printf("iPhone 6/6S/7/8");
+                    _playButton1.frame = CGRectMake(278, 4, 50, 50);
+                    break;
+                case 2208:
+                    printf("iPhone 6+/6S+/7+/8+");
+                    _playButton1.frame = CGRectMake(317, 4, 50, 50);
+                    
+                    break;
+                case 2436:
+                    printf("iPhone X ,XS");
+                    _playButton1.frame = CGRectMake(278, 4, 50, 50);
+                    
+                    break;
+                    
+                case 2688:
+                    printf("iPhone XS Max");
+                    _playButton1.frame = CGRectMake(317, 4, 50, 50);
+                    
+                    break;
+                    
+                case 1792:
+                    printf("iPhone XR");
+                    _playButton1.frame = CGRectMake(317, 4, 50, 50);
+                    
+                    break;
+                default:
+                    printf("unknown");
+            }
+        }
+        
+        
+        
+        _progressLabel.hidden=NO;
+        self.myTimer1 = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateUI:) userInfo:nil repeats:YES];
+        
+        [_playButton1 setBackgroundImage:[UIImage imageNamed:@"701492-256.png"] forState:UIControlStateNormal];
+        
+        if (!audioRecorder.recording) {
+            AVAudioSession *session = [AVAudioSession sharedInstance];
+            [session setActive:YES error:nil];
+            // Start recording
+            
+            [audioRecorder record];
+            self.voicerecordviewobj.hidden=NO;
+            self.deletebtnobj.hidden=YES;
             
         }
-         else if([longPress state] == UIGestureRecognizerStateBegan) {
-             
-              NSLog(@"long press detected");
-             recordstr=@"recorded";
-
-                 if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone) {
-             
-                     switch ((int)[[UIScreen mainScreen] nativeBounds].size.height) {
-             
-                         case 1136:
-                             printf("iPhone 5 or 5S or 5C");
-                              _playButton1.frame = CGRectMake(223, 4, 50, 50);
-                             break;
-                         case 1334:
-                             printf("iPhone 6/6S/7/8");
-                             _playButton1.frame = CGRectMake(278, 4, 50, 50);
-                              break;
-                         case 2208:
-                             printf("iPhone 6+/6S+/7+/8+");
-                             _playButton1.frame = CGRectMake(317, 4, 50, 50);
-
-                             break;
-                         case 2436:
-                             printf("iPhone X ,XS");
-                             _playButton1.frame = CGRectMake(278, 4, 50, 50);
-
-                             break;
-                          
-                          case 2688:
-                             printf("iPhone XS Max");
-                             _playButton1.frame = CGRectMake(317, 4, 50, 50);
-
-                             break;
-
-                         case 1792:
-                             printf("iPhone XR");
-                             _playButton1.frame = CGRectMake(317, 4, 50, 50);
-                             
-                             break;
-                         default:
-                             printf("unknown");
-                     }
-                 }
-             
-             
-
-              _progressLabel.hidden=NO;
-             self.myTimer1 = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateUI:) userInfo:nil repeats:YES];
-             
-             [_playButton1 setBackgroundImage:[UIImage imageNamed:@"701492-256.png"] forState:UIControlStateNormal];
-
-              if (!audioRecorder.recording) {
-                 AVAudioSession *session = [AVAudioSession sharedInstance];
-                 [session setActive:YES error:nil];
-                  // Start recording
-
-                 [audioRecorder record];
-                  self.voicerecordviewobj.hidden=NO;
-                  self.deletebtnobj.hidden=YES;
-                  
-             }
-             
-             if (player.playing) {
-                 [player stop];
-             }
-         }
+        
+        if (player.playing) {
+            [player stop];
+        }
+    }
     
-  }
+}
 
 - (IBAction)playTapped:(id)sender {
     NSLog(@"playTapped");
@@ -505,21 +504,21 @@
 }
 - (IBAction)deleteTapped:(id)sender
 {
-   // NSURL* url = [NSURL URLWithString:audioRecorder.url.path];
+    // NSURL* url = [NSURL URLWithString:audioRecorder.url.path];
     _progressLabel.text=@"0 Sec";
     _imgbuttonobj.hidden=NO;
     // NSString *urr=[url absoluteString];
-   // [recordeddata addObject:urr];
+    // [recordeddata addObject:urr];
     int lastindex=[recordeddata count]-1;
     if (lastindex >1)
     {
-         [recordeddata removeObjectAtIndex:lastindex];
+        [recordeddata removeObjectAtIndex:lastindex];
     }
-   //NSString *laststr=[recordeddata objectAtIndex:lastindex];
+    //NSString *laststr=[recordeddata objectAtIndex:lastindex];
     recordstr=@"deleterecorded";
-
+    
     _voicerecordviewobj.hidden=YES;
-   // [[NSFileManager defaultManager]removeItemAtPath:path error:&error];
+    // [[NSFileManager defaultManager]removeItemAtPath:path error:&error];
 }
 #pragma mark - AVAudioRecorderDelegate
 
@@ -534,7 +533,7 @@
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
     
-     [_voiceplayBtnobj setBackgroundImage:[UIImage imageNamed:@"play_button_green.png"] forState:UIControlStateNormal];
+    [_voiceplayBtnobj setBackgroundImage:[UIImage imageNamed:@"play_button_green.png"] forState:UIControlStateNormal];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Done"
                                                     message: @"Finish playing the recording!"
@@ -570,57 +569,57 @@
         base64_encoded_image=_base64_encoded_image1;
         
     }
-   
-        [audioRecorder stop];
-       // [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
-         _progressLabel.hidden=YES;
-        if ([recordstr isEqualToString:@"recorded"])
+    
+    [audioRecorder stop];
+    // [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
+    _progressLabel.hidden=YES;
+    if ([recordstr isEqualToString:@"recorded"])
+    {
+        NSURL* url = [NSURL URLWithString:audioRecorder.url.path];
+        
+        NSString *urr=[url absoluteString];
+        [recordeddata addObject:urr];
+        int lastindex=[recordeddata count]-1;
+        
+        NSString *laststr=[recordeddata objectAtIndex:lastindex];
+        checkvoicestr=laststr;
+        if ([laststr isEqualToString:@""])
         {
-            NSURL* url = [NSURL URLWithString:audioRecorder.url.path];
-            
-            NSString *urr=[url absoluteString];
-            [recordeddata addObject:urr];
-            int lastindex=[recordeddata count]-1;
-            
-            NSString *laststr=[recordeddata objectAtIndex:lastindex];
-            checkvoicestr=laststr;
-            if ([laststr isEqualToString:@""])
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
-            }
-            else
-            {
-                NSData *daataa = [[NSData alloc] initWithContentsOfFile:laststr];
-                base64_encoded_image11 =  [Base64 encode:daataa];
-                
-                NSDate *dtTime = [NSDate date];
-                NSDateFormatter *df = [[NSDateFormatter alloc] init];
-                [df setDateFormat:@"dd-MMM-yyyy hh-MM-ss"];
-                imageNameStr11 = [df stringFromDate:dtTime];
-                NSArray *arra = [imageNameStr11 componentsSeparatedByString:@" "];
-                
-                imageNameStr11 = [NSString stringWithFormat:@"%@%@",[arra objectAtIndex:0],[arra objectAtIndex:1]];
-                
-                [audioRecorder stop];
-                
-                // NSData *data = [[NSData alloc] initWithContentsOfFile:audioRecorder.url.path];
-                // NSString *urr = [NSString stringWithUTF8String:[data bytes]];
-                //[recordeddata addObject:imageNameStr];
-                
-                
-            }
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
         }
-//        else if ([recordstr isEqualToString:@"deleterecorded"])
-//        {
-//             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//            [alert show];
-//        }
+        else
+        {
+            NSData *daataa = [[NSData alloc] initWithContentsOfFile:laststr];
+            base64_encoded_image11 =  [Base64 encode:daataa];
+            
+            NSDate *dtTime = [NSDate date];
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            [df setDateFormat:@"dd-MMM-yyyy hh-MM-ss"];
+            imageNameStr11 = [df stringFromDate:dtTime];
+            NSArray *arra = [imageNameStr11 componentsSeparatedByString:@" "];
+            
+            imageNameStr11 = [NSString stringWithFormat:@"%@%@",[arra objectAtIndex:0],[arra objectAtIndex:1]];
+            
+            [audioRecorder stop];
+            
+            // NSData *data = [[NSData alloc] initWithContentsOfFile:audioRecorder.url.path];
+            // NSString *urr = [NSString stringWithUTF8String:[data bytes]];
+            //[recordeddata addObject:imageNameStr];
+            
+            
+        }
+    }
+    //        else if ([recordstr isEqualToString:@"deleterecorded"])
+    //        {
+    //             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    //            [alert show];
+    //        }
     
-//    if ([checkstr isEqualToString:@"nonvoice"])
-//    {
+    //    if ([checkstr isEqualToString:@"nonvoice"])
+    //    {
     
-     if ( gesture.state == UIGestureRecognizerStateEnded ) {
+    if ( gesture.state == UIGestureRecognizerStateEnded ) {
         NSLog(@"Long Press");
         
         BOOL stricterFilter = NO;
@@ -629,8 +628,8 @@
         NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
         NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
         
-         NSString *msg  = @"0";
- 
+        NSString *msg  = @"0";
+        
         if ([imageNameStr isEqual:(id)[NSNull null]] || imageNameStr.length < 1)
             
         {
@@ -638,7 +637,7 @@
         }
         else if([_TagEmotionTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length < 1)
         {
-             msg = @"Please select Emotion OR record emotions";
+            msg = @"Please select Emotion OR record emotions";
         }
         else if([_TagEmotionTF.text isEqualToString:@"What are you feeling?"] && checkvoicestr.length <1)
         {
@@ -668,18 +667,18 @@
                     // [_CircleBtnobj setSelected:YES];
                     
                     [self.view showActivityViewWithLabel:@"Loading"];
- 
+                    
                     [self CallTagEmotioninandout];
                     [_CircleBtnobj setEnabled:NO];
                 }
                 
-            else if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"Inner_frnd_count"] integerValue] >0 && [[[NSUserDefaults standardUserDefaults]valueForKey:@"Outer_frnd_count"] integerValue] < 1)
+                else if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"Inner_frnd_count"] integerValue] >0 && [[[NSUserDefaults standardUserDefaults]valueForKey:@"Outer_frnd_count"] integerValue] < 1)
                 {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"You have no friends in your outer circle, please add from contacts" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     alert.tag=1007;
                     [alert show];
                 }
-            else if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"Inner_frnd_count"] integerValue] <1 && [[[NSUserDefaults standardUserDefaults]valueForKey:@"Outer_frnd_count"] integerValue] > 0)
+                else if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"Inner_frnd_count"] integerValue] <1 && [[[NSUserDefaults standardUserDefaults]valueForKey:@"Outer_frnd_count"] integerValue] > 0)
                 {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"You have no friends in inner circle, please add from contacts" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     alert.tag=1007;
@@ -693,12 +692,12 @@
                     
                 }
                 
-             }
-        }
-         
+            }
         }
         
     }
+    
+}
 //}
 
 - (void)tapOnce:(UIGestureRecognizer *)gesture
@@ -713,157 +712,157 @@
         
     }
     
-        [audioRecorder stop];
-        [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
-        // _progressbarobj.hidden=YES;
-        _progressLabel.hidden=YES;
-        if ([recordstr isEqualToString:@"recorded"])
-        {
-            NSURL* url = [NSURL URLWithString:audioRecorder.url.path];
-            
-            NSString *urr=[url absoluteString];
-            [recordeddata addObject:urr];
-            int lastindex=[recordeddata count]-1;
-            
-            NSString *laststr=[recordeddata objectAtIndex:lastindex];
-            checkvoicestr=laststr;
-            if ([laststr isEqualToString:@""])
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
-            }
-            else
-            {
-                
-                NSData *daataa = [[NSData alloc] initWithContentsOfFile:laststr];
-                base64_encoded_image11 =  [Base64 encode:daataa];
-                
-                NSDate *dtTime = [NSDate date];
-                NSDateFormatter *df = [[NSDateFormatter alloc] init];
-                [df setDateFormat:@"dd-MMM-yyyy hh-MM-ss"];
-                imageNameStr11 = [df stringFromDate:dtTime];
-                
-                NSArray *arra = [imageNameStr11 componentsSeparatedByString:@" "];
-                
-                imageNameStr11 = [NSString stringWithFormat:@"%@%@",[arra objectAtIndex:0],[arra objectAtIndex:1]];
-                
-                [audioRecorder stop];
-                
-                // NSData *data = [[NSData alloc] initWithContentsOfFile:audioRecorder.url.path];
-                // NSString *urr = [NSString stringWithUTF8String:[data bytes]];
-                
-                //[recordeddata addObject:imageNameStr];
-                
-                
-                
-            }
-        }
-//        else if([recordstr isEqualToString:@"deleterecorded"])
-//        {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//            [alert show];
-//        }
-    
-    
-//        if ([checkstr isEqualToString:@"nonvoice"])
-//        {
-    
-        BOOL stricterFilter = NO;
-        NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
-        NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
-        NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
-        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    [audioRecorder stop];
+    [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
+    // _progressbarobj.hidden=YES;
+    _progressLabel.hidden=YES;
+    if ([recordstr isEqualToString:@"recorded"])
+    {
+        NSURL* url = [NSURL URLWithString:audioRecorder.url.path];
         
-        NSString *msg  = @"0";
+        NSString *urr=[url absoluteString];
+        [recordeddata addObject:urr];
+        int lastindex=[recordeddata count]-1;
         
-        if ([imageNameStr isEqual:(id)[NSNull null]] || imageNameStr.length < 1)
-            
+        NSString *laststr=[recordeddata objectAtIndex:lastindex];
+        checkvoicestr=laststr;
+        if ([laststr isEqualToString:@""])
         {
-            msg = @"Please Select Image";
-        }
-        
-        else if([_TagEmotionTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length < 1)
-        {
-            msg = @"Please select Emotion OR record voice";
-
-        }
-        else if([_TagEmotionTF.text isEqualToString:@"What are you feeling?"] && checkvoicestr.length <1)
-        {
-            msg = @"Please select Emotion OR record emotions";
-            
-        }
-            
-        
-        else if (_CommentTF.text.length >50)
-        {
-            msg = @"Please enter comment in limit character";
-            
-        }
-        
-        if (![msg isEqualToString:@"0"])
-        {
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:msg delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
         }
-        
         else
         {
             
-            if (public==false) {
-                
-                
-                if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"Inner_frnd_count"] integerValue] >0)
-                {
-                    [_CircleBtnobj setImage:[UIImage imageNamed:@"inner_circle_green150.png"] forState:UIControlStateNormal];
-                    NSLog(@"epikso");
-                    
-                    
-                    [self.view showActivityViewWithLabel:@"Loading"];
-                    
-                    
-                    [self CallTagEmotion];
-                    
-                    [_CircleBtnobj setEnabled:NO];
-                }
-                else
-                {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"You have no friends in your inner circle, please add from contacts" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                    alert.tag=1007;
-                    [alert show];
-                    
-                }
- 
-            }
-            else
+            NSData *daataa = [[NSData alloc] initWithContentsOfFile:laststr];
+            base64_encoded_image11 =  [Base64 encode:daataa];
+            
+            NSDate *dtTime = [NSDate date];
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            [df setDateFormat:@"dd-MMM-yyyy hh-MM-ss"];
+            imageNameStr11 = [df stringFromDate:dtTime];
+            
+            NSArray *arra = [imageNameStr11 componentsSeparatedByString:@" "];
+            
+            imageNameStr11 = [NSString stringWithFormat:@"%@%@",[arra objectAtIndex:0],[arra objectAtIndex:1]];
+            
+            [audioRecorder stop];
+            
+            // NSData *data = [[NSData alloc] initWithContentsOfFile:audioRecorder.url.path];
+            // NSString *urr = [NSString stringWithUTF8String:[data bytes]];
+            
+            //[recordeddata addObject:imageNameStr];
+            
+            
+            
+        }
+    }
+    //        else if([recordstr isEqualToString:@"deleterecorded"])
+    //        {
+    //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    //            [alert show];
+    //        }
+    
+    
+    //        if ([checkstr isEqualToString:@"nonvoice"])
+    //        {
+    
+    BOOL stricterFilter = NO;
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    NSString *msg  = @"0";
+    
+    if ([imageNameStr isEqual:(id)[NSNull null]] || imageNameStr.length < 1)
+        
+    {
+        msg = @"Please Select Image";
+    }
+    
+    else if([_TagEmotionTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length < 1)
+    {
+        msg = @"Please select Emotion OR record voice";
+        
+    }
+    else if([_TagEmotionTF.text isEqualToString:@"What are you feeling?"] && checkvoicestr.length <1)
+    {
+        msg = @"Please select Emotion OR record emotions";
+        
+    }
+    
+    
+    else if (_CommentTF.text.length >50)
+    {
+        msg = @"Please enter comment in limit character";
+        
+    }
+    
+    if (![msg isEqualToString:@"0"])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:msg delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+    else
+    {
+        
+        if (public==false) {
+            
+            
+            if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"Inner_frnd_count"] integerValue] >0)
             {
-                public=true;
-                [_CircleBtnobj setImage:[UIImage imageNamed:@"both_circle_golden150.png"] forState:UIControlStateNormal];
+                [_CircleBtnobj setImage:[UIImage imageNamed:@"inner_circle_green150.png"] forState:UIControlStateNormal];
+                NSLog(@"epikso");
+                
                 
                 [self.view showActivityViewWithLabel:@"Loading"];
                 
                 
-                [self CallTagEmotionpublic];
+                [self CallTagEmotion];
+                
                 [_CircleBtnobj setEnabled:NO];
-            
             }
-//            i=i+1;
-//            [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone.png"] forState:UIControlStateNormal];
-//
-//            _recordButton.hidden=NO;
-//            [_recordButton setUserInteractionEnabled:YES];
-//
-//            _stopButton.hidden=YES;
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"You have no friends in your inner circle, please add from contacts" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                alert.tag=1007;
+                [alert show];
+                
+            }
             
         }
+        else
+        {
+            public=true;
+            [_CircleBtnobj setImage:[UIImage imageNamed:@"both_circle_golden150.png"] forState:UIControlStateNormal];
+            
+            [self.view showActivityViewWithLabel:@"Loading"];
+            
+            
+            [self CallTagEmotionpublic];
+            [_CircleBtnobj setEnabled:NO];
+            
+        }
+        //            i=i+1;
+        //            [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone.png"] forState:UIControlStateNormal];
+        //
+        //            _recordButton.hidden=NO;
+        //            [_recordButton setUserInteractionEnabled:YES];
+        //
+        //            _stopButton.hidden=YES;
+        
     }
-    
-    
+}
+
+
 //}
 
 - (void)tapTwice:(UIGestureRecognizer *)gesture
 {
     NSString *checkvoicestr;
-
+    
     if ([_detailstr isEqualToString:@"done"])
     {
         _Backgroundimg.image=_Backimg;
@@ -871,61 +870,61 @@
         base64_encoded_image=_base64_encoded_image1;
         
     }
-   
-        [audioRecorder stop];
-        [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
-         _progressLabel.hidden=YES;
-        if ([recordstr isEqualToString:@"recorded"])
-        {
-            NSURL* url = [NSURL URLWithString:audioRecorder.url.path];
-            
-            NSString *urr=[url absoluteString];
-            [recordeddata addObject:urr];
-            int lastindex=[recordeddata count]-1;
-            
-            NSString *laststr=[recordeddata objectAtIndex:lastindex];
-            checkvoicestr=laststr;
-            if ([laststr isEqualToString:@""])
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
-            }
-            else
-            {
-                
-                NSData *daataa = [[NSData alloc] initWithContentsOfFile:laststr];
-                
-                base64_encoded_image11 =  [Base64 encode:daataa];
-                
-                NSDate *dtTime = [NSDate date];
-                NSDateFormatter *df = [[NSDateFormatter alloc] init];
-                [df setDateFormat:@"dd-MMM-yyyy hh-MM-ss"];
-                imageNameStr11 = [df stringFromDate:dtTime];
-                
-                NSArray *arra = [imageNameStr11 componentsSeparatedByString:@" "];
-                
-                imageNameStr11 = [NSString stringWithFormat:@"%@%@",[arra objectAtIndex:0],[arra objectAtIndex:1]];
-                
-                [audioRecorder stop];
-                
-                // NSData *data = [[NSData alloc] initWithContentsOfFile:audioRecorder.url.path];
-                // NSString *urr = [NSString stringWithUTF8String:[data bytes]];
-                
-                //[recordeddata addObject:imageNameStr];
-                
-                
-                
-               
-            }
-        }
-//        else if ([recordstr isEqualToString:@"deleterecorded"])
-//        {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//            [alert show];
-//        }
     
-//    if ([checkstr isEqualToString:@"nonvoice"])
-//    {
+    [audioRecorder stop];
+    [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
+    _progressLabel.hidden=YES;
+    if ([recordstr isEqualToString:@"recorded"])
+    {
+        NSURL* url = [NSURL URLWithString:audioRecorder.url.path];
+        
+        NSString *urr=[url absoluteString];
+        [recordeddata addObject:urr];
+        int lastindex=[recordeddata count]-1;
+        
+        NSString *laststr=[recordeddata objectAtIndex:lastindex];
+        checkvoicestr=laststr;
+        if ([laststr isEqualToString:@""])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+        else
+        {
+            
+            NSData *daataa = [[NSData alloc] initWithContentsOfFile:laststr];
+            
+            base64_encoded_image11 =  [Base64 encode:daataa];
+            
+            NSDate *dtTime = [NSDate date];
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            [df setDateFormat:@"dd-MMM-yyyy hh-MM-ss"];
+            imageNameStr11 = [df stringFromDate:dtTime];
+            
+            NSArray *arra = [imageNameStr11 componentsSeparatedByString:@" "];
+            
+            imageNameStr11 = [NSString stringWithFormat:@"%@%@",[arra objectAtIndex:0],[arra objectAtIndex:1]];
+            
+            [audioRecorder stop];
+            
+            // NSData *data = [[NSData alloc] initWithContentsOfFile:audioRecorder.url.path];
+            // NSString *urr = [NSString stringWithUTF8String:[data bytes]];
+            
+            //[recordeddata addObject:imageNameStr];
+            
+            
+            
+            
+        }
+    }
+    //        else if ([recordstr isEqualToString:@"deleterecorded"])
+    //        {
+    //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    //            [alert show];
+    //        }
+    
+    //    if ([checkstr isEqualToString:@"nonvoice"])
+    //    {
     
     BOOL stricterFilter = NO;
     NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
@@ -944,7 +943,7 @@
     else if([_TagEmotionTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length < 1)
     {
         msg = @"Please select Emotion OR record emotions";
-
+        
         
     }
     else if([_TagEmotionTF.text isEqualToString:@"What are you feeling?"] && checkvoicestr.length <1)
@@ -968,7 +967,7 @@
     else
     {
         if (public==false) {
- 
+            
             if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"Outer_frnd_count"] integerValue] > 0)
             {
                 
@@ -977,7 +976,7 @@
                 
                 NSLog(@"india");
                 [self.view showActivityViewWithLabel:@"Loading"];
- 
+                
                 [self CallTagEmotionouter];
                 [_CircleBtnobj setEnabled:NO];
                 [_BackBtnobj setEnabled:NO];
@@ -996,7 +995,7 @@
         }
         
     }
-    }
+}
 //}
 
 
@@ -1011,29 +1010,29 @@
 
 - (IBAction)HardTagBtn:(id)sender {
     
-//    chkBtn = @"country";
-//
-//    if([chkBtn isEqualToString:@"country"])
-//    {
-//        [_pickerviewobj11 reloadData];
-//    }
-//    if ([chkBtn isEqualToString:@"city"])
-//    {
-//        [_pickerviewobj12 reloadData];
-//
-//
-//    }
-//    _pickerviewobj11.hidden=NO;
-//    _pickerviewobj12.hidden=NO;
-//    _hardTaglbl.hidden=NO;
-//    _SoftTaglbl.hidden=NO;
-//    _DoneBtnobj.hidden=NO;
-//
-//    _selecttaglbl.hidden=NO;
-//    //_pickerviewObj.backgroundColor=[UIColor whiteColor];
-//
-//    [_CommentTF resignFirstResponder];
-//    [_TagEmotionTF resignFirstResponder];
+    //    chkBtn = @"country";
+    //
+    //    if([chkBtn isEqualToString:@"country"])
+    //    {
+    //        [_pickerviewobj11 reloadData];
+    //    }
+    //    if ([chkBtn isEqualToString:@"city"])
+    //    {
+    //        [_pickerviewobj12 reloadData];
+    //
+    //
+    //    }
+    //    _pickerviewobj11.hidden=NO;
+    //    _pickerviewobj12.hidden=NO;
+    //    _hardTaglbl.hidden=NO;
+    //    _SoftTaglbl.hidden=NO;
+    //    _DoneBtnobj.hidden=NO;
+    //
+    //    _selecttaglbl.hidden=NO;
+    //    //_pickerviewObj.backgroundColor=[UIColor whiteColor];
+    //
+    //    [_CommentTF resignFirstResponder];
+    //    [_TagEmotionTF resignFirstResponder];
 }
 //    if (flag==1) {
 //        flag=0;
@@ -1049,18 +1048,18 @@
 
 
 - (IBAction)SoftTagBtn:(id)sender {
-//    chkBtn = @"city";
-//
-//
-//
-//
-//    [_pickerviewobj11 reloadData];
-//
-//
-//    _selecttaglbl.hidden=NO;
-//    _pickerviewobj11.hidden=NO;
-//    _DoneBtnobj.hidden=NO;
-//    [_CommentTF resignFirstResponder];
+    //    chkBtn = @"city";
+    //
+    //
+    //
+    //
+    //    [_pickerviewobj11 reloadData];
+    //
+    //
+    //    _selecttaglbl.hidden=NO;
+    //    _pickerviewobj11.hidden=NO;
+    //    _DoneBtnobj.hidden=NO;
+    //    [_CommentTF resignFirstResponder];
     
     
 }
@@ -1071,7 +1070,7 @@
     {
         [self.scrollViewObj setContentOffset:CGPointMake(0, 0)animated:YES];
         [_CommentTF endEditing:YES];
-
+        
         if (flag==1)
         {
             //chkBtn = @"country";
@@ -1109,7 +1108,7 @@
     {
         [self.scrollViewObj setContentOffset:CGPointMake(0, 0)animated:YES];
         [_CommentTF endEditing:YES];
-
+        
     }
     
 }
@@ -1124,7 +1123,7 @@
     checkstr=@"nonvoice";
     [_CommentTF resignFirstResponder];
     [self.scrollViewObj setContentOffset:CGPointMake(0, 0)animated:YES];
-
+    
 }
 
 -(void)callpublicSwitchBtn
@@ -1211,35 +1210,36 @@
     {
         
         [paramDict setValue:@"1" forKey:@"emotion_type"];
-
+        
     }
     else
     {
         if ([recordstr isEqualToString:@"recorded"])
-       {
-           [paramDict setValue:@"1" forKey:@"emotion_type"];
-
+        {
+            [paramDict setValue:@"1" forKey:@"emotion_type"];
+            
         }
         else
         {
-        [paramDict setValue:@"0" forKey:@"emotion_type"];
-
+            [paramDict setValue:@"0" forKey:@"emotion_type"];
+            
         }
     }
     if ([_TagEmotionTF.text isEqualToString:@"What are you feeling?"])
     {
         [paramDict setValue:@"" forKey:@"emotion_txt"];
-
+        
     }
     else
     {
         [paramDict setValue:_TagEmotionTF.text forKey:@"emotion_txt"];
-
+        
     }
-
+    
     [paramDict setValue:base64_encoded_image11 forKey:@"emotion"];
-
-     [paramDict setValue:_CommentTF.text forKey:@"comment_txt"];
+    [paramDict setValue:mainemotionstr forKey:@"tag_emotion"];
+    [paramDict setValue:subemotionid forKey:@"tag_sub_emotion_id"];
+    [paramDict setValue:_CommentTF.text forKey:@"comment_txt"];
     [paramDict setValue:@"3" forKey:@"Tag_circle"];
     
     [paramDict setValue:base64_encoded_image forKey:@"img_file"];
@@ -1304,6 +1304,8 @@
     [paramDict setValue:base64_encoded_image11 forKey:@"emotion"];
     //        if (![_locationTF.text isEqualToString:[NSNull null]] || ![_locationTF.text isEqualToString:@" "])
     //        {
+    [paramDict setValue:mainemotionstr forKey:@"tag_emotion"];
+    [paramDict setValue:subemotionid forKey:@"tag_sub_emotion_id"];
     [paramDict setValue:_CommentTF.text forKey:@"comment_txt"];
     [paramDict setValue:@"0" forKey:@"Tag_circle"];
     
@@ -1322,7 +1324,7 @@
 
 
 -(void)CallTagEmotion
- {
+{
     //    _Backgroundimg.image=_Backimg;
     
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
@@ -1336,38 +1338,40 @@
     //[paramDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] forKey:@"id"];
     [paramDict setValue:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"id"]] forKey:@"id"];
     // }
-     if ([recordstr isEqualToString:@"recorded"] && _TagEmotionTF.text.length >1)
-     {
-         
-         [paramDict setValue:@"1" forKey:@"emotion_type"];
-         
-     }
-     else
-     {
-         if ([recordstr isEqualToString:@"recorded"])
-         {
-             [paramDict setValue:@"1" forKey:@"emotion_type"];
-             
-         }
-         else
-         {
-             [paramDict setValue:@"0" forKey:@"emotion_type"];
-             
-         }
-     }
-     if ([_TagEmotionTF.text isEqualToString:@"What are you feeling?"])
-     {
-         [paramDict setValue:@"" forKey:@"emotion_txt"];
-         
-     }
-     else
-     {
-         [paramDict setValue:_TagEmotionTF.text forKey:@"emotion_txt"];
-         
-     }
-     [paramDict setValue:base64_encoded_image11 forKey:@"emotion"];
+    if ([recordstr isEqualToString:@"recorded"] && _TagEmotionTF.text.length >1)
+    {
+        
+        [paramDict setValue:@"1" forKey:@"emotion_type"];
+        
+    }
+    else
+    {
+        if ([recordstr isEqualToString:@"recorded"])
+        {
+            [paramDict setValue:@"1" forKey:@"emotion_type"];
+            
+        }
+        else
+        {
+            [paramDict setValue:@"0" forKey:@"emotion_type"];
+            
+        }
+    }
+    if ([_TagEmotionTF.text isEqualToString:@"What are you feeling?"])
+    {
+        [paramDict setValue:@"" forKey:@"emotion_txt"];
+        
+    }
+    else
+    {
+        [paramDict setValue:_TagEmotionTF.text forKey:@"emotion_txt"];
+        
+    }
+    [paramDict setValue:base64_encoded_image11 forKey:@"emotion"];
     //        if (![_locationTF.text isEqualToString:[NSNull null]] || ![_locationTF.text isEqualToString:@" "])
     //        {
+    [paramDict setValue:mainemotionstr forKey:@"tag_emotion"];
+    [paramDict setValue:subemotionid forKey:@"tag_sub_emotion_id"];
     [paramDict setValue:_CommentTF.text forKey:@"comment_txt"];
     [paramDict setValue:@"1" forKey:@"Tag_circle"];
     
@@ -1428,6 +1432,9 @@
     [paramDict setValue:base64_encoded_image11 forKey:@"emotion"];
     //        if (![_locationTF.text isEqualToString:[NSNull null]] || ![_locationTF.text isEqualToString:@" "])
     //        {
+    [paramDict setValue:mainemotionstr forKey:@"tag_emotion"];
+    [paramDict setValue:subemotionid forKey:@"tag_sub_emotion_id"];
+    
     [paramDict setValue:_CommentTF.text forKey:@"comment_txt"];
     [paramDict setValue:@"2" forKey:@"Tag_circle"];
     // }
@@ -1577,9 +1584,9 @@
         {
             [self.view hideActivityView];
             
-//            SectionBvoicetestViewController *LVC3=[[SectionBvoicetestViewController alloc]init];
-//
-//            [self.navigationController pushViewController:LVC3 animated:YES];
+            //            SectionBvoicetestViewController *LVC3=[[SectionBvoicetestViewController alloc]init];
+            //
+            //            [self.navigationController pushViewController:LVC3 animated:YES];
         }
         
     }
@@ -1587,12 +1594,12 @@
     {
         if ([[responseDictionary valueForKey:@"status"] integerValue] ==200)
         {
-          
+            
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Inner_frnd_count"] forKey:@"Inner_frnd_count"];
             
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Outer_frnd_count"] forKey:@"Outer_frnd_count"];
         }
-     }
+    }
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
@@ -1879,12 +1886,12 @@
 - (IBAction)TagpostBtn:(id)sender {
     
     NSString *checkvoicestr;
-        [audioRecorder stop];
-        [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
-         _progressLabel.hidden=YES;
-        if ([recordstr isEqualToString:@"recorded"])
-        {
-            
+    [audioRecorder stop];
+    [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
+    _progressLabel.hidden=YES;
+    if ([recordstr isEqualToString:@"recorded"])
+    {
+        
         NSURL* url = [NSURL URLWithString:audioRecorder.url.path];
         
         NSString *urr=[url absoluteString];
@@ -1892,7 +1899,7 @@
         int lastindex=[recordeddata count]-1;
         
         NSString *laststr=[recordeddata objectAtIndex:lastindex];
-            checkvoicestr=laststr;
+        checkvoicestr=laststr;
         if ([laststr isEqualToString:@""])
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SISUROOT" message:@"Please record your emotions" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -1902,7 +1909,7 @@
         {
             
             NSData *daataa = [[NSData alloc] initWithContentsOfFile:laststr];
-             base64_encoded_image11 =  [Base64 encode:daataa];
+            base64_encoded_image11 =  [Base64 encode:daataa];
             
             NSDate *dtTime = [NSDate date];
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
@@ -1920,19 +1927,19 @@
             
             //[recordeddata addObject:imageNameStr];
             
-//            [self calltagmepost];
-//            i=i+1;
-//            [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone.png"] forState:UIControlStateNormal];
-//
-//            _recordButton.hidden=NO;
-//            [_recordButton setUserInteractionEnabled:YES];
-//
-//            _stopButton.hidden=YES;
+            //            [self calltagmepost];
+            //            i=i+1;
+            //            [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone.png"] forState:UIControlStateNormal];
+            //
+            //            _recordButton.hidden=NO;
+            //            [_recordButton setUserInteractionEnabled:YES];
+            //
+            //            _stopButton.hidden=YES;
             
         }
     }
     
-        
+    
     BOOL stricterFilter = NO;
     NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
     NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
@@ -1949,14 +1956,14 @@
     else if([_TagEmotionTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length < 1)
     {
         msg = @"Please select Emotion OR record emotions";
-
+        
     }
     else if([_TagEmotionTF.text isEqualToString:@"What feeling do you read?"] && checkvoicestr.length < 1)
     {
         msg = @"Please select Emotion OR record emotions";
         
     }
-     
+    
     
     if (![msg isEqualToString:@"0"])
     {
@@ -1970,9 +1977,9 @@
         [self calltagmepost];
         
     }
-  }
+}
 
-    
+
 
 
 
@@ -1980,7 +1987,7 @@
 {
     
     [self.view showActivityViewWithLabel:@"Loading"];
-     [_TagPostBtnobj setEnabled:NO];
+    [_TagPostBtnobj setEnabled:NO];
     
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
@@ -1994,10 +2001,10 @@
     [dict1 setValue:_tagidstr forKey:@"tag_id"];
     
     [dict1 setValue:_idstr forKey:@"tagging_to"];
-     if ([recordstr isEqualToString:@"recorded"] && _TagEmotionTF.text.length >1)
+    if ([recordstr isEqualToString:@"recorded"] && _TagEmotionTF.text.length >1)
     {
-         [dict1 setValue:@"1" forKey:@"emotion_type"];
-     }
+        [dict1 setValue:@"1" forKey:@"emotion_type"];
+    }
     else
     {
         if ([recordstr isEqualToString:@"recorded"])
@@ -2021,9 +2028,12 @@
         [dict1 setValue:_TagEmotionTF.text forKey:@"emotion_txt"];
         
     }
+    [dict1 setValue:mainemotionstr forKey:@"tagMe_emotion"];
+    [dict1 setValue:subemotionid forKey:@"tagMe_sub_emotion_id"];
+
     [dict1 setValue:base64_encoded_image11 forKey:@"emotion"];
     [dict1 setValue:_CommentTF.text forKey:@"comment"];
- 
+    
     [webServiceManager setDelegateMethode:self];
     [webServiceManager callMyWebServiceManager:@"tagMePost":dict :dict1];
 }
@@ -2042,9 +2052,9 @@
 - (IBAction)ImgBtnAction:(id)sender
 {
     [self.scrollViewObj setContentOffset:CGPointMake(0, 0)animated:YES];
-
+    
     [_CommentTF endEditing:YES];
-
+    
     if (flag==1)
     {
         //chkBtn = @"country";
@@ -2072,7 +2082,7 @@
     [_CommentTF resignFirstResponder];
     //_pickerviewObj.backgroundColor=[UIColor whiteColor];
     
-  }
+}
 
 //- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 //{
@@ -2112,10 +2122,9 @@
     if (cell == nil)
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EmotionlistTableViewCell" owner:self options:nil];
+         cell = [nib objectAtIndex:0];
         
-        cell = [nib objectAtIndex:0];
-        
-    }
+     }
     //[tapTwice setCancelsTouchesInView:YES];
     [longpress setCancelsTouchesInView:YES];
     //[tapOnce setCancelsTouchesInView:YES];
@@ -2123,58 +2132,21 @@
     cell.backemobtnobj.tag = indexPath.row;
     
     [cell.backemobtnobj addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     if (tableView==_pickerviewobj11)
     {
         flag=1;
         cell.arrowimg.hidden=NO;
         cell.emotionlbl.text= [[hardarr objectAtIndex:indexPath.row] valueForKey:@"emotions"];
-//        if (indexPath.row==0)
-//        {
-//
-//            cell.contentView.backgroundColor = [UIColor lightGrayColor];
-//
-//         }
-//        else if (indexPath.row==1)
-//        {
-//
-//            cell.contentView.backgroundColor = [UIColor grayColor];
-//
-//        }
-//        else if (indexPath.row==2)
-//        {
-//
-//            cell.contentView.backgroundColor = [UIColor blueColor];
-//
-//        }
-//        else if (indexPath.row==3)
-//        {
-//
-//            cell.contentView.backgroundColor = [UIColor whiteColor];
-//
-//        }
-//        else if (indexPath.row==4)
-//        {
-//
-//            cell.contentView.backgroundColor = [UIColor greenColor];
-//
-//        }
-//
-//        else if (indexPath.row==5)
-//        {
-//
-//            cell.contentView.backgroundColor = [UIColor orangeColor];
-//
-//        }
+        
     }
     else if(tableView==_pickerviewobj12)
     {
-
+        
         flag1=1;
         cell.arrowimg.hidden=YES;
         cell.emotionlbl.text= [[[[hardarr objectAtIndex:inddd] valueForKey:@"child"] objectAtIndex:indexPath.row] valueForKey:@"soft_emotion"];
-        
-    }
+     }
     //     [tapTwice setCancelsTouchesInView:NO];
     //     [longpress setCancelsTouchesInView:NO];
     //     [tapOnce setCancelsTouchesInView:NO];
@@ -2193,23 +2165,14 @@
     //cell.contentView.backgroundColor = [UIColor lightGrayColor];
     if (tableView==_pickerviewobj11)
     {
-        
-        
-        // cell.contentView.backgroundColor = [UIColor lightGrayColor];
-        //  _pickerviewobj12.backgroundColor = [UIColor lightGrayColor];
-        
-        
-        
-        
-        //        EmotionlistTableViewCell *cell = (EmotionlistTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        //        cell.contentView.backgroundColor = [UIColor lightGrayColor];
-        
+       
         NSString *inde = [NSString stringWithFormat:@"%d", indexPath.row];
         NSNumber *num = [NSNumber numberWithInteger: [inde integerValue]];
         inddd = [num intValue];
         
         flag=1;
         _TagEmotionTF.text = [[hardarr objectAtIndex:indexPath.row]valueForKey:@"emotions"];
+        mainemotionstr=[[hardarr objectAtIndex:indexPath.row]valueForKey:@"emotions"];
         hardtagid = [[hardarr objectAtIndex:indexPath.row]valueForKey:@"id"];
         [_pickerviewobj12 reloadData];
         
@@ -2217,12 +2180,12 @@
     if(tableView==_pickerviewobj12)
     {
         flag1=1;
-        _TagEmotionTF.text = [[[[hardarr objectAtIndex:inddd] valueForKey:@"child"] objectAtIndex:indexPath.row] valueForKey:@"soft_emotion"];
+         subemotionid=[[[[hardarr objectAtIndex:inddd] valueForKey:@"child"] objectAtIndex:indexPath.row] valueForKey:@"id"];
         
+        _TagEmotionTF.text = [[[[hardarr objectAtIndex:inddd] valueForKey:@"child"] objectAtIndex:indexPath.row] valueForKey:@"soft_emotion"];
+       
     }
 }
-//- (void)tableView:(UITableView *)tableView deselectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
 
 // [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
@@ -2281,26 +2244,23 @@
     //         _TagEmotionTF.text = [[[[hardarr objectAtIndex:inddd] valueForKey:@"child"] objectAtIndex:btn.tag] valueForKey:@"soft_emotion"];
     //      }
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 60;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 38;
+}
 - (IBAction)voiceBtnAction:(id)sender
 {
     
 }
-
-
-
-
+ 
 - (void)methodToUpdateProgress
 {
     if(someFloat ==0){
         
         someFloat = someFloat + 10;
         
-       // [_progressbarobj setProgress:someFloat animated:YES];
- 
+        // [_progressbarobj setProgress:someFloat animated:YES];
+        
     }
     else
     {
@@ -2314,33 +2274,33 @@
 -(void)calltimerAction
 {
     someFloat=0;
-  //  _nextbtnobj.hidden=NO;
+    //  _nextbtnobj.hidden=NO;
     [player stop];
     
-   // [_nextbtnobj setUserInteractionEnabled:YES];
-     [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
-   // _progressbarobj.hidden=YES;
+    // [_nextbtnobj setUserInteractionEnabled:YES];
+    [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone-(1).png"] forState:UIControlStateNormal];
+    // _progressbarobj.hidden=YES;
     _progressLabel.hidden=YES;
-     _recordButton.hidden=NO;
+    _recordButton.hidden=NO;
     _stopButton.hidden=YES;
     [_recordButton setUserInteractionEnabled:NO];
     
- }
+}
 - (IBAction)recordAudio:(id)sender {
     //  _nextbtnobj.hidden=YES;
     someFloat=0;
-   // _recordButton.hidden=YES;
+    // _recordButton.hidden=YES;
     checkstr=@"voice";
     [_stopButton setBackgroundImage:[UIImage imageNamed:@"stoprecord.png"] forState:UIControlStateNormal];
     
-     // [self methodToUpdateProgress];
-     count =0;
-     [audioRecorder record];
-     //    if (!_audioRecorder.recording)
+    // [self methodToUpdateProgress];
+    count =0;
+    [audioRecorder record];
+    //    if (!_audioRecorder.recording)
     //    {
     _stopButton.hidden=NO;
     
-     //        _playButton.enabled = NO;
+    //        _playButton.enabled = NO;
     //        _stopButton.enabled = YES;
     //        _progressbarobj.hidden=NO;
     //        [self methodToUpdateProgress];
@@ -2350,7 +2310,7 @@
     _progressLabel.hidden=NO;
     self.myTimer1 = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateUI:) userInfo:nil repeats:YES];
     
-     myTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 repeats:NO block:^(NSTimer * _Nonnull timer)
+    myTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 repeats:NO block:^(NSTimer * _Nonnull timer)
                {
                    [self calltimerAction];
                }];
@@ -2366,12 +2326,12 @@
 {
     count++;
     
-     if (count <=10)
+    if (count <=10)
     {
         self.progressLabel.text = [NSString stringWithFormat:@"%d Sec",count*1];
-       // _progressbarobj.progress = (float)count/60.0f;
+        // _progressbarobj.progress = (float)count/60.0f;
     }
-     else
+    else
     {
         [self.myTimer1 invalidate];
         self.myTimer1 = nil;
@@ -2411,7 +2371,7 @@
     // _playButton.enabled = YES;
     // _recordButton.enabled = YES;
     
- 
+    
     if (audioRecorder.recording)
     {
         [audioRecorder stop];
@@ -2444,7 +2404,7 @@
                       [error localizedDescription]);
             else
                 [player play];
-             [self.myTimer1 invalidate];
+            [self.myTimer1 invalidate];
             self.myTimer1 = nil;
             
             
@@ -2537,7 +2497,7 @@
         
         i=i+1;
         [_recordButton setBackgroundImage:[UIImage imageNamed:@"microphone.png"] forState:UIControlStateNormal];
- 
+        
         _recordButton.hidden=NO;
         [_recordButton setUserInteractionEnabled:YES];
         
@@ -2566,7 +2526,7 @@
     NSMutableDictionary *paramDict = [[NSMutableDictionary alloc]init];
     
     [paramDict setValue:base64_encoded_image forKey:@"fileA"];
- 
+    
     [paramDict setValue:@"A" forKey:@"section"];
     
     [paramDict setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"id"] forKey:@"id"];
@@ -2576,7 +2536,7 @@
     [webServiceManager callMyWebServiceManager:@"VoiceTest" :dict :paramDict];
 }
 
- 
+
 
 //-(void)callvoicetest2
 //{
@@ -2651,7 +2611,7 @@
 
 -(void)callfetchprofile
 {
- 
+    
     MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
     [dict setValue:@"getProfileInfo" forKey:@"name"];
@@ -2677,7 +2637,7 @@
         {
             FriendsViewController *Hgn= [[FriendsViewController alloc]init];
             [Hgn setStr1:@"done"];
-             [self.navigationController pushViewController:Hgn animated:YES];
+            [self.navigationController pushViewController:Hgn animated:YES];
         }
         else
         {

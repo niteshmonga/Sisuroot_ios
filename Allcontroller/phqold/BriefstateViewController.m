@@ -64,6 +64,14 @@
 
 - (void)viewDidLoad {
     
+    if([_teststatus isEqualToString:@"1"])
+    {
+        _Gobackbtnobj.hidden=YES;
+    }
+    else
+    {
+        _Gobackbtnobj.hidden=NO;
+    }
     _alertviewobj.layer.cornerRadius=8;
     _alertviewobj.clipsToBounds=YES;
     _alertviewobj.layer.borderWidth =1.0f;
@@ -250,6 +258,14 @@ shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
     questionA=cell.BSAlbl.text;
     
     cell.Homebtnobj.tag = indexPath.row;
+    if([_teststatus isEqualToString:@"1"])
+    {
+        cell.Homebtnobj.hidden=YES;
+    }
+    else
+    {
+        cell.Homebtnobj.hidden=NO;
+    }
     [cell.Homebtnobj addTarget:self action:@selector(HomeAction:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.SubmitBtnobj.tag = indexPath.row;

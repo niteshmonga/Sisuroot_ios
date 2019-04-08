@@ -26,6 +26,12 @@
 #import "BS1ViewController.h"
 #import "Reachability.h"
 
+#import <GoogleAnalytics/GAI.h>
+#import <GoogleAnalytics/GAIDictionaryBuilder.h>
+#import <GoogleAnalytics/GAIFields.h>
+
+@import Firebase;
+
 @interface NotificationListViewController ()
 {
 NSMutableArray *userarr;
@@ -45,9 +51,12 @@ BOOL check;
 
 @implementation NotificationListViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-  //  [self callThisForeGroundMethode];
+    
+     [FIRAnalytics setScreenName:@"Alerts" screenClass:@"Alerts"];
+    //  [self callThisForeGroundMethode];
     [self callThisWebservice];
     self.navigationController.navigationBar.hidden=YES;
     chatnotification.layer.cornerRadius=10;

@@ -40,8 +40,8 @@
                 <outlet property="emonamelbl" destination="XoU-gG-FdZ" id="3Wv-fY-r5V"/>
                 <outlet property="imgbuttonobj" destination="U72-0d-zte" id="E6W-Bl-QGr"/>
                 <outlet property="itaggedlbl" destination="rvx-MP-fZZ" id="0W7-7E-A0F"/>
-                <outlet property="pickerviewobj11" destination="nrb-Wm-HWR" id="xwR-Sc-Rpm"/>
-                <outlet property="pickerviewobj12" destination="hcT-rd-UTG" id="jFx-fb-6hp"/>
+                <outlet property="pickerviewobj11" destination="h6C-6B-zXg" id="0ct-ud-4VX"/>
+                <outlet property="pickerviewobj12" destination="Iul-Tz-ZWY" id="ZTg-Ii-abu"/>
                 <outlet property="playButton" destination="27j-70-YjI" id="fqe-bp-FAf"/>
                 <outlet property="playButton1" destination="Jqi-6f-yGA" id="22T-AL-lFI"/>
                 <outlet property="progressLabel" destination="Ka3-9q-kIM" id="Rme-CA-r8M"/>
@@ -284,26 +284,26 @@
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hcT-rd-UTG">
-                    <rect key="frame" x="201" y="487" width="213" height="249"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Iul-Tz-ZWY">
+                    <rect key="frame" x="201" y="486" width="213" height="251"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="gzf-VA-tAg"/>
-                        <outlet property="delegate" destination="-1" id="Cft-5c-mQX"/>
+                        <outlet property="dataSource" destination="-1" id="fx5-xS-P2C"/>
+                        <outlet property="delegate" destination="-1" id="seM-XW-oFS"/>
                     </connections>
                 </tableView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nrb-Wm-HWR">
-                    <rect key="frame" x="-1" y="487" width="215" height="250"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h6C-6B-zXg">
+                    <rect key="frame" x="0.0" y="486" width="224" height="251"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="5yr-9F-Dgp"/>
-                        <outlet property="delegate" destination="-1" id="MU6-jl-xSR"/>
+                        <outlet property="dataSource" destination="-1" id="Hhw-dd-hev"/>
+                        <outlet property="delegate" destination="-1" id="NBB-6a-4Ya"/>
                     </connections>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMi-zo-FUf">
-                    <rect key="frame" x="0.0" y="447" width="414" height="46"/>
+                    <rect key="frame" x="0.0" y="445" width="414" height="46"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -311,7 +311,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWy-Nd-ZqF">
-                    <rect key="frame" x="333" y="447" width="81" height="46"/>
+                    <rect key="frame" x="333" y="445" width="81" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="0.68784781678082196" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>

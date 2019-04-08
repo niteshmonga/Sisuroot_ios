@@ -23,7 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *StartedBtn;
 @property (strong, nonatomic) IBOutlet UIButton *backbtnobj1;
 
-@property (strong, nonatomic) IBOutlet NSString *identifystr;
+@property (strong, nonatomic) IBOutlet NSString *identifystr,*teststatus;
 - (IBAction)GbackBtn:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *Gobackbtnobj;
 @property (strong, nonatomic) IBOutlet UIView *alertviewobj;

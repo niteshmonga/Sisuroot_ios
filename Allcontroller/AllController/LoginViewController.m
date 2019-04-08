@@ -20,7 +20,8 @@
 #import "KeychainItemWrapper.h"
 #import "DemoOtherViewController.h"
 #import "BS4ViewController.h"
-
+#import "BriefstateQ1ViewController.h"
+#import "BriefstateViewController.h"
 @interface LoginViewController ()<GIDSignInUIDelegate>
 {
     NSMutableDictionary *Arr;
@@ -55,7 +56,7 @@ NSString *kAttributeTitle = @"Attributed string operation successfully completed
 - (void)viewDidLoad
 {
 
-    
+     [FIRAnalytics setScreenName:@"Login" screenClass:@"Login"];
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"SisurootLogin" accessGroup:nil];
     
     self.userTF.text = [keychainItem objectForKey:(__bridge id)(kSecAttrAccount)];
@@ -348,6 +349,13 @@ didSignInForUser:(GIDGoogleUser *)user
                 }
                 else if ([[[responseDictionary valueForKey:@"data"] valueForKey:@"email_verified_status"] isEqual:@"1"])
                 {
+                    
+                    NSString *GAD7_required_status = [[responseDictionary valueForKey:@"data"]valueForKey:@"GAD7_required_status"];
+                    NSString *DietaryInfo_required_status = [[responseDictionary valueForKey:@"data"]valueForKey:@"DietaryInfo_required_status"];
+                    NSString *PHQ9_required_status = [[responseDictionary valueForKey:@"data"]valueForKey:@"PHQ9_required_status"];
+                    _Dafault_demographic_form_status = [[responseDictionary valueForKey:@"data"]valueForKey:@"Dafault_demographic_form_status"];
+                    
+                    
                     if ([[[responseDictionary valueForKey:@"data"] valueForKey:@"Terms_Cond_Verified_Status"]integerValue] == 0)
                     {
                         
@@ -358,16 +366,6 @@ didSignInForUser:(GIDGoogleUser *)user
                     
                     else if ([[[responseDictionary valueForKey:@"data"] valueForKey:@"DemographicFormStatus"]integerValue] == 0)
                       {
-                        
-//                        if ([[responseDictionary valueForKey:@"Demographic_Form_Group_Status"]integerValue] == 1)
-//                         {
-//                             FeedViewController  *pvc=[[FeedViewController alloc]init];
-//                             [pvc setStr1:@"done"];
-//                             [self.navigationController pushViewController:pvc animated:YES];
-//                         }
-//                         else
-//                         {
-                          
                              if ([[[responseDictionary valueForKey:@"data"] valueForKey:@"Dafault_demographic_form_status"] integerValue] == 1)
                              {
                                 
@@ -402,48 +400,43 @@ didSignInForUser:(GIDGoogleUser *)user
                                  [self.navigationController pushViewController:BSV animated:YES];
                                  
                              }
-                              
-                          //   }
- 
+                        
                             }
-                          
-                     //                    else if ([[responseDictionary valueForKey:@"formupdationstatus"] integerValue]==0 || [[responseDictionary valueForKey:@"formupdationstatus"] isEqual:[NSNull null]])
-                    //                     {
-                    //                         Bs2ViewController *EVC=[[Bs2ViewController alloc]init];
-                    //                         //[EVC setDetailstr:@"done"];
-                    //                         [self.navigationController pushViewController:EVC animated:YES];
-                    ////                         DemoGraphicViewController *EVC=[[DemoGraphicViewController alloc]init];
-                    ////                         [self.navigationController pushViewController:EVC animated:YES];
-                    //
-                    //                     }
+                    else if ([GAD7_required_status isEqual:@"1"] )
+                    {
+                        
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Please give GAD-7 test to use the app" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        
+                        alert.tag=2001;
+                        [alert show];
+                    }
+                    else  if ([PHQ9_required_status isEqual:@"1"])
+                    {
+                        
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Please give PHQ9 test to use the app" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        
+                        alert.tag=2002;
+                        [alert show];
+                    }
+                    else     if ([DietaryInfo_required_status isEqual:@"1"])
+                    {
+                        
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"Please fill Dietary info form" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        
+                        alert.tag=2003;
+                        [alert show];
+                    }
                     else
                     {
-                        //[[NSUserDefaults standardUserDefaults] setValue:@"true" forKey:@"launch"];
-                        
                             FeedViewController  *pvc=[[FeedViewController alloc]init];
                             [pvc setStr1:@"done"];
                             [self.navigationController pushViewController:pvc animated:YES];
                         
-                        
-                            //                    ViewController *myNewVC = [[ViewController alloc] init];
-                            //                    [myNewVC setStr1:@"done"];
-                            //
-                            //                    myNewVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-                            //                    [self presentViewController:myNewVC animated:YES completion:nil];
                      }
                     
                 }
-                //                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[responseDictionary valueForKey:@"status_message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                //                [alert show];
             }
-            
-            
-            
         }
-        
-        
-        // [self callstorelocation];
-        
     }
     
     if ([[methodeDictionary valueForKey:@"name"] isEqualToString:@"userRegistrationViaGmail"])
@@ -776,6 +769,61 @@ didSignInForUser:(GIDGoogleUser *)user
             [webServiceManager setDelegateMethode:self];
             [webServiceManager callMyWebServiceManager:@"resendMail" :dict :dict1];
         }
+        
+        else
+            if(alertView.tag == 2001)
+            {
+                BriefstateViewController *bsvc=[[BriefstateViewController alloc]init];
+                [bsvc setIdentifystr:@"done1"];
+                bsvc.teststatus=@"1";
+                [self.navigationController pushViewController:bsvc animated:YES];
+                
+            }
+            else
+                if(alertView.tag == 2002)
+                {
+                    BriefstateQ1ViewController *bsvc=[[BriefstateQ1ViewController alloc]init];
+                    bsvc.teststatus=@"1";
+                    [self.navigationController pushViewController:bsvc animated:YES];
+                    
+                }
+                else if(alertView.tag == 2003)
+                {
+                    if ([_Dafault_demographic_form_status integerValue] == 1)
+                    {
+                        DemoGraphicViewController *EVC=[[DemoGraphicViewController alloc]init];
+                        [self.navigationController pushViewController:EVC animated:YES];
+                    }
+                    if ([_Dafault_demographic_form_status integerValue] == 2)
+                    {
+                        DemoOtherViewController *BSV=[[DemoOtherViewController alloc]init];
+                        [BSV setTypeString:@"demo1"];
+                        [BSV setDemostr:@"demostr"];
+                        
+                        [self.navigationController pushViewController:BSV animated:YES];
+                    }
+                    if ([_Dafault_demographic_form_status integerValue] == 3)
+                    {
+                        
+                        DemoOtherViewController *BSV=[[DemoOtherViewController alloc]init];
+                        [BSV setTypeString:@"demo2"];
+                        [BSV setDemostr:@"demostr"];
+                        
+                        [self.navigationController pushViewController:BSV animated:YES];
+                        
+                    }
+                    if ([_Dafault_demographic_form_status integerValue] == 4)
+                    {
+                        
+                        DemoOtherViewController *BSV=[[DemoOtherViewController alloc]init];
+                        [BSV setTypeString:@"demo3"];
+                        [BSV setDemostr:@"demostr"];
+                        
+                        [self.navigationController pushViewController:BSV animated:YES];
+                        
+                    }
+                    
+                }
         else
         {
 //            MyWebserviceManager *webServiceManager = [[MyWebserviceManager alloc]init];

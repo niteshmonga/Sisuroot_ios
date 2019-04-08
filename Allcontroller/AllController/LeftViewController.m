@@ -29,7 +29,7 @@
 #import "VoiceTestViewController.h"
 #import "DemoOtherViewController.h"
 #import "NotificationListViewController.h"
-
+#import "ResourcesViewController.h"
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
 //#import "GAIFields.h"
@@ -49,13 +49,14 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     
-    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
+     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     [self callfetchprofile];
 }
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
+     [FIRAnalytics setScreenName:@"SlideMenu" screenClass:@"SlideMenu"];
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     [self callfetchprofile];
     
@@ -72,16 +73,16 @@
     
     _LogoutBtnobj.layer.cornerRadius=16;
     _LogoutBtnobj.clipsToBounds=YES;
-     _LogoutBtnobj.layer.borderWidth =1;
+    _LogoutBtnobj.layer.borderWidth =1;
     _LogoutBtnobj.layer.borderColor = [UIColor whiteColor].CGColor;
     
     
     // Do any additional setup after loading the view from its nib.
     
-    titles=[[NSArray alloc]initWithObjects:@"HOME",@"FRIEND CIRCLE",@"NOTIFICATIONS",@"SETTINGS",@"TEST",@"DEMOGRAPHIC FORM",@"FEEDBACK",@"ALERTS",@"LOGOUT",nil];
+    titles=[[NSArray alloc]initWithObjects:@"HOME",@"FRIEND CIRCLE",@"NOTIFICATIONS",@"ALERTS",@"SETTINGS",@"TEST",@"DEMOGRAPHIC FORM",@"RESOURCES",@"FEEDBACK",@"LOGOUT",nil];
     
     
-    imgarr=[[NSArray alloc]initWithObjects:@"icons8-home.png",@"dashboard_icon_friends_white.png",@"notification.png",@"settings1.png",@"test.png",@"forms.png",@"Feedback.png",@"warning.png",@"logout-2.png",nil];
+    imgarr=[[NSArray alloc]initWithObjects:@"icons8-home.png",@"dashboard_icon_friends_white.png",@"notification.png",@"warning.png",@"settings1.png",@"test.png",@"forms.png",@"Health_Resources.png",@"Feedback.png",@"logout-2.png",nil];
     //@"icons8-voice_presentation.png",,@"VOICE TEST"
     
 }
@@ -108,13 +109,13 @@
         
         cell = [nib objectAtIndex:0];
         
-     }
+    }
     
     cell.notificationlbl.text=[listarray valueForKey:@"AlertCount"];
     
     cell.notificationlbl.hidden=YES;
-
-    if (indexPath.row==7)
+    
+    if (indexPath.row==3)
     {
         if ([cell.notificationlbl.text isEqual:@"0"])
         {
@@ -125,14 +126,14 @@
         {
             
             cell.notificationlbl.hidden=NO;
-
+            
         }
-
+        
     }
     else
     {
         cell.notificationlbl.hidden=YES;
-
+        
     }
     
     cell.liststmtlbl.text=[titles objectAtIndex:indexPath.row];
@@ -151,7 +152,7 @@
         [revealController pushFrontViewController:nav animated:YES];
         [OVC setStr2:@"feed"];
         
-     }
+    }
     //    else if (indexPath.row==1)
     //    {
     //        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
@@ -189,57 +190,77 @@
     }
     else if (indexPath.row==3)
     {
+        
+        SWRevealViewController *revealController = [self revealViewController];
+        NotificationListViewController *LVC=[[NotificationListViewController alloc]init];
+        // [LVC setTypeString:@"quiz"];
+        
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LVC];
+        [revealController pushFrontViewController:nav animated:YES];
+        
       
+    }
+    
+    else if(indexPath.row==4)
+    {
+        
         SWRevealViewController *revealController = [self revealViewController];
         SettingViewController *HVC=[[SettingViewController alloc]init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:HVC];
         [revealController pushFrontViewController:nav animated:YES];
         [HVC setStr1:@"done"];
+        
+       
+        
     }
-    
-    else if(indexPath.row==4)
+    else if(indexPath.row==5)
     {
         SWRevealViewController *revealController = [self revealViewController];
         TestlistViewController *LVC=[[TestlistViewController alloc]init];
         [LVC setListarray12:listarray];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LVC];
         [revealController pushFrontViewController:nav animated:YES];
-        
-    }
-    else if(indexPath.row==5)
-    {
-        
         // [[NSUserDefaults standardUserDefaults] setValue:@" " forKey:@"id"];
         
+      
+        
+    }
+    
+    else if(indexPath.row==6)
+    {
         SWRevealViewController *revealController = [self revealViewController];
         PHQ8ViewController *LVC=[[PHQ8ViewController alloc]init];
         [LVC setListarray12:listarray];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LVC];
         [revealController pushFrontViewController:nav animated:YES];
- 
-     }
-    else if(indexPath.row==6)
+        
+        // [[NSUserDefaults standardUserDefaults] setValue:@" " forKey:@"id"];
+        
+      
+        
+    }
+    else if(indexPath.row==7)
     {
+        SWRevealViewController *revealController = [self revealViewController];
+        ResourcesViewController *LVC=[[ResourcesViewController alloc]init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LVC];
+        [revealController pushFrontViewController:nav animated:YES];
+        
+       
+        
+    }
+    else if(indexPath.row==8)
+    {
+        
         SWRevealViewController *revealController = [self revealViewController];
         EmotionViewController *LVC=[[EmotionViewController alloc]init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LVC];
         [revealController pushFrontViewController:nav animated:YES];
         
+        
     }
-       else if(indexPath.row==7)
-        {
-
-            SWRevealViewController *revealController = [self revealViewController];
-            NotificationListViewController *LVC=[[NotificationListViewController alloc]init];
-           // [LVC setTypeString:@"quiz"];
-
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LVC];
-            [revealController pushFrontViewController:nav animated:YES];
-
-
-        }
     
-    else if(indexPath.row==8)
+    else if(indexPath.row==9)
     {
         [self calllogout];
         
@@ -269,7 +290,7 @@
 
 - (IBAction)profilepicBtn:(id)sender {
     
-   
+    
     SWRevealViewController *revealController = [self revealViewController];
     
     EditViewController *Evc=[[EditViewController alloc]init];
@@ -315,9 +336,10 @@
         if ([[responseDictionary valueForKey:@"status"] integerValue] ==200)
         {
             //hud.hidden=YES;
-            listarray =[responseDictionary valueForKey:@"data"];
             
-             //  [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"UserImage"] forKey:@"UserImage"];
+             listarray =[responseDictionary valueForKey:@"data"];
+            
+            //  [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"UserImage"] forKey:@"UserImage"];
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Phq_Test_Status"] forKey:@"Phq_Test_Status"];
             
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Brief_State_Status"] forKey:@"Brief_State_Status"];
@@ -328,26 +350,21 @@
             
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Chat_Status"] forKey:@"Chat_Status"];
             
-            
-            
-            [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Voice_Test_StatusA"] forKey:@"Voice_Test_StatusA"];
+             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Voice_Test_StatusA"] forKey:@"Voice_Test_StatusA"];
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Voice_Test_StatusB"] forKey:@"Voice_Test_StatusB"];
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Voice_Test_StatusC"] forKey:@"Voice_Test_StatusC"];
             
-            
-            
-            
-            
-            [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Demographic_Form_Group_Status"] forKey:@"Demographic_Form_Group_Status"];
-            
+             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"Demographic_Form_Group_Status"] forKey:@"Demographic_Form_Group_Status"];
  
-             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"AddTagReminderStatus"] forKey:@"AddTagReminderStatus"];
+            [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"AddTagReminderStatus"] forKey:@"AddTagReminderStatus"];
             
             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"TestReminderStatus"] forKey:@"TestReminderStatus"];
             
             _Usernamelbl.text = [[responseDictionary valueForKey:@"data"]valueForKey:@"username"];
             
-              [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"TagRedAlertInnerCircle"] forKey:@"TagRedAlertInnerCircle"];
+            [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"TagRedAlertInnerCircle"] forKey:@"TagRedAlertInnerCircle"];
+            
+             [[NSUserDefaults standardUserDefaults] setValue:[[responseDictionary valueForKey:@"data"]valueForKey:@"NZ_Group_status"] forKey:@"NZ_Group_status"];
             
             //            if ([[[responseDictionary valueForKey:@"data"] valueForKey:@"UserPassword"] isEqual:(id)[NSNull null]])
             //            {
@@ -368,9 +385,9 @@
             //                _PhoneTF.text=@"";
             //
             //            }
- 
+            
             NSString *imgStr = [[responseDictionary valueForKey:@"data"]valueForKey:@"profile_img"];
- 
+            
             if ([imgStr isEqual:(id)[NSNull null]] || imgStr.length < 1 )
             {
                 _profilepicimg.image = [UIImage imageNamed:@"user.png"];
@@ -396,7 +413,7 @@
         if ([[responseDictionary valueForKey:@"status"] integerValue] ==200)
         {
             [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"id"];
-           
+            
             
             SWRevealViewController *revealController = [self revealViewController];
             FrontViewController *LVC=[[FrontViewController alloc]init];

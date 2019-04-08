@@ -27,8 +27,28 @@
 
 
 - (void)viewDidLoad {
+     [FIRAnalytics setScreenName:@"Emotion" screenClass:@"Emotion"];
     [super viewDidLoad];
+    
     self.navigationController.navigationBar.hidden=YES;
+    
+    int NZ_Group_status=[[[NSUserDefaults standardUserDefaults] valueForKey:@"NZ_Group_status"] integerValue];
+    
+    //if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"NZ_Group_status"] isEqual:@"1"])
+    if(NZ_Group_status==1)
+    {
+        _kiwainfolbl.hidden=NO;
+        _infofirstlbl.hidden=NO;
+    }
+    else
+    {
+        
+         _infolbl.frame = CGRectMake(16, 90, 500, 100);
+
+        _kiwainfolbl.hidden=YES;
+        _infofirstlbl.hidden=YES;
+
+    }
     SWRevealViewController *revealController = [self revealViewController];
     
     [revealController panGestureRecognizer];

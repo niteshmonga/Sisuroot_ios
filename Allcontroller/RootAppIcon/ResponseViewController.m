@@ -43,6 +43,7 @@
 @implementation ResponseViewController
 
 - (void)viewDidLoad {
+      [FIRAnalytics setScreenName:@"Notification" screenClass:@"Notification"];
     [super viewDidLoad];
     [self callnetconnection];
 

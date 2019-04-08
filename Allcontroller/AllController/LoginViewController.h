@@ -31,7 +31,7 @@
 - (IBAction)AllowcontactBtn:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *AllowcontactBtnobj;
 @property (strong, nonatomic) IBOutlet NSString *str1;
-@property (strong, nonatomic) IBOutlet NSString *changebackstr;
+@property (strong, nonatomic) IBOutlet NSString *changebackstr,*Dafault_demographic_form_status;
 
 - (IBAction)termsnconditionsBtn:(id)sender;
 - (IBAction)LoginBtn:(id)sender;

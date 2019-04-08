@@ -49,6 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [FIRAnalytics setScreenName:@"Chat" screenClass:@"Chat"];
     //checktimer=@"scrolldown1";
     checktimer=@"scrolldown2";
     

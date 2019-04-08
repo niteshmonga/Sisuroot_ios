@@ -34,6 +34,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [FIRAnalytics setScreenName:@"Forgot Password" screenClass:@"Forgot Password"];
     self.navigationController.navigationBar.hidden=YES;
     
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];

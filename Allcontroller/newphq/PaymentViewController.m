@@ -44,7 +44,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [FIRAnalytics setScreenName:@"Payment" screenClass:@"Payment"];
     ch1=NO;
     activItyView.hidden = YES;
     [activItyView startAnimating];

@@ -37,7 +37,7 @@
 
 - (void)viewDidLoad { 
     [super viewDidLoad];
- 
+//  [FIRAnalytics setScreenName:@"Front Page" screenClass:@"Front Page"];
     
     self.navigationController.navigationBar.hidden=YES;
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];

@@ -32,6 +32,7 @@
     
 }
 - (void)viewDidLoad {
+     [FIRAnalytics setScreenName:@"Select Contacts" screenClass:@"Select Contacts"];
     [super viewDidLoad];
     [self callcontactlist];
     self.navigationController.navigationBar.hidden=YES;

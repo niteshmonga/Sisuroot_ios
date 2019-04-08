@@ -19,7 +19,7 @@
 - (IBAction)BackbtnAction1:(id)sender;
 @property (strong, nonatomic) IBOutlet UIPageControl *pagecontrol;
 @property (strong, nonatomic) IBOutlet UIButton *StartedBtn;
-@property (strong, nonatomic) IBOutlet NSString *identifystr;
+@property (strong, nonatomic) IBOutlet NSString *identifystr,*teststatus;
 @property (strong, nonatomic) IBOutlet UIButton *backbtnobj1;
 
 @end

@@ -49,6 +49,7 @@
     
 }
 - (void)viewDidLoad {
+     [FIRAnalytics setScreenName:@"Share My Post" screenClass:@"Share My Post"];
     [super viewDidLoad];
     [self callnetconnection];
 

@@ -1,7 +1,9 @@
 
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
+@import Firebase;
 @interface FeedViewController : UIViewController
 {
     IBOutlet UIView *barView;
@@ -29,7 +31,7 @@
 @property (strong, nonatomic) IBOutlet UIView *SearchView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBarItem;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchbarobj;
-@property (strong, nonatomic) IBOutlet NSString *str1;
+@property (strong, nonatomic) IBOutlet NSString *str1,*Dafault_demographic_form_status;
 @property (strong, nonatomic) IBOutlet UIView *Nointernetviewobj;
 @property (strong, nonatomic) IBOutlet UIButton *MenuBtnobj;
 @property (strong, nonatomic) IBOutlet UIButton *backBtnobj;

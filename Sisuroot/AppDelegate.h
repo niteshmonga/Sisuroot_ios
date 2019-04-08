@@ -13,6 +13,13 @@
 #import <UserNotifications/UserNotifications.h>
 #import "FirstViewController.h"
 
+#import <GoogleAnalytics/GAI.h>
+#import <GoogleAnalytics/GAIDictionaryBuilder.h>
+#import <CoreLocation/CoreLocation.h>
+@import Firebase;
+
+
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, GIDSignInDelegate, UNUserNotificationCenterDelegate>
 
 //@interface AppDelegate : UIResponder <UIApplicationDelegate>

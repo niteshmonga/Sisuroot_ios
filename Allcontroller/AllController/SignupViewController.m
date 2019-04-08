@@ -51,6 +51,7 @@
 }
 
 - (void)viewDidLoad {
+     [FIRAnalytics setScreenName:@"SignUp" screenClass:@"SignUp"];
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden=YES;
     codearr=[[NSMutableArray alloc]initWithObjects:@"+1",@"+64",@"+61",@"+91", nil];

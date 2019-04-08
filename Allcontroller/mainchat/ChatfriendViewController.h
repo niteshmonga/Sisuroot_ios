@@ -24,10 +24,13 @@
     IBOutlet UITableView *chattableview;
 }
 
+@property (weak, nonatomic) IBOutlet UIView *view_Alert;
+@property (weak, nonatomic) IBOutlet UIButton *chck_alert;
 
 @property (strong, nonatomic) IBOutlet UIImageView *Backgroundimg;
 - (IBAction)BackBtn:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *backbtnobj1;
+@property (weak, nonatomic) IBOutlet UIButton *btn_okalert;
 
 - (IBAction)SearchbtnAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *Feedstmtlbl;
