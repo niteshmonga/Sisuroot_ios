@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+        <array key="Roboto-Light.ttf">
+            <string>Roboto-Light</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FriendsaddViewController">
+            <connections>
+                <outlet property="FriendsTableviewobj" destination="78j-U6-IPT" id="zGw-ru-jJY"/>
+                <outlet property="Sosbtnobj" destination="ndc-OI-Upq" id="yOM-WS-utV"/>
+                <outlet property="backBtnobj" destination="nBA-7w-5IX" id="WQ8-wc-Kfd"/>
+                <outlet property="btn_inner" destination="3vx-0T-13u" id="P8Y-jK-JJn"/>
+                <outlet property="btn_outer" destination="8Mp-03-ry1" id="GQX-XT-Bra"/>
+                <outlet property="can1" destination="wbJ-ei-9FQ" id="LKh-SL-fYm"/>
+                <outlet property="searchBar" destination="Y2l-RG-AZk" id="6Vw-Qo-Pb7"/>
+                <outlet property="tb_footer" destination="NXR-Q6-aJP" id="R56-J6-rX5"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view_add_new_conaact" destination="kiu-fI-HQ5" id="gW3-pX-f6T"/>
+                <outlet property="view_addto" destination="Zhf-1w-dcM" id="F3L-zy-MrN"/>
+                <outlet property="view_footer1" destination="QBQ-9Q-45K" id="tWR-8B-pVX"/>
+                <outlet property="view_footer2" destination="MDu-bx-xJy" id="dMd-9o-EC5"/>
+                <outlet property="viewinner" destination="VL5-aw-FjD" id="azO-g7-gqj"/>
+                <outlet property="viewouter" destination="h9L-DL-DDi" id="Oaq-cW-974"/>
+                <outlet property="viwqqq" destination="QpU-k7-oCW" id="eLe-gx-Jlz"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Group 14698.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xvh-vX-6Zi">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVM-d1-iop">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBA-7w-5IX">
+                    <rect key="frame" x="7" y="30" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="noun_Arrow_2304597.png"/>
+                    <connections>
+                        <action selector="BackBtnAction:" destination="-1" eventType="touchUpInside" id="e52-UM-J49"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndc-OI-Upq">
+                    <rect key="frame" x="369" y="35" width="28" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="sos"/>
+                    <connections>
+                        <action selector="SosBtnAction:" destination="-1" eventType="touchUpInside" id="SYE-MF-kUr"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Contacts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQ7-4w-WRT">
+                    <rect key="frame" x="124" y="36" width="161" height="27"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <searchBar contentMode="left" fixedFrame="YES" barStyle="black" text="" placeholder="Search Friends " translatesAutoresizingMaskIntoConstraints="NO" id="Y2l-RG-AZk">
+                    <rect key="frame" x="25" y="80" width="364" height="56"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="barTintColor" red="0.098039215686274508" green="0.28235294117647058" blue="0.46666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <scopeButtonTitles>
+                        <string>Title</string>
+                    </scopeButtonTitles>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="yQJ-V8-WUY"/>
+                    </connections>
+                </searchBar>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qAe-JN-F0R">
+                    <rect key="frame" x="0.0" y="150" width="414" height="40"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Contact To Add Inner/Outer Circle" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEl-Iv-Wrn">
+                            <rect key="frame" x="15" y="0.0" width="300" height="40"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zhf-1w-dcM">
+                            <rect key="frame" x="324" y="0.0" width="90" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcY-nf-UAu">
+                                    <rect key="frame" x="0.0" y="5" width="80" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                    <state key="normal" title="Add To">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="addtobtnclick:" destination="-1" eventType="touchUpInside" id="5ZG-ll-hCA"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="78j-U6-IPT">
+                    <rect key="frame" x="0.0" y="216" width="414" height="617"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="b33-ML-6K6"/>
+                        <outlet property="delegate" destination="-1" id="feY-SS-0Xk"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kiu-fI-HQ5">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QpU-k7-oCW">
+                            <rect key="frame" x="62.5" y="341" width="289" height="214"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adv-lZ-XNV">
+                                    <rect key="frame" x="0.0" y="0.0" width="289" height="60"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="shareback" translatesAutoresizingMaskIntoConstraints="NO" id="GsB-7r-pr0">
+                                            <rect key="frame" x="0.0" y="0.0" width="289" height="55"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbu-mp-Cqv">
+                                            <rect key="frame" x="93" y="18" width="99" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbJ-ei-9FQ">
+                                            <rect key="frame" x="253" y="17" width="26" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                            <state key="normal" image="cross"/>
+                                            <connections>
+                                                <action selector="cancel_Add_contact:" destination="-1" eventType="touchUpInside" id="b7S-5O-YKD"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="GEi-y0-xaW"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ow-My-CgK">
+                                    <rect key="frame" x="0.0" y="80" width="289" height="40"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VL5-aw-FjD">
+                                            <rect key="frame" x="0.0" y="0.0" width="131" height="40"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbP-OP-ubg">
+                                                    <rect key="frame" x="20" y="12" width="15" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <state key="normal" image="Group 372.png">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="btn_inner:" destination="-1" eventType="touchUpInside" id="F9f-vv-zCM"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vx-0T-13u">
+                                                    <rect key="frame" x="42" y="7" width="82" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                                    <state key="normal" title="Inner Circle">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="btn_inner:" destination="-1" eventType="touchUpInside" id="d9l-YZ-pJe"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="131" id="IZW-nM-6Fv"/>
+                                                <constraint firstAttribute="height" constant="40" id="iVU-Pd-qzH"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9L-DL-DDi">
+                                            <rect key="frame" x="156" y="0.0" width="133" height="40"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGH-BA-wio">
+                                                    <rect key="frame" x="20" y="12" width="15" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <state key="normal" image="Group 374.png"/>
+                                                    <connections>
+                                                        <action selector="btn_outer:" destination="-1" eventType="touchUpInside" id="b7N-e0-V6R"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mp-03-ry1">
+                                                    <rect key="frame" x="42" y="7" width="82" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
+                                                    <state key="normal" title="Outer Circle">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <state key="selected">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="btn_outer:" destination="-1" eventType="touchUpInside" id="rl9-dV-TYE"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="BUy-ih-QOr"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="h9L-DL-DDi" secondAttribute="trailing" id="MwZ-Zz-IeE"/>
+                                        <constraint firstAttribute="bottom" secondItem="VL5-aw-FjD" secondAttribute="bottom" id="Tvn-fe-9GJ"/>
+                                        <constraint firstAttribute="height" constant="40" id="bNh-u4-nll"/>
+                                        <constraint firstItem="h9L-DL-DDi" firstAttribute="top" secondItem="6ow-My-CgK" secondAttribute="top" id="ozf-Wp-iJA"/>
+                                        <constraint firstAttribute="bottom" secondItem="h9L-DL-DDi" secondAttribute="bottom" id="tl3-Ml-zCc"/>
+                                        <constraint firstItem="VL5-aw-FjD" firstAttribute="top" secondItem="6ow-My-CgK" secondAttribute="top" id="uLY-eW-fQA"/>
+                                        <constraint firstItem="VL5-aw-FjD" firstAttribute="leading" secondItem="6ow-My-CgK" secondAttribute="leading" id="vSI-VP-UJl"/>
+                                        <constraint firstItem="h9L-DL-DDi" firstAttribute="leading" secondItem="VL5-aw-FjD" secondAttribute="trailing" constant="25" id="ykS-ln-nzd"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XAN-EG-i2t">
+                                    <rect key="frame" x="87" y="166" width="115" height="36"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="gNy-kU-fPg"/>
+                                    </constraints>
+                                    <inset key="imageEdgeInsets" minX="80" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Add To" image="arrow_blue">
+                                        <color key="titleColor" red="0.0" green="0.3921568627" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="addtonewcontactbtnclick:" destination="-1" eventType="touchUpInside" id="jcB-6i-HcO"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="XAN-EG-i2t" secondAttribute="bottom" constant="12" id="14B-IL-k56"/>
+                                <constraint firstAttribute="height" constant="214" id="4iM-hv-Usi"/>
+                                <constraint firstItem="6ow-My-CgK" firstAttribute="leading" secondItem="QpU-k7-oCW" secondAttribute="leading" id="Ccv-RT-Byp"/>
+                                <constraint firstAttribute="width" constant="289" id="Pyh-89-YzT"/>
+                                <constraint firstItem="Adv-lZ-XNV" firstAttribute="top" secondItem="QpU-k7-oCW" secondAttribute="top" id="Q0C-z1-pil"/>
+                                <constraint firstItem="XAN-EG-i2t" firstAttribute="leading" secondItem="QpU-k7-oCW" secondAttribute="leading" constant="87" id="Vbc-hG-D8X"/>
+                                <constraint firstItem="6ow-My-CgK" firstAttribute="top" secondItem="Adv-lZ-XNV" secondAttribute="bottom" constant="20" id="gay-AT-4Km"/>
+                                <constraint firstAttribute="trailing" secondItem="Adv-lZ-XNV" secondAttribute="trailing" id="gcR-Dp-htn"/>
+                                <constraint firstAttribute="trailing" secondItem="6ow-My-CgK" secondAttribute="trailing" id="nKN-jd-ZDm"/>
+                                <constraint firstItem="Adv-lZ-XNV" firstAttribute="leading" secondItem="QpU-k7-oCW" secondAttribute="leading" id="vCg-zF-poe"/>
+                                <constraint firstAttribute="trailing" secondItem="XAN-EG-i2t" secondAttribute="trailing" constant="87" id="zBm-mt-OXr"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.65656154141104295" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="QpU-k7-oCW" firstAttribute="centerX" secondItem="kiu-fI-HQ5" secondAttribute="centerX" id="5BO-IT-vVr"/>
+                        <constraint firstItem="QpU-k7-oCW" firstAttribute="centerY" secondItem="kiu-fI-HQ5" secondAttribute="centerY" id="gS7-kb-MqY"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QBQ-9Q-45K">
+                    <rect key="frame" x="0.0" y="847" width="49" height="49"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NXR-Q6-aJP">
+                    <rect key="frame" x="40" y="847" width="334" height="49"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U19-TH-HLY">
+                            <rect key="frame" x="1" y="0.0" width="83" height="49"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" image="Group 366.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                            </state>
+                            <connections>
+                                <action selector="FeedBtnAction:" destination="-1" eventType="touchUpInside" id="UpX-FM-WYo"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GA-X6-2cj">
+                            <rect key="frame" x="84" y="0.0" width="83" height="49"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="chat"/>
+                            <connections>
+                                <action selector="FriendsBtnAction:" destination="-1" eventType="touchUpInside" id="0Tr-sH-p5H"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIo-OG-H7a">
+                            <rect key="frame" x="167" y="0.0" width="83" height="49"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="you"/>
+                            <connections>
+                                <action selector="btnyou:" destination="-1" eventType="touchUpInside" id="Hlw-Ls-A8L"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXG-pq-FxZ">
+                            <rect key="frame" x="250" y="0.0" width="83" height="49"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="faq"/>
+                            <connections>
+                                <action selector="btn_qa:" destination="-1" eventType="touchUpInside" id="LJC-Yg-yy1"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.41176470590000003" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <view contentMode="scaleToFill" id="MDu-bx-xJy">
+                    <rect key="frame" x="363" y="847" width="49" height="49"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="kiu-fI-HQ5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="02c-de-foM"/>
+                <constraint firstAttribute="bottom" secondItem="kiu-fI-HQ5" secondAttribute="bottom" id="4ae-al-k7m"/>
+                <constraint firstItem="kiu-fI-HQ5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GiE-hl-UN5"/>
+                <constraint firstAttribute="trailing" secondItem="kiu-fI-HQ5" secondAttribute="trailing" id="dcm-fh-RHs"/>
+            </constraints>
+            <point key="canvasLocation" x="63.768115942028992" y="-211.60714285714286"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Group 14698.png" width="375" height="667"/>
+        <image name="Group 366.png" width="28" height="13"/>
+        <image name="Group 372.png" width="72" height="71"/>
+        <image name="Group 374.png" width="72" height="72"/>
+        <image name="arrow_blue" width="19.5" height="14"/>
+        <image name="chat" width="25" height="20.5"/>
+        <image name="cross" width="23" height="20.5"/>
+        <image name="faq" width="12.5" height="20.5"/>
+        <image name="noun_Arrow_2304597.png" width="20" height="14"/>
+        <image name="shareback" width="292" height="194.5"/>
+        <image name="sos" width="23" height="23"/>
+        <image name="you" width="21" height="19.5"/>
+    </resources>
+</document>
